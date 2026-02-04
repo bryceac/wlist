@@ -120,8 +120,9 @@ fn load_items_from_db(p: &str) -> Vec<Item> {
                     let priority: String = row.get_unwrap(3);
                     let url: String = row.get_unwrap(4);
 
-                    let item = Item::builder()
-                    .set_id(&id)
+                    let mut item = Item::builder();
+
+                    item.set_id(&id)
                     .set_name(&name)
                     .set_quantity(quantity)
                     .set_priority(&priority)
