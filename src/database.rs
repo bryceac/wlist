@@ -83,6 +83,18 @@ fn id_for_note(p: &str, note: &str) -> Option<u32> {
     }
 }
 
+fn add_note(p: &str, note: &str) {
+    if let Ok(db) = Connection::open(p) {
+        let insert_note_statement = "Insert INTO notes(note) VALUES (?1)";
+
+        if let Ok(mut statement) = db.prepare(insert_note_statement) {
+            if let Err(error) = statement.execute([note]) {
+                println!("{}", error);
+            }
+        }
+    } else {}
+}
+
 fn retrieve_notes_for_item_with_id(p: &str, item_id: &str) -> Vec<String> {
     let mut item_notes: Vec<String> = vec![];
 
