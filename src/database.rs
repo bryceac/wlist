@@ -75,7 +75,6 @@ fn note_with_id(p: &str, id: u32) -> Option<Note> {
 
 fn retrieve_notes_for_item(p: &str, item: &Item) -> Vec<String> {
     let mut item_notes: Vec<String> = vec![]
-    let notes = load_notes_from_db(p);
 
     match Connection::open(p) {
         Ok(db) => {
@@ -83,12 +82,18 @@ fn retrieve_notes_for_item(p: &str, item: &Item) -> Vec<String> {
 
             if let Ok(statement) = db.prepare(&note_query) {
                 let note_id_query = statement.query_map([], |row| {
-                    let note_id: u32 = if let Ok(id) = row.get(0) {
-                        Ok(id)
-                    }
+                    let note_id: u32 = row.get(0).expect("unable to parse value");
+
+                    Ok(note_id)
                 }).unwrap();
 
-
+                for note_id in note_id_query {
+                    if let Ok(note_id) = note_id {
+                        if let Some(note) = note_with_id(p, note_id) {
+                            item_notes.push(note.note);
+                        }
+                    }
+                }
             }
         },
         _ => {}
