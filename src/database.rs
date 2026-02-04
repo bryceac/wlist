@@ -157,5 +157,3 @@ pub fn load_items_from_db(p: &str) -> Vec<Item> {
 
     items
 }
-
-fn 
