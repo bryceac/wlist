@@ -31,3 +31,7 @@ pub fn copy_database_if_not_exists(p: &str) {
         let _ = fs::copy(original_path, destination_path);
     }
 }
+
+pub fn load_notes_from_db(p: &str) -> Vec<String> {
+    vec![]
+}
