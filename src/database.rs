@@ -80,7 +80,7 @@ fn retrieve_notes_for_item_with_id(p: &str, item_id: &str) -> Vec<String> {
         Ok(db) => {
             let note_query = format!("SELECT note_id FROM item_notes WHERE item_id = '{}'", item_id);
 
-            if let Ok(statement) = db.prepare(&note_query) {
+            if let Ok(mut statement) = db.prepare(&note_query) {
                 let note_id_query = statement.query_map([], |row| {
                     let note_id: u32 = row.get(0).expect("unable to parse value");
 
