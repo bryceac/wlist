@@ -32,7 +32,7 @@ pub fn copy_database_if_not_exists(p: &str) {
     }
 }
 
-fn load_notes_from_db(p: &str) -> Vec<Note> {
+pub fn load_notes_from_db(p: &str) -> Vec<Note> {
     let mut notes: Vec<Note> = vec![];
 
     match Connection::open(&real_path(p)) {
@@ -112,7 +112,7 @@ fn retrieve_notes_for_item_with_id(p: &str, item_id: &str) -> Vec<String> {
     item_notes
 }
 
-fn load_items_from_db(p: &str) -> Vec<Item> {
+pub fn load_items_from_db(p: &str) -> Vec<Item> {
     let mut items: Vec<Item> = vec![];
 
     match Connection::open(&real_path(p)) {
@@ -157,3 +157,5 @@ fn load_items_from_db(p: &str) -> Vec<Item> {
 
     items
 }
+
+fn 
