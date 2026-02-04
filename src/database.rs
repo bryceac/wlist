@@ -5,7 +5,7 @@ use std::env;
 
 use rusqlite::{ Connection, params };
 use wlitem::Item;
-use crate::shared::*;
+use crate::{shared::*, note::Note };
 
 pub fn copy_database_if_not_exists(p: &str) {
     let target = real_path(p);
@@ -32,6 +32,33 @@ pub fn copy_database_if_not_exists(p: &str) {
     }
 }
 
-pub fn load_notes_from_db(p: &str) -> Vec<String> {
-    vec![]
+pub fn load_notes_from_db(p: &str) -> Vec<Note> {
+    let mut notes: Vec<Note> = vec![];
+
+    match Connection::open(&real_path(p)) {
+        Ok(db) => {
+            if let Ok(mut statement) = db.prepare("SELECT * FROM notes") {
+                let note_query = statement.query_map([], |row| {
+                    let id: u32 = if let Ok(num) = row.get(0) {
+                        num
+                    } else {
+                        0
+                    };
+
+                    let note: String = row.get_unwrap(1);
+
+                    Ok(Note::from(id, &note))
+                }).unwrap();
+
+                for note in note_query {
+                    if let Ok(note) = note {
+                        notes.push(note);
+                    }
+                }
+            }
+        },
+        _ => {}
+    }
+
+    notes
 }
