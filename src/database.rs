@@ -14,16 +14,16 @@ pub fn copy_database_if_not_exists(p: &str) {
     #[cfg(windows)]
     let original_path: PathBuf = if let Ok(path) = env::current_exe() {
         if let Some(db_directory) = path.parent() {
-            db_directory.join("register.db")
+            db_directory.join("gift_registry.db")
         } else {
-            Path::new("register.db").to_path_buf()  
+            Path::new("gift_registry.db").to_path_buf()  
         }
     } else {
-        Path::new("register.db").to_path_buf()
+        Path::new("gift_registry.db").to_path_buf()
     };
 
     #[cfg(unix)]
-    let original_path: PathBuf = Path::new(&real_path("/var/db/rcheckbook/register.db")).to_path_buf();
+    let original_path: PathBuf = Path::new(&real_path("/var/db/wlist/gift_registry.db")).to_path_buf();
     
 
     if !destination_path.exists() {
