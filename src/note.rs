@@ -1,3 +1,4 @@
+#[derive(Clone)]
 pub struct Note {
     pub id: u32,
     pub note: String

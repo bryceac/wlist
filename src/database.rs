@@ -32,7 +32,7 @@ pub fn copy_database_if_not_exists(p: &str) {
     }
 }
 
-pub fn load_notes_from_db(p: &str) -> Vec<Note> {
+fn load_notes_from_db(p: &str) -> Vec<Note> {
     let mut notes: Vec<Note> = vec![];
 
     match Connection::open(&real_path(p)) {
@@ -61,4 +61,38 @@ pub fn load_notes_from_db(p: &str) -> Vec<Note> {
     }
 
     notes
+}
+
+fn note_with_id(p: &str, id: u32) -> Option<Note> {
+    let notes = load_notes_from_db(p);
+
+    if let Some(note_index) = notes.iter().position(|n| n.id == id) {
+        Some(notes[note_index].clone())
+    } else {
+        None
+    }
+}
+
+fn retrieve_notes_for_item(p: &str, item: &Item) -> Vec<String> {
+    let mut item_notes: Vec<String> = vec![]
+    let notes = load_notes_from_db(p);
+
+    match Connection::open(p) {
+        Ok(db) => {
+            let note_query = format!("SELECT note_id FROM item_notes WHERE item_id = '{}'", item.id);
+
+            if let Ok(statement) = db.prepare(&note_query) {
+                let note_id_query = statement.query_map([], |row| {
+                    let note_id: u32 = if let Ok(id) = row.get(0) {
+                        Ok(id)
+                    }
+                }).unwrap();
+
+
+            }
+        },
+        _ => {}
+    }
+
+    item_notes
 }
