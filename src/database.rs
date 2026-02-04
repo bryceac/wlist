@@ -109,13 +109,25 @@ fn link_note_to_item(p: &str, item: Item, note: &str) {
     }
 }
 
-pub fn delete_note_with_id(p: &str, note_id: u3) {
+pub fn delete_note_with_id(p: &str, note_id: u32) {
     if let Ok(db) = Connection::open(p) {
         let delete_statement = "DELETE FROM notes WHERE id = (?1)";
 
         if let Ok(mut statement) = db.prepare(delete_statement) {
             if let Err(error) = statement.execute(params![note_id]) {
                 println!("{}", error)
+            }
+        }
+    }
+}
+
+fn remove_note_from_item(p: &str, item: Item, note_id: u32) {
+    if let Ok(db) = Connection::open(p) {
+        let remove_link_statement = "DELETE FROM item_notes WHERE item_id = (?1) AND note_id = (?2)";
+
+        if let Ok(mut statement) = db.prepare(remove_link_statement) {
+            if let Err(error) = statement.execute(params![item.id, note_id]) {
+                println!("{}", error);
             }
         }
     }
@@ -194,4 +206,14 @@ pub fn load_items_from_db(p: &str) -> Vec<Item> {
     }
 
     items
+}
+
+pub fn item_with_id(p: &str, id: &str) -> Option<Item> {
+    let items = load_items_from_db(p);
+
+    if let Some(item_index) = items.iter().position(|item| item.id == id) {
+        Some(items[item_index].clone())
+    } else {
+        None
+    }
 }
