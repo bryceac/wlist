@@ -109,6 +109,18 @@ fn link_note_to_item(p: &str, item: Item, note: &str) {
     }
 }
 
+pub fn delete_note_with_id(p: &str, note_id: u3) {
+    if let Ok(db) = Connection::open(p) {
+        let delete_statement = "DELETE FROM notes WHERE id = (?1)";
+
+        if let Ok(mut statement) = db.prepare(delete_statement) {
+            if let Err(error) = statement.execute(params![note_id]) {
+                println!("{}", error)
+            }
+        }
+    }
+}
+
 fn retrieve_notes_for_item_with_id(p: &str, item_id: &str) -> Vec<String> {
     let mut item_notes: Vec<String> = vec![];
 
