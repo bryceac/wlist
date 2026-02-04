@@ -73,6 +73,16 @@ fn note_with_id(p: &str, id: u32) -> Option<Note> {
     }
 }
 
+fn id_for_note(p: &str, note: &str) -> Option<u32> {
+    let notes = load_notes_from_db(p);
+
+    if let Some(note_index) = notes.iter().position(|n| n.note == note) {
+        Some(notes[note_index].id)
+    } else {
+        None
+    }
+}
+
 fn retrieve_notes_for_item_with_id(p: &str, item_id: &str) -> Vec<String> {
     let mut item_notes: Vec<String> = vec![];
 
