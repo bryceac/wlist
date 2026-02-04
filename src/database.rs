@@ -1,4 +1,4 @@
-use std::{ fs, path::{ Path, PathBuf } };
+use std::{ fs, path::{ Path, PathBuf }, collections::HashMap };
 
 #[cfg(windows)]
 use std::env;
@@ -216,4 +216,14 @@ pub fn item_with_id(p: &str, id: &str) -> Option<Item> {
     } else {
         None
     }
+}
+
+pub fn item_note_associations(p: &str) -> HashMap<u32, Vec<String>> {
+    let mut associations: HashMap<u32, Vec<String>> = HashMap::new();
+
+    if let Ok(db) = Connection::open(p) {
+
+    }
+
+    associations
 }
