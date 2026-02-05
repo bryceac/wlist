@@ -182,7 +182,7 @@ fn delete_item_note_associations(p: &str, item_id: Option<&str>, note_id: Option
     }
 }
 
-fn retrieve_notes_for_item_with_id(p: &str, item_id: &str) -> Vec<String> {
+pub fn retrieve_notes_for_item_with_id(p: &str, item_id: &str) -> Vec<String> {
     let mut item_notes: Vec<String> = vec![];
 
     let note_relations = item_note_associations(p);
