@@ -139,8 +139,14 @@ fn retrieve_notes_for_item_with_id(p: &str, item_id: &str) -> Vec<String> {
     let note_relations = item_note_associations(p);
 
     let note_ids: Vec<u32> = note_relations.keys().filter(|key| note_relations
-        .get(key)?.contains(&item_id.to_owned()))
+        .get(key).unwrap_or(&vec![]).contains(&item_id.to_owned()))
         .map(|key| key.to_owned()).collect();
+
+    for id in note_ids {
+        if let Some(note) = note_with_id(p, id) {
+            item_notes.push(item_id.to_owned());
+        }
+    }
 
     item_notes
 }
