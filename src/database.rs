@@ -136,28 +136,11 @@ fn remove_note_from_item(p: &str, item: Item, note_id: u32) {
 fn retrieve_notes_for_item_with_id(p: &str, item_id: &str) -> Vec<String> {
     let mut item_notes: Vec<String> = vec![];
 
-    match Connection::open(p) {
-        Ok(db) => {
-            let note_query = format!("SELECT note_id FROM item_notes WHERE item_id = '{}'", item_id);
+    let note_relations = item_note_associations(p);
 
-            if let Ok(mut statement) = db.prepare(&note_query) {
-                let note_id_query = statement.query_map([], |row| {
-                    let note_id: u32 = row.get(0).expect("unable to parse value");
-
-                    Ok(note_id)
-                }).unwrap();
-
-                for note_id in note_id_query {
-                    if let Ok(note_id) = note_id {
-                        if let Some(note) = note_with_id(p, note_id) {
-                            item_notes.push(note.note);
-                        }
-                    }
-                }
-            }
-        },
-        _ => {}
-    }
+    let note_ids: Vec<u32> = note_relations.keys().filter(|key| note_relations
+        .get(key)?.contains(&item_id.to_owned()))
+        .map(|key| key.to_owned()).collect();
 
     item_notes
 }
@@ -236,7 +219,7 @@ pub fn item_note_associations(p: &str) -> HashMap<u32, Vec<String>> {
 
             for item_pair in item_note_query {
                 let keys: Vec<u32> = associations.keys().map(|key| key.to_owned()).collect();
-                
+
                 if let Ok(item_pair) = item_pair {
                     if keys.contains(&item_pair.1) {
                         if let Some(item_ids) = associations.get_mut(&item_pair.1) {
