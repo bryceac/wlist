@@ -96,7 +96,12 @@ fn add_note(p: &str, note: &str) {
 }
 
 fn link_note_to_item(p: &str, item: &Item, note: &str) {
-    let note_id = id_for_note(p, note).unwrap();
+    let note_id = if let Some(id) = id_for_note(p, note) {
+        id
+    } else {
+        add_note(p, note);
+        id_for_note(p, note).unwrap()
+    };
 
     if let Ok(db) = Connection::open(p) {
         let insert_link_statement = "INSERT INTO item_notes VALUES (?1, ?2)";
