@@ -273,7 +273,17 @@ pub fn item_note_associations(p: &str) -> HashMap<String, Vec<u32>> {
 }
 
 pub fn add_item(p: &str, item: Item) {
-    if item_with_id(p, &item.id).is_none() {
+    let stored_notes: Vec<String> = item.notes.iter()
+    .filter(|&note| id_for_note(p, note).is_some())
+    .map(|note| note.clone())
+    .collect();
 
+    let new_notes: Vec<String> = item.notes.iter()
+    .filter(|&note| id_for_note(p, note).is_none())
+    .map(|note| note.clone())
+    .collect();
+
+    for note in stored_notes {
+        link_note_to_item(p, item, &note);
     }
 }
