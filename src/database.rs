@@ -140,7 +140,7 @@ pub fn update_note_with_id(p: &str, note_id: u32, note: &str) {
     }
 }
 
-fn remove_note_from_item(p: &str, item: Item, note_id: u32) {
+pub fn remove_note_from_item(p: &str, item: Item, note_id: u32) {
     if let Ok(db) = Connection::open(p) {
         let remove_link_statement = "DELETE FROM item_notes WHERE item_id = (?1) AND note_id = (?2)";
 
