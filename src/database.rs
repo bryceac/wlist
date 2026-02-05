@@ -235,7 +235,7 @@ pub fn load_items_from_db(p: &str) -> Vec<Item> {
 pub fn item_with_id(p: &str, id: &str) -> Option<Item> {
     let items = load_items_from_db(p);
 
-    if let Some(item_index) = items.iter().position(|item| item.id == id) {
+    if let Some(item_index) = items.iter().position(|item| item.id.to_lowercase() == id.to_lowercase()) {
         Some(items[item_index].clone())
     } else {
         None
