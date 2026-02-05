@@ -116,6 +116,8 @@ pub fn delete_note_with_id(p: &str, note_id: u32) {
         if let Ok(mut statement) = db.prepare(delete_statement) {
             if let Err(error) = statement.execute(params![note_id]) {
                 println!("{}", error)
+            } else {
+                delete_item_note_associations(p, None, Some(note_id));
             }
         }
     }
@@ -128,6 +130,36 @@ fn remove_note_from_item(p: &str, item: Item, note_id: u32) {
         if let Ok(mut statement) = db.prepare(remove_link_statement) {
             if let Err(error) = statement.execute(params![item.id, note_id]) {
                 println!("{}", error);
+            }
+        }
+    }
+}
+
+fn delete_item_note_associations(p: &str, item_id: Option<&str>, note_id: Option<u32>) {
+    if item_id.is_some() && note_id.is_some() {
+        println!("It is not necessary for both an item and note id to be provided. Please provide only one.");
+        return;
+    } else if item_id.is_none() && note_id.is_none() {
+        println!("Please provide either an item or note id.");
+        return;
+    }
+
+    let delete_statement = if item_id.is_some() {
+        "DELETE FROM item_notes WHERE item_id = ?1"
+    } else {
+        "DELETE FROM item_notes WHERE note_id = ?1"
+    };
+
+    if let Ok(db) = Connection::open(p) {
+        if let Ok(mut statement) = db.prepare(delete_statement) {
+            if let Some(item_id) = item_id {
+                if let Err(error) = statement.execute(params![item_id]) {
+                    println!("{}", error)
+                }
+            } else {
+                if let Err(error) = statement.execute(params![note_id.unwrap()]) {
+                    println!("{}", error)
+                }
             }
         }
     }
