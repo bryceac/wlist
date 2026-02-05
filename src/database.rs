@@ -224,23 +224,29 @@ pub fn item_note_associations(p: &str) -> HashMap<u32, Vec<String>> {
     if let Ok(db) = Connection::open(p) {
         if let Ok(mut statement) = db.prepare("SELECT * FROM item_notes") {
             let item_note_query = statement.query_map([], |row| {
-                let item_id: String = row.get_ref_unwrap(0);
+                let item_id: String = row.get_unwrap(0);
                 let note_id: u32 = if let Ok(num) = row.get(1) {
                     num
                 } else {
                     0
                 };
 
-                if note_id > 0 {
-                    if associations.keys().contains(note_id) {
-                        if let Some(items) = associations.get_mut(note_id) {
-                            items.push(item_id);
+                Ok((item_id,note_id))
+            }).unwrap();
+
+            for item_pair in item_note_query {
+                let keys: Vec<u32> = associations.keys().map(|key| key.to_owned()).collect();
+                
+                if let Ok(item_pair) = item_pair {
+                    if keys.contains(&item_pair.1) {
+                        if let Some(item_ids) = associations.get_mut(&item_pair.1) {
+                            item_ids.push(item_pair.0);
+                        } else {
+                            associations.insert(item_pair.1, vec![item_pair.0]);
                         }
-                    } else {
-                        associations.insert(note_id, vec![item_id]);
                     }
                 }
-            })
+            }
         }
     }
 
