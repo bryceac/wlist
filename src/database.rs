@@ -272,7 +272,7 @@ pub fn item_note_associations(p: &str) -> HashMap<String, Vec<u32>> {
     associations
 }
 
-fn add_item(p: &str, item: Item) {
+pub fn add_item(p: &str, item: Item) {
     if item_with_id(p, &item.id).is_none() {
 
     }
