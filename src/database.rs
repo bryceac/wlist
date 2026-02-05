@@ -95,7 +95,7 @@ fn add_note(p: &str, note: &str) {
     } else {}
 }
 
-fn link_note_to_item(p: &str, item: Item, note: &str) {
+fn link_note_to_item(p: &str, item: &Item, note: &str) {
     let note_id = id_for_note(p, note).unwrap();
 
     if let Ok(db) = Connection::open(p) {
@@ -284,6 +284,6 @@ pub fn add_item(p: &str, item: Item) {
     .collect();
 
     for note in stored_notes {
-        link_note_to_item(p, item, &note);
+        link_note_to_item(p, &item, &note);
     }
 }
