@@ -144,7 +144,7 @@ fn retrieve_notes_for_item_with_id(p: &str, item_id: &str) -> Vec<String> {
 
     for id in note_ids {
         if let Some(note) = note_with_id(p, id) {
-            item_notes.push(item_id.to_owned());
+            item_notes.push(note.note);
         }
     }
 
