@@ -278,17 +278,17 @@ pub fn item_note_associations(p: &str) -> HashMap<String, Vec<u32>> {
 }
 
 pub fn add_item(p: &str, item: Item) {
-    let stored_notes: Vec<String> = item.notes.iter()
-    .filter(|&note| id_for_note(p, note).is_some())
-    .map(|note| note.clone())
-    .collect();
+    if let Ok(db) = Connection::open(p) {
+        let insert_statement = "INSERT INTO items VALUES (?1, ?2, ?3, ?4, ?5)";
 
-    let new_notes: Vec<String> = item.notes.iter()
-    .filter(|&note| id_for_note(p, note).is_none())
-    .map(|note| note.clone())
-    .collect();
-
-    for note in stored_notes {
-        link_note_to_item(p, &item, &note);
+        if let Ok(statement) = db.prepare(insert_statement) {
+            if let Err(error) = statement.execute(params![item.id, item.name, item.quantity, item.priority, item.url.as_str()]) {
+                println!("{}", error);
+            } else {
+                for note in item.notes.clone() {
+                    link_note_to_item(p, &item, &note);
+                }
+            }
+        }
     }
 }
