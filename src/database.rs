@@ -296,11 +296,17 @@ fn id_for_priority(p: &str, priority: &Priority) -> u32 {
 }
 
 pub fn add_item(p: &str, item: Item) {
+    let item_url = if let Some(url) = item.url.clone() {
+        url.as_str().to_owned()
+    } else {
+        "".to_owned()
+    };
+
     if let Ok(db) = Connection::open(p) {
         let insert_statement = "INSERT INTO items VALUES (?1, ?2, ?3, ?4, ?5)";
 
-        if let Ok(statement) = db.prepare(insert_statement) {
-            if let Err(error) = statement.execute(params![item.id, item.name, item.quantity, id_for_priority(p, &item.priority), item.url.as_str()]) {
+        if let Ok(mut statement) = db.prepare(insert_statement) {
+            if let Err(error) = statement.execute(params![item.id, item.name, item.quantity, id_for_priority(p, &item.priority), item_url]) {
                 println!("{}", error);
             } else {
                 for note in item.notes.clone() {
