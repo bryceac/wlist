@@ -316,3 +316,17 @@ pub fn add_item(p: &str, item: Item) {
         }
     }
 }
+
+pub fn delete_item(p: &str, item: &Item) {
+    if let Ok(db) = Connection::open(p) {
+        let delete_statement = "DELETE FROM items WHERE id = ?1";
+
+        if let Ok(mut statement) = db.prepare(delete_statement) {
+            if let Err(error) = statement.execute([item.id]) {
+                println!("{}", error);
+            } else {
+                delete_item_note_associations(p, item.id, None);
+            }
+        }
+    }
+}
