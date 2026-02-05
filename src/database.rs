@@ -325,7 +325,7 @@ pub fn delete_item(p: &str, item: &Item) {
             if let Err(error) = statement.execute([item.id]) {
                 println!("{}", error);
             } else {
-                delete_item_note_associations(p, item.id, None);
+                delete_item_note_associations(p, Some(&item.id), None);
             }
         }
     }
