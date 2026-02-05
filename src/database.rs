@@ -130,7 +130,7 @@ pub fn delete_note_with_id(p: &str, note_id: u32) {
 
 pub fn update_note_with_id(p: &str, note_id: u32, note: &str) {
     if let Ok(db) = Connection::open(p) {
-        let update_statement = "UPDATES notes SET note = ?1 WHERE id = ?2";
+        let update_statement = "UPDATES notes SET note = (?1) WHERE id = (?2)";
 
         if let Ok(mut statement) = db.prepare(update_statement) {
             if let Err(error) = statement.execute(params![note, note_id]) {
@@ -162,9 +162,9 @@ fn delete_item_note_associations(p: &str, item_id: Option<&str>, note_id: Option
     }
 
     let delete_statement = if item_id.is_some() {
-        "DELETE FROM item_notes WHERE item_id = ?1"
+        "DELETE FROM item_notes WHERE item_id = (?1)"
     } else {
-        "DELETE FROM item_notes WHERE note_id = ?1"
+        "DELETE FROM item_notes WHERE note_id = (?1)"
     };
 
     if let Ok(db) = Connection::open(p) {
@@ -344,5 +344,19 @@ pub fn delete_item(p: &str, item: &Item) {
 }
 
 pub fn update_item(p: &str, item: &Item) {
+    let item_url = if let Some(url) = item.url.clone() {
+        url.as_str().to_owned()
+    } else {
+        "".to_owned()
+    };
 
+    if let Ok(db) = Connection::open(p) {
+        let update_statement = "UPDATE items SET name = (?1), quantity = (?2), priority = (?3), url = (?4) WHERE id = (?5)";
+
+        if let Ok(mut statement) = db.prepare(update_statement) {
+            if let Err(error) = statement.execute(params![item.name, item.quantity, id_for_priority(p, &item.priority), item_url, item.id]) {
+                println!("{}", error);
+            }
+        }
+    }
 }
