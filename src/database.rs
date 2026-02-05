@@ -300,7 +300,7 @@ pub fn add_item(p: &str, item: Item) {
         let insert_statement = "INSERT INTO items VALUES (?1, ?2, ?3, ?4, ?5)";
 
         if let Ok(statement) = db.prepare(insert_statement) {
-            if let Err(error) = statement.execute(params![item.id, item.name, item.quantity, item.priority, item.url.as_str()]) {
+            if let Err(error) = statement.execute(params![item.id, item.name, item.quantity, id_for_priority(p, &item.priority), item.url.as_str()]) {
                 println!("{}", error);
             } else {
                 for note in item.notes.clone() {
