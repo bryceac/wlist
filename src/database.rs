@@ -207,8 +207,8 @@ pub fn item_with_id(p: &str, id: &str) -> Option<Item> {
     }
 }
 
-pub fn item_note_associations(p: &str) -> HashMap<u32, Vec<String>> {
-    let mut associations: HashMap<u32, Vec<String>> = HashMap::new();
+pub fn item_note_associations(p: &str) -> HashMap<String, Vec<u32>> {
+    let mut associations: HashMap<String, Vec<u32>> = HashMap::new();
 
     if let Ok(db) = Connection::open(p) {
         if let Ok(mut statement) = db.prepare("SELECT * FROM item_notes") {
@@ -224,14 +224,14 @@ pub fn item_note_associations(p: &str) -> HashMap<u32, Vec<String>> {
             }).unwrap();
 
             for item_pair in item_note_query {
-                let keys: Vec<u32> = associations.keys().map(|key| key.to_owned()).collect();
+                let keys: Vec<String> = associations.keys().map(|key| key.to_owned()).collect();
 
                 if let Ok(item_pair) = item_pair {
-                    if keys.contains(&item_pair.1) {
-                        if let Some(item_ids) = associations.get_mut(&item_pair.1) {
-                            item_ids.push(item_pair.0);
+                    if keys.contains(&item_pair.0) {
+                        if let Some(note_ids) = associations.get_mut(&item_pair.0) {
+                            note_ids.push(item_pair.1);
                         } else {
-                            associations.insert(item_pair.1, vec![item_pair.0]);
+                            associations.insert(item_pair.0, vec![item_pair.1]);
                         }
                     }
                 }
