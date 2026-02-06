@@ -18,11 +18,11 @@ pub struct Add {
     #[clap(long, short, default_value = "medium")]
     pub priority: Priority,
 
-    #[clap(long, short, default_value = "")]
-    pub url: String,
+    #[clap(long, short)]
+    pub url: Option<String>,
 
-    #[clap(long, num_args = 0.., value_delimiter = ',', required = false)]
-    pub notes: Vec<String>
+    #[clap(long, num_args = 0..)]
+    pub notes: Option<Vec<String>>
 }
 
 impl Add {
