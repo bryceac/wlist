@@ -63,7 +63,6 @@ I have no idea how long it will take me to get things working, but it should be 
 
 Considering that this project is in its beginning phase at the moment, there is plenty to do at the moment, such as:
 
-* implement subcommand to display the wishlist
 * implement subcommand to import items to wishlist
 * implement subcommand update items in the wishlist
 * implement subcommand to display notes
