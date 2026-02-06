@@ -33,12 +33,23 @@ impl Add {
     }
 
     fn add_item(&self, p: &str) {
-        let item = Item::from("", 
-        &self.name, 
-        self.quantity, 
-        self.priority.to_str(), 
-        &self.url, 
-        self.notes.clone());
+        let mut item_builder = Item::builder();
+
+        item_builder.set_name(&self.name)
+        .set_quantity(self.quantity)
+        .set_priority(self.priority.to_str());
+
+        if let Some(url) = self.url.clone() {
+            item_builder.set_url(&url);
+        }
+
+        if let Some(notes) = self.notes.clone() {
+            for note in notes {
+                item_builder.add_note(&note);
+            }
+        }
+
+        let item = item_builder.build();
 
         add_item(p, item);
     }
