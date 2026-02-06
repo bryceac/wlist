@@ -85,7 +85,7 @@ fn id_for_note(p: &str, note: &str) -> Option<u32> {
 }
 
 fn add_note(p: &str, note: &str) {
-    if let Ok(db) = Connection::open(p) {
+    if let Ok(db) = Connect::open(&real_path(p)) {
         let insert_note_statement = "Insert INTO notes(note) VALUES (?1)";
 
         if let Ok(mut statement) = db.prepare(insert_note_statement) {
@@ -104,7 +104,7 @@ fn link_note_to_item(p: &str, item: &Item, note: &str) {
         id_for_note(p, note).unwrap()
     };
 
-    if let Ok(db) = Connection::open(p) {
+    if let Ok(db) = Connect::open(&real_path(p)) {
         let insert_link_statement = "INSERT INTO item_notes VALUES (?1, ?2)";
 
         if let Ok(mut statement) = db.prepare(insert_link_statement) {
@@ -116,7 +116,7 @@ fn link_note_to_item(p: &str, item: &Item, note: &str) {
 }
 
 pub fn delete_note_with_id(p: &str, note_id: u32) {
-    if let Ok(db) = Connection::open(p) {
+    if let Ok(db) = Connect::open(&real_path(p)) {
         let delete_statement = "DELETE FROM notes WHERE id = (?1)";
 
         if let Ok(mut statement) = db.prepare(delete_statement) {
@@ -130,7 +130,7 @@ pub fn delete_note_with_id(p: &str, note_id: u32) {
 }
 
 pub fn update_note_with_id(p: &str, note_id: u32, note: &str) {
-    if let Ok(db) = Connection::open(p) {
+    if let Ok(db) = Connect::open(&real_path(p)) {
         let update_statement = "UPDATES notes SET note = (?1) WHERE id = (?2)";
 
         if let Ok(mut statement) = db.prepare(update_statement) {
@@ -142,7 +142,7 @@ pub fn update_note_with_id(p: &str, note_id: u32, note: &str) {
 }
 
 pub fn remove_note_from_item(p: &str, item: Item, note_id: u32) {
-    if let Ok(db) = Connection::open(p) {
+    if let Ok(db) = Connect::open(&real_path(p)) {
         let remove_link_statement = "DELETE FROM item_notes WHERE item_id = (?1) AND note_id = (?2)";
 
         if let Ok(mut statement) = db.prepare(remove_link_statement) {
@@ -168,7 +168,7 @@ fn delete_item_note_associations(p: &str, item_id: Option<&str>, note_id: Option
         "DELETE FROM item_notes WHERE note_id = (?1)"
     };
 
-    if let Ok(db) = Connection::open(p) {
+    if let Ok(db) = Connect::open(&real_path(p)) {
         if let Ok(mut statement) = db.prepare(delete_statement) {
             if let Some(item_id) = item_id {
                 if let Err(error) = statement.execute(params![item_id]) {
@@ -258,7 +258,7 @@ pub fn item_with_id(p: &str, id: &str) -> Option<Item> {
 pub fn item_note_associations(p: &str) -> HashMap<String, Vec<u32>> {
     let mut associations: HashMap<String, Vec<u32>> = HashMap::new();
 
-    if let Ok(db) = Connection::open(p) {
+    if let Ok(db) = Connect::open(&real_path(p)) {
         if let Ok(mut statement) = db.prepare("SELECT * FROM item_notes") {
             let item_note_query = statement.query_map([], |row| {
                 let item_id: String = row.get_unwrap(0);
@@ -293,7 +293,7 @@ pub fn item_note_associations(p: &str) -> HashMap<String, Vec<u32>> {
 fn id_for_priority(p: &str, priority: &Priority) -> u32 {
     let mut id: u32 = 0;
 
-    if let Ok(db) = Connection::open(p) {
+    if let Ok(db) = Connect::open(&real_path(p)) {
         let priority_statement = format!("SELECT id FROM priorities WHERE id = '{}'", priority.to_str());
 
         if let Ok(mut statement) = db.prepare(&priority_statement) {
@@ -315,7 +315,7 @@ pub fn add_item(p: &str, item: Item) {
         "".to_owned()
     };
 
-    if let Ok(db) = Connection::open(p) {
+    if let Ok(db) = Connect::open(&real_path(p)) {
         let insert_statement = "INSERT INTO items VALUES (?1, ?2, ?3, ?4, ?5)";
 
         if let Ok(mut statement) = db.prepare(insert_statement) {
@@ -331,7 +331,7 @@ pub fn add_item(p: &str, item: Item) {
 }
 
 pub fn delete_item(p: &str, item: &Item) {
-    if let Ok(db) = Connection::open(p) {
+    if let Ok(db) = Connect::open(&real_path(p)) {
         let delete_statement = "DELETE FROM items WHERE id = ?1";
 
         if let Ok(mut statement) = db.prepare(delete_statement) {
@@ -351,7 +351,7 @@ pub fn update_item(p: &str, item: &Item) {
         "".to_owned()
     };
 
-    if let Ok(db) = Connection::open(p) {
+    if let Ok(db) = Connect::open(&real_path(p)) {
         let update_statement = "UPDATE items SET name = (?1), quantity = (?2), priority = (?3), url = (?4) WHERE id = (?5)";
 
         if let Ok(mut statement) = db.prepare(update_statement) {
