@@ -6,6 +6,7 @@ mod add;
 mod subcommand;
 mod show;
 mod content;
+mod export;
 
 use subcommand::SubCommand;
 use wlist::WList;
