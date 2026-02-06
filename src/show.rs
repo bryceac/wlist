@@ -1,7 +1,8 @@
 use clap::Parser;
 use wlitem::Item;
+use crate::note::Note;
 
-use crate::{database::{copy_database_if_not_exists, load_items_from_db, load_notes_from_db}, content::Content};
+use crate::{database::{copy_database_if_not_exists, load_items_from_db, load_notes_from_db, item_with_id}, content::Content};
 
 #[derive(Parser)]
 #[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", long_about = "display wishlist content.")]
@@ -10,7 +11,7 @@ pub struct Show {
     pub file_path: String,
 
     #[clap(value_enum, default_value_t=Content::Items)]
-    pub content: Content
+    pub content: Content,
 
     #[clap(long, short)]
     pub item_id: Option<String>
@@ -32,7 +33,21 @@ impl Show {
                 display_items(&item_store);
             },
             Content::Notes => {
-                let notes = load_notes_from_db(&self.file_path);
+                if let Some(id) = self.item_id.clone() {
+                    let notes = if let Some(item) = item_with_id(&self.file_path, &id) {
+                        item.notes
+                    } else {
+                        vec![]
+                    };
+
+                    for note in notes {
+                        println!("{}\r\n\r\n", note);
+                    }
+                } else {
+                    let notes = load_notes_from_db(&self.file_path);
+
+                    display_notes(&notes);
+                }
             }
         }
     }
@@ -52,5 +67,11 @@ fn display_items(store: &Vec<Item>) {
         item.quantity, 
         item.priority.to_str(), 
         item_url);
+    }
+}
+
+fn display_notes(store: &Vec<Note>) {
+    for note in store {
+        println!("{}\r\n-----\r\n\r\n{}\r\n\r\n", note.id, note.note);
     }
 }
