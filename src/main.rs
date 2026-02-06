@@ -7,6 +7,7 @@ mod subcommand;
 mod show;
 mod content;
 mod export;
+mod import;
 
 use subcommand::SubCommand;
 use wlist::WList;
@@ -18,6 +19,7 @@ fn main() {
     match wishlist.subcommand {
         SubCommand::Add(a) => a.run(),
         SubCommand::Show(s) => s.run(),
-        SubCommand::Export(e) => e.run()
+        SubCommand::Export(e) => e.run(),
+        SubCommand::Import(i) => i.run(),
     }
 }

@@ -2,10 +2,12 @@ use clap::Parser;
 use crate::add::Add;
 use crate::show::Show;
 use crate::export::Export;
+use crate::import::Import;
 
 #[derive(Parser)]
 pub enum SubCommand {
     Add(Add),
     Show(Show),
-    Export(Export)
+    Export(Export),
+    Import(Import)
 }
