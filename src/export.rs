@@ -19,7 +19,7 @@ impl Export {
         let items = load_items_from_db(&self.file_path);
 
         match destination_path {
-            p if p.ends_with(".json") => if let Err(error) = items.save(&destination_path) {
+            ref p if p.ends_with(".json") => if let Err(error) = items.save(p) {
                 println!("{}", error);
             },
             _ => if let Err(error) = items.save_tsv(&destination_path) {
