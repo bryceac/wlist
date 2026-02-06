@@ -3,6 +3,9 @@ mod database;
 mod note;
 mod wlist;
 
+use wlist::WList;
+use clap::Parser;
+
 fn main() {
-    println!("Hello, world!");
+    let wishlist = WList::parse();
 }
