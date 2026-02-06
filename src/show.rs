@@ -1,7 +1,7 @@
 use clap::Parser;
 use wlitem::Item;
 
-use crate::{database::{copy_database_if_not_exists, load_items_from_db}, content::Content};
+use crate::{database::{copy_database_if_not_exists, load_items_from_db, load_notes_from_db}, content::Content};
 
 #[derive(Parser)]
 #[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", long_about = "display wishlist content.")]
@@ -11,6 +11,9 @@ pub struct Show {
 
     #[clap(value_enum, default_value_t=Content::Items)]
     pub content: Content
+
+    #[clap(long, short)]
+    pub item_id: Option<String>
 }
 
 impl Show {
@@ -19,11 +22,18 @@ impl Show {
 
         match self.content {
             Content::Items => {
+                if self.item_id.is_some() {
+                    println!("Item id is not allowed to be specified when displaying items.");
+                    return;
+                }
+
                 let item_store = load_items_from_db(&self.file_path);
 
                 display_items(&item_store);
             },
-            Content::Notes => {}
+            Content::Notes => {
+                let notes = load_notes_from_db(&self.file_path);
+            }
         }
     }
 }
