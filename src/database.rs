@@ -278,9 +278,9 @@ pub fn item_note_associations(p: &str) -> HashMap<String, Vec<u32>> {
                     if keys.contains(&item_pair.0) {
                         if let Some(note_ids) = associations.get_mut(&item_pair.0) {
                             note_ids.push(item_pair.1);
-                        } else {
-                            associations.insert(item_pair.0, vec![item_pair.1]);
                         }
+                    } else {
+                        associations.insert(item_pair.0, vec![item_pair.1]);
                     }
                 }
             }
