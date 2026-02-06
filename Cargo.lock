@@ -794,9 +794,9 @@ dependencies = [
 
 [[package]]
 name = "wlitem"
-version = "0.1.0"
+version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f607f08ba9d5f938e3e5754d44f18873b49d6c04b26a4098999b1dd83ad3f3f8"
+checksum = "b351b641a982090748ded841af30da0a7723c78ee31a86f0428089a25f51e932"
 dependencies = [
  "serde",
  "serde_json",
