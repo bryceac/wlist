@@ -1,7 +1,7 @@
 use clap::Parser;
 use wlitem::Item;
 
-use crate::{shared::real_path, database::load_items_from_db};
+use crate::shared::real_path;
 
 #[derive(Parser)]
 #[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", long_about = "import wishlist.")]
@@ -13,7 +13,7 @@ pub struct Import {
     pub input_file: String
 }
 
-impl Export {
+impl Import {
     pub fn run(&self) {
         let origin_path = real_path(&self.input_file);
         let items = match origin_path {
