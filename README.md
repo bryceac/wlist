@@ -65,6 +65,7 @@ Considering that this project is in its beginning phase at the moment, there is 
 
 * implement subcommand to import items to wishlist
 * implement method to export wishlist
+* implement subcommand to delete notes and items
 * implement subcommand update items in the wishlist
 * implement subcommand generate the HTML with list ordered from highest priority to low priority
 
