@@ -5,6 +5,7 @@ mod wlist;
 mod add;
 mod subcommand;
 mod show;
+mod content;
 
 use subcommand::SubCommand;
 use wlist::WList;
