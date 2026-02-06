@@ -29,10 +29,10 @@ impl Add {
     pub fn run(&self) {
         copy_database_if_not_exists(&self.file_path);
 
-        self.add_item(&self.file_path);
+        self.add_item_to_db(&self.file_path);
     }
 
-    fn add_item(&self, p: &str) {
+    fn add_item_to_db(&self, p: &str) {
         let mut item_builder = Item::builder();
 
         item_builder.set_name(&self.name)
