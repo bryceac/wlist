@@ -23,7 +23,8 @@ pub fn copy_database_if_not_exists(p: &str) {
     };
 
     #[cfg(unix)]
-    let original_path: PathBuf = Path::new(&real_path("/var/db/wlist/gift_registry.db")).to_path_buf();
+    // let original_path: PathBuf = Path::new(&real_path("/var/db/wlist/gift_registry.db")).to_path_buf();
+    let original_path: PathBuf = Path::new("gift_registry.db").to_path_buf();
     
 
     if !destination_path.exists() {
