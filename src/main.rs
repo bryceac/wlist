@@ -17,6 +17,7 @@ fn main() {
 
     match wishlist.subcommand {
         SubCommand::Add(a) => a.run(),
-        SubCommand::Show(s) => s.run()
+        SubCommand::Show(s) => s.run(),
+        SubCommand::Export(e) => e.run()
     }
 }
