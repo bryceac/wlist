@@ -294,7 +294,7 @@ fn id_for_priority(p: &str, priority: &Priority) -> u32 {
     let mut id: u32 = 0;
 
     if let Ok(db) = Connection::open(&real_path(p)) {
-        let priority_statement = format!("SELECT id FROM priorities WHERE id = '{}'", priority.to_str());
+        let priority_statement = format!("SELECT id FROM priorities WHERE priority = '{}'", priority.to_str());
 
         if let Ok(mut statement) = db.prepare(&priority_statement) {
             if let Ok(priority_id) = statement.query_one([], |row| {
