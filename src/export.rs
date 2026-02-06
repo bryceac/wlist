@@ -1,5 +1,5 @@
 use clap::Parser;
-use wlitem::{ Item, Save };
+use wlitem::Save;
 
 use crate::{shared::real_path, database::load_items_from_db};
 
@@ -19,8 +19,12 @@ impl Export {
         let items = load_items_from_db(&self.file_path);
 
         match destination_path {
-            p if p.ends_with(".json") => {},
-            _ => {}
+            p if p.ends_with(".json") => if let Err(error) = items.save(&destination_path) {
+                println!("{}", error);
+            },
+            _ => if let Err(error) = items.save_tsv(&destination_path) {
+                println!("{}", error)
+            }
         }
     }
 }
