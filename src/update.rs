@@ -70,7 +70,7 @@ impl Update {
 
                 if let Some(url_string) = self.url.clone() {
                     if let Ok(url) = Url::parse(&url_string) {
-                        item.url = url;
+                        item.url = Some(url);
                     }
                 }
             }
