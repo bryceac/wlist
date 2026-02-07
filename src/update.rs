@@ -98,6 +98,8 @@ impl Update {
                         }
                     }
                 }
+
+                update_item(p, &item);
             }
         }
     }
