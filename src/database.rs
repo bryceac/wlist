@@ -117,7 +117,7 @@ pub fn link_note_to_item(p: &str, item: &Item, note: &str) {
 
 pub fn delete_note_with_id(p: &str, note_id: u32) {
     if let Ok(db) = Connection::open(&real_path(p)) {
-        let delete_statement = "DELETE FROM notes WHERE id = (?1)";
+        let delete_statement = "DELETE FROM notes WHERE id = ?1";
 
         if let Ok(mut statement) = db.prepare(delete_statement) {
             if let Err(error) = statement.execute(params![note_id]) {
@@ -131,7 +131,7 @@ pub fn delete_note_with_id(p: &str, note_id: u32) {
 
 pub fn update_note_with_id(p: &str, note_id: u32, note: &str) {
     if let Ok(db) = Connection::open(&real_path(p)) {
-        let update_statement = "UPDATES notes SET note = (?1) WHERE id = (?2)";
+        let update_statement = "UPDATES notes SET note = ?1 WHERE id = ?2";
 
         if let Ok(mut statement) = db.prepare(update_statement) {
             if let Err(error) = statement.execute(params![note, note_id]) {
@@ -143,7 +143,7 @@ pub fn update_note_with_id(p: &str, note_id: u32, note: &str) {
 
 pub fn remove_note_from_item(p: &str, item: Item, note_id: u32) {
     if let Ok(db) = Connection::open(&real_path(p)) {
-        let remove_link_statement = "DELETE FROM item_notes WHERE item_id = (?1) AND note_id = (?2)";
+        let remove_link_statement = "DELETE FROM item_notes WHERE item_id = ?1 AND note_id = ?2";
 
         if let Ok(mut statement) = db.prepare(remove_link_statement) {
             if let Err(error) = statement.execute(params![item.id, note_id]) {
@@ -163,9 +163,9 @@ fn delete_item_note_associations(p: &str, item_id: Option<&str>, note_id: Option
     }
 
     let delete_statement = if item_id.is_some() {
-        "DELETE FROM item_notes WHERE item_id = (?1)"
+        "DELETE FROM item_notes WHERE item_id = ?1"
     } else {
-        "DELETE FROM item_notes WHERE note_id = (?1)"
+        "DELETE FROM item_notes WHERE note_id = ?1"
     };
 
     if let Ok(db) = Connection::open(&real_path(p)) {
@@ -352,7 +352,7 @@ pub fn update_item(p: &str, item: &Item) {
     };
 
     if let Ok(db) = Connection::open(&real_path(p)) {
-        let update_statement = "UPDATE items SET name = (?1), quantity = (?2), priority = (?3), url = (?4) WHERE id = (?5)";
+        let update_statement = "UPDATE items SET name = ?1, quantity = ?2, priority = ?3, url = ?4 WHERE id = ?5";
 
         if let Ok(mut statement) = db.prepare(update_statement) {
             if let Err(error) = statement.execute(params![item.name, item.quantity, id_for_priority(p, &item.priority), item_url, item.id]) {
