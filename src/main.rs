@@ -9,6 +9,7 @@ mod content;
 mod export;
 mod import;
 mod delete;
+mod update;
 
 use subcommand::SubCommand;
 use wlist::WList;
