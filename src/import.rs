@@ -25,7 +25,7 @@ impl Import {
             } else {
                 vec![]
             },
-            _ => if let Ok(decoded_items) = Item::from_tsv_file(p) {
+            _ => if let Ok(decoded_items) = Item::from_tsv_file(&self.file_path) {
                 decoded_items
             } else {
                 vec![]
