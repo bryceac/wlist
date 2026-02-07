@@ -2,7 +2,7 @@ use clap::Parser;
 use wlitem::Priority;
 use crate::note::Note;
 
-use crate::database::copy_database_if_not_exists;
+use crate::database::{copy_database_if_not_exists, update_note_with_id};
 
 #[derive(Parser)]
 #[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", long_about = "update items and notes.")]
@@ -44,6 +44,12 @@ impl Update {
         self.note.is_some() {
             println!("note cannot be specified if both note id and item id are given. If you intend to update a note, please only specify the note id");
             return;
+        }
+
+        if let Some(note_id) = self.note_id {
+            if let Some(note) = self.note.clone() {
+                update_note_with_id(&self.file_path, note_id, &note);
+            }
         }
     }
 }
