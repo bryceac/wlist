@@ -30,7 +30,7 @@ pub struct Update {
     #[clap(long, short)]
     pub url: Option<String>,
 
-    #[clap(long)]
+    #[clap(long, num_args = 0..)]
     pub notes: Option<Vec<Note>>,
 
     #[clap(long)]
