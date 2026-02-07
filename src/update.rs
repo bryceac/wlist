@@ -32,10 +32,10 @@ pub struct Update {
     pub notes: Option<Vec<String>>,
 
     #[clap(long)]
-    pub note: Option<String>
+    pub note: Option<String>,
 
     #[clap(long, short)]
-    pub remove_note: bool
+    pub remove_note: bool,
 
     #[clap(long, short)]
     pub append_note: bool
@@ -89,7 +89,7 @@ impl Update {
 
                 if let Some(note_id) = self.note_id {
                     if self.remove_note {
-                        remove_note_from_item(&self.file_path, item, note_id);
+                        remove_note_from_item(&self.file_path, item.clone(), note_id);
                     }
 
                     if self.append_note {
