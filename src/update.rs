@@ -35,6 +35,12 @@ pub struct Update {
 
     #[clap(long)]
     pub note: Option<String>
+
+    #[clap(long, short)]
+    pub remove_note: bool
+
+    #[clap(long, short)]
+    pub append_note: bool
 }
 
 impl Update {
@@ -84,7 +90,7 @@ impl Update {
                 }
 
                 if let Some(note_id) = self.note_id {
-                    
+
                 }
             }
         }
