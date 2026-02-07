@@ -64,7 +64,7 @@ pub fn load_notes_from_db(p: &str) -> Vec<Note> {
     notes
 }
 
-fn note_with_id(p: &str, id: u32) -> Option<Note> {
+pub fn note_with_id(p: &str, id: u32) -> Option<Note> {
     let notes = load_notes_from_db(p);
 
     if let Some(note_index) = notes.iter().position(|n| n.id == id) {
@@ -96,7 +96,7 @@ fn add_note(p: &str, note: &str) {
     } else {}
 }
 
-fn link_note_to_item(p: &str, item: &Item, note: &str) {
+pub fn link_note_to_item(p: &str, item: &Item, note: &str) {
     let note_id = if let Some(id) = id_for_note(p, note) {
         id
     } else {

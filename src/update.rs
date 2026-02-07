@@ -2,9 +2,7 @@ use clap::Parser;
 use wlitem::Priority;
 use url::Url;
 
-use crate::note::Note;
-
-use crate::database::{copy_database_if_not_exists, update_note_with_id, item_with_id};
+use crate::database::*;
 
 #[derive(Parser)]
 #[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", long_about = "update items and notes.")]
@@ -90,7 +88,15 @@ impl Update {
                 }
 
                 if let Some(note_id) = self.note_id {
+                    if self.remove_note {
+                        remove_note_from_item(&self.file_path, item, note_id);
+                    }
 
+                    if self.append_note {
+                        if let Some(note) = note_with_id(&self.file_path, note_id) {
+                            link_note_to_item(&self.file_path, &item, &note.note);
+                        }
+                    }
                 }
             }
         }
