@@ -1,5 +1,7 @@
 use clap::Parser;
 use wlitem::Priority;
+use url::Url;
+
 use crate::note::Note;
 
 use crate::database::{copy_database_if_not_exists, update_note_with_id, item_with_id};
@@ -59,15 +61,17 @@ impl Update {
                 }
 
                 if let Some(quantity) = self.quantity {
-                    item.quantity = quantity
+                    item.quantity = quantity;
                 }
 
                 if let Some(priority) = self.priority.clone() {
-                    item.priority = priority
+                    item.priority = priority;
                 }
 
-                if let Some(url) = self.url.clone() {
-                    
+                if let Some(url_string) = self.url.clone() {
+                    if let Ok(url) = Url::parse(&url_string) {
+                        item.url = url;
+                    }
                 }
             }
         }
