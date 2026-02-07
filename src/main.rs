@@ -8,6 +8,7 @@ mod show;
 mod content;
 mod export;
 mod import;
+mod delete;
 
 use subcommand::SubCommand;
 use wlist::WList;
