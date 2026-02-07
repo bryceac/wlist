@@ -359,5 +359,13 @@ pub fn update_item(p: &str, item: &Item) {
                 println!("{}", error);
             }
         }
+
+        let current_notes = retrieve_notes_for_item_with_id(p, &item.id);
+
+        for note in item.notes.clone() {
+            if !current_notes.contains(&note) {
+                link_note_to_item(p, &item, &note);
+            }
+        }
     }
 }
