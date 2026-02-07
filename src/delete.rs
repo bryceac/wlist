@@ -1,5 +1,7 @@
 use clap::Parser;
 
+use crate::database::{delete_item, item_with_id, delete_note_with_id};
+
 #[derive(Parser)]
 #[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", long_about = "delete items or notes.")]
 pub struct Delete {
@@ -15,6 +17,19 @@ pub struct Delete {
 
 impl Delete {
     pub fn run(&self) {
+        if self.item_id.is_some() && self.note_id.is_some() {
+            println!("You can only either delete notes or items. Please specify only one id.");
+            return;
+        }
 
+        if let Some(item_id) = self.item_id.clone() {
+            if let Some(item) = item_with_id(&self.file_path, &item_id) {
+                delete_item(&self.file_path, &item);
+            }
+        }
+
+        if let Some(note_id) = self.note_id {
+            delete_note_with_id(&self.file_path, note_id);
+        }
     }
 }
