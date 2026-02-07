@@ -99,7 +99,7 @@ impl Update {
                     }
                 }
 
-                update_item(p, &item);
+                update_item(&self.file_path, &item);
             }
         }
     }
