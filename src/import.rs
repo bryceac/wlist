@@ -2,6 +2,7 @@ use clap::Parser;
 use wlitem::Item;
 
 use crate::shared::real_path;
+use crate::database::{ copy_database_if_not_exists, add_item };
 
 #[derive(Parser)]
 #[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", long_about = "import wishlist.")]
@@ -15,14 +16,20 @@ pub struct Import {
 
 impl Import {
     pub fn run(&self) {
+        copy_database_if_not_exists(&self.file_path);
         let origin_path = real_path(&self.input_file);
+        
         let items = match origin_path {
-            ref p if p.ends_with(".json") => if let Err(error) = Item::from_file(p) {
-                println!("{}", error);
+            ref p if p.ends_with(".json") => if let Ok(decoded_items) = Item::from_file(p) {
+                decoded_items
             },
-            _ => if let Err(error) = Item::from_tsv_file(p) {
-                println!("{}", error)
+            _ => if let Ok(decoded_items) = Item::from_tsv_file(p) {
+                decoded_items
             }
+        };
+
+        for item in items {
+            add_item(&self.file_path, item);
         }
     }
 }
