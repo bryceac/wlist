@@ -5,7 +5,7 @@ use url::Url;
 use crate::database::*;
 
 #[derive(Parser)]
-#[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", long_about = "update items and notes.")]
+#[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "update items and notes.")]
 pub struct Update {
     #[clap(default_value = "~/wishlist/gift_registry.db")]
     pub file_path: String,

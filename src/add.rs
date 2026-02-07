@@ -4,7 +4,7 @@ use wlitem::{Priority, Item};
 use crate::database::{copy_database_if_not_exists, add_item};
 
 #[derive(Parser)]
-#[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", long_about = "add new item to wishlist.")]
+#[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "add new item to wishlist.")]
 pub struct Add {
     #[clap(default_value = "~/wishlist/gift_registry.db")]
     pub file_path: String,
