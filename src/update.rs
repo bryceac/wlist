@@ -75,9 +75,9 @@ impl Update {
                 }
 
                 if let Some(notes) = self.notes.clone() {
-                    for note in notes {
+                    for note in notes.clone() {
 
-                        if !notes.contains(&note) {
+                        if !notes.clone().contains(&note) {
                             item.notes.push(note);
                         }
                     }
