@@ -788,6 +788,7 @@ dependencies = [
  "clap",
  "rusqlite",
  "shellexpand",
+ "url",
  "url_path",
  "wlitem",
 ]
