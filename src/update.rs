@@ -31,7 +31,7 @@ pub struct Update {
     pub url: Option<String>,
 
     #[clap(long, num_args = 0..)]
-    pub notes: Option<Vec<Note>>,
+    pub notes: Option<Vec<String>>,
 
     #[clap(long)]
     pub note: Option<String>
@@ -71,6 +71,15 @@ impl Update {
                 if let Some(url_string) = self.url.clone() {
                     if let Ok(url) = Url::parse(&url_string) {
                         item.url = Some(url);
+                    }
+                }
+
+                if let Some(notes) = self.notes.clone() {
+                    for note in notes {
+
+                        if !notes.contains(&note) {
+                            item.notes.push(note);
+                        }
                     }
                 }
             }
