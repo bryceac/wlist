@@ -82,6 +82,10 @@ impl Update {
                         }
                     }
                 }
+
+                if let Some(note_id) = self.note_id {
+                    
+                }
             }
         }
     }
