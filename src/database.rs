@@ -143,7 +143,7 @@ pub fn update_note_with_id(p: &str, note_id: u32, note: &str) {
 
 pub fn remove_note_from_item(p: &str, item: Item, note_id: u32) {
     if let Ok(db) = Connection::open(&real_path(p)) {
-        let remove_link_statement = "DELETE FROM item_notes WHERE item_id = ?1 AND note_id = ?2";
+        let remove_link_statement = "DELETE FROM item_notes WHERE item_id = (?1) AND note_id = (?2)";
 
         if let Ok(mut statement) = db.prepare(remove_link_statement) {
             if let Err(error) = statement.execute(params![item.id, note_id]) {
