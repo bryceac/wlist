@@ -33,7 +33,7 @@ impl Import {
         };
 
         for item in items {
-            add_item(&self.file_path, item);
+            update_or_add_item(&self.file_path, item);
         }
     }
 }
