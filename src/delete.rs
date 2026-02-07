@@ -9,6 +9,12 @@ pub struct Delete {
     #[clap(long, short)]
     pub item_id: Option<String>,
 
-    #clap[(long, short)]
+    #[clap(long, short)]
     pub note_id: Option<u32>
+}
+
+impl Delete {
+    pub fn run(&self) {
+
+    }
 }
