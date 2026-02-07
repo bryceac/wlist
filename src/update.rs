@@ -52,12 +52,6 @@ impl Update {
             return;
         }
 
-        if let Some(note_id) = self.note_id {
-            if let Some(note) = self.note.clone() {
-                update_note_with_id(&self.file_path, note_id, &note);
-            }
-        }
-
         if let Some(item_id) = self.item_id.clone() {
             if let Some(mut item) = item_with_id(&self.file_path, &item_id) {
                 if let Some(name) = self.name.clone() {
@@ -105,6 +99,12 @@ impl Update {
                 }
 
                 update_item(&self.file_path, &item);
+            }
+        }
+
+        if let Some(note_id) = self.note_id {
+            if let Some(note) = self.note.clone() {
+                update_note_with_id(&self.file_path, note_id, &note);
             }
         }
     }
