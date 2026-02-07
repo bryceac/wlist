@@ -23,6 +23,7 @@ fn main() {
         SubCommand::Show(s) => s.run(),
         SubCommand::Export(e) => e.run(),
         SubCommand::Import(i) => i.run(),
-        SubCommand::Delete(d) => d.run()
+        SubCommand::Delete(d) => d.run(),
+        SubCommand::Update(u) => u.run()
     }
 }

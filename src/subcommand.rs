@@ -4,6 +4,7 @@ use crate::delete::Delete;
 use crate::show::Show;
 use crate::export::Export;
 use crate::import::Import;
+use crate::update::Update;
 
 #[derive(Parser)]
 pub enum SubCommand {
@@ -11,5 +12,6 @@ pub enum SubCommand {
     Show(Show),
     Export(Export),
     Import(Import),
-    Delete(Delete)
+    Delete(Delete),
+    Update(Update)
 }
