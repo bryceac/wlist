@@ -369,3 +369,11 @@ pub fn update_item(p: &str, item: &Item) {
         }
     }
 }
+
+pub fn update_or_add_item(p: &str, item: &Item) {
+    if let Some(_) = item_with_id(p, &item.id) {
+        update_item(p, item);
+    } else {
+        add_item(p, item.clone());
+    }
+}
