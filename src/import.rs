@@ -2,7 +2,7 @@ use clap::Parser;
 use wlitem::Item;
 
 use crate::shared::real_path;
-use crate::database::{ copy_database_if_not_exists, add_item };
+use crate::database::{ copy_database_if_not_exists, update_or_add_item };
 
 #[derive(Parser)]
 #[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "import wishlist.")]
