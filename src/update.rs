@@ -88,6 +88,11 @@ impl Update {
                 }
 
                 if let Some(note_id) = self.note_id {
+                    if !self.remove_note && !self.append_note {
+                        println!("Purpose of having a note id is not clear.\r\nPlease use a flag to determine if the note is to be appended or removed.");
+                        return;
+                    }
+
                     if self.remove_note {
                         remove_note_from_item(&self.file_path, item.clone(), note_id);
                     }
