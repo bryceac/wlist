@@ -22,9 +22,13 @@ impl Import {
         let items = match origin_path {
             ref p if p.ends_with(".json") => if let Ok(decoded_items) = Item::from_file(p) {
                 decoded_items
+            } else {
+                vec![]
             },
             _ => if let Ok(decoded_items) = Item::from_tsv_file(p) {
                 decoded_items
+            } else {
+                vec![]
             }
         };
 
