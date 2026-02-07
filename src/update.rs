@@ -1,5 +1,8 @@
 use clap::Parser;
 use wlitem::Priority;
+use crate::note::Note;
+
+use crate::database::copy_database_if_not_exists;
 
 #[derive(Parser)]
 #[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", long_about = "update items and notes.")]
@@ -30,4 +33,17 @@ pub struct Update {
 
     #[clap(long)]
     pub note: Option<String>
+}
+
+impl Update {
+    pub fn run(&self) {
+        copy_database_if_not_exists(&self.file_path);
+
+        if self.item_id.is_some() && 
+        self.note_id.is_some() && 
+        self.note.is_some() {
+            println!("note cannot be specified if both note id and item id are given. If you intend to update a note, please only specify the note id");
+            return;
+        }
+    }
 }
