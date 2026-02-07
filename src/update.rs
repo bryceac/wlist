@@ -88,7 +88,7 @@ impl Update {
                     }
 
                     if self.remove_note {
-                        remove_note_from_item(&self.file_path, item.clone(), note_id);
+                        remove_note_from_item(&self.file_path, &item, note_id);
                     }
 
                     if self.append_note {
