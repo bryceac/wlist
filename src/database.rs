@@ -211,7 +211,7 @@ pub fn load_items_from_db(p: &str) -> Vec<Item> {
 
     match Connection::open(&real_path(p)) {
         Ok(db) => {
-            if let Ok(mut statement) = db.prepare("SELECT * FROM registry") {
+            if let Ok(mut statement) = db.prepare("SELECT * FROM items") {
                 let item_query = statement.query_map([], |row| {
                     let id: String = row.get_unwrap(0);
                     let name: String = row.get_unwrap(1);
