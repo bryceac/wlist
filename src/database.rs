@@ -32,9 +32,16 @@ pub fn create_database_if_not_exists(p: &str) {
         let _ = fs::copy(original_path, destination_path);
     } */
 
-    if let Ok(db) = Connection::open(&real_path(destination_path)) {
-        if let Err(error) = db.execute_batch(include_str!(schema_path.as_str())) {
-            println!("{}", error)
+    if !destination_path.exists() {
+        if let Ok(db) = Connection::open(&destination_path) {
+            if let Some(schema_path_string) = schema_path.as_path().as_os_str().to_str() {
+                match file_content(schema_path_string) {
+                    Ok(sql) => if let Err(error) = db.execute_batch(&sql) {
+                        println!("{}", error)
+                    },
+                    Err(error) => println!("{}", error)
+                }
+            }
         }
     }
 }
