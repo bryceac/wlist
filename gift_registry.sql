@@ -20,8 +20,4 @@ CREATE TABLE IF NOT EXISTS "item_notes" (
 	"note_id"	INTEGER,
 	PRIMARY KEY("item_id","note_id")
 ) STRICT;
-INSERT INTO "priorities" VALUES (1,'low'),
- (2,'medium'),
- (3,'high'),
- (4,'highest');
 COMMIT;
