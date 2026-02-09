@@ -31,6 +31,10 @@ pub fn create_database_if_not_exists(p: &str) {
         let _ = fs::create_dir_all(destination_path.parent().unwrap());
         let _ = fs::copy(original_path, destination_path);
     } */
+
+    if let Ok(db) = Connection::open(real_path(destination_path)) {
+        db.execute_batch(include_str!(schema_path))
+    }
 }
 
 pub fn load_notes_from_db(p: &str) -> Vec<Note> {
