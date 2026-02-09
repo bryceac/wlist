@@ -30,6 +30,4 @@ INSERT INTO "priorities" VALUES (1,'low'),
  (2,'medium'),
  (3,'high'),
  (4,'highest');
-DROP VIEW IF EXISTS "registry";
-CREATE VIEW registry AS SELECT i.id, i.name, i.quantity, p.priority, i.url FROM items as i JOIN priorities as p WHERE i.priority = p.id ORDER BY p.id DESC;
 COMMIT;
