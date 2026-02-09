@@ -18,8 +18,6 @@ DROP TABLE IF EXISTS "item_notes";
 CREATE TABLE IF NOT EXISTS "item_notes" (
 	"item_id"	TEXT,
 	"note_id"	INTEGER,
-	PRIMARY KEY("item_id","note_id"),
-	FOREIGN KEY("item_id") REFERENCES items(id),
-	FOREIGN KEY("note_id") REFERENCES notes(id)
+	PRIMARY KEY("item_id","note_id")
 ) STRICT;
 COMMIT;
