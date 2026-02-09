@@ -52,6 +52,39 @@ impl Update {
             return;
         }
 
+        if self.item_id.is_some() &&
+        self.note_id.is_some() {
+            if self.name.is_some() &&
+            self.quantity.is_some() &&
+            self.priority.is_some() &&
+            self.url.is_some() &&
+            self.notes.is_some() {
+                println!("Cannot update item details and append\r\n or remove existng notes. Please only specify if you want to remove or add note.");
+                return;
+            }
+
+            if let Some(id) = self.item_id.clone() {
+                if let Some(item) = item_with_id(&self.file_path, &id) {
+                    if let Some(note_id) = self.note_id {
+                        if !self.remove_note && !self.append_note {
+                            println!("Purpose of having a note id is not clear.\r\nPlease use a flag to determine if the note is to be appended or removed.");
+                            return;
+                        }
+        
+                        if self.remove_note {
+                            remove_note_from_item(&self.file_path, &item, note_id);
+                        }
+        
+                        if self.append_note {
+                            if let Some(note) = note_with_id(&self.file_path, note_id) {
+                                link_note_to_item(&self.file_path, &item, &note.note);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         if let Some(item_id) = self.item_id.clone() {
             if let Some(mut item) = item_with_id(&self.file_path, &item_id) {
                 if let Some(name) = self.name.clone() {
@@ -77,23 +110,6 @@ impl Update {
 
                         if !notes.clone().contains(&note) {
                             item.notes.push(note);
-                        }
-                    }
-                }
-
-                if let Some(note_id) = self.note_id {
-                    if !self.remove_note && !self.append_note {
-                        println!("Purpose of having a note id is not clear.\r\nPlease use a flag to determine if the note is to be appended or removed.");
-                        return;
-                    }
-
-                    if self.remove_note {
-                        remove_note_from_item(&self.file_path, &item, note_id);
-                    }
-
-                    if self.append_note {
-                        if let Some(note) = note_with_id(&self.file_path, note_id) {
-                            link_note_to_item(&self.file_path, &item, &note.note);
                         }
                     }
                 }
