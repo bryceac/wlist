@@ -12,9 +12,9 @@ pub fn copy_database_if_not_exists(p: &str) {
     let destination_path = Path::new(&target);
 
     #[cfg(windows)]
-    let original_path: PathBuf = if let Ok(path) = env::current_exe() {
+    let schema_path: PathBuf = if let Ok(path) = env::current_exe() {
         if let Some(db_directory) = path.parent() {
-            db_directory.join("gift_registry.db")
+            db_directory.join("gift_registry.sql")
         } else {
             Path::new("gift_registry.db").to_path_buf()  
         }
@@ -24,13 +24,13 @@ pub fn copy_database_if_not_exists(p: &str) {
 
     #[cfg(unix)]
     // let original_path: PathBuf = Path::new(&real_path("/var/db/wlist/gift_registry.db")).to_path_buf();
-    let original_path: PathBuf = Path::new("gift_registry.db").to_path_buf();
+    let schema_path: PathBuf = Path::new("gift_registry.sql").to_path_buf();
     
 
-    if !destination_path.exists() {
+    /* if !destination_path.exists() {
         let _ = fs::create_dir_all(destination_path.parent().unwrap());
         let _ = fs::copy(original_path, destination_path);
-    }
+    } */
 }
 
 pub fn load_notes_from_db(p: &str) -> Vec<Note> {
