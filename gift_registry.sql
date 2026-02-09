@@ -7,25 +7,25 @@ CREATE TABLE IF NOT EXISTS "items" (
 	"priority"	INTEGER,
 	"url"	TEXT,
 	PRIMARY KEY("id")
-);
+) STRICT;
 DROP TABLE IF EXISTS "priorities";
 CREATE TABLE IF NOT EXISTS "priorities" (
 	"id"	INTEGER,
 	"priority"	TEXT,
 	PRIMARY KEY("id" AUTOINCREMENT)
-);
+) STRICT;
 DROP TABLE IF EXISTS "notes";
 CREATE TABLE IF NOT EXISTS "notes" (
 	"id"	INTEGER,
 	"note"	TEXT,
 	PRIMARY KEY("id" AUTOINCREMENT)
-);
+) STRICT;
 DROP TABLE IF EXISTS "item_notes";
 CREATE TABLE IF NOT EXISTS "item_notes" (
 	"item_id"	TEXT,
 	"note_id"	INTEGER,
 	PRIMARY KEY("item_id","note_id")
-);
+) STRICT;
 INSERT INTO "priorities" VALUES (1,'low'),
  (2,'medium'),
  (3,'high'),
