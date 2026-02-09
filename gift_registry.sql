@@ -2,10 +2,10 @@ BEGIN TRANSACTION;
 DROP TABLE IF EXISTS "items";
 CREATE TABLE IF NOT EXISTS "items" (
 	"id"	TEXT,
-	"name"	TEXT,
-	"quantity"	INTEGER,
-	"priority"	INTEGER,
-	"url"	TEXT,
+	"name"	TEXT NOT NULL DEFAULT "",
+	"quantity"	INTEGER NOT NULL DEFAULT 1,
+	"priority"	TEXT CHECK("priority" IN ("low", "medium", "high", "highest")) NOT NULL DEFAULT "medium",
+	"url"	TEXT NULL DEFAULT NULL,
 	PRIMARY KEY("id")
 ) STRICT;
 DROP TABLE IF EXISTS "notes";
