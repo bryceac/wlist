@@ -7,7 +7,7 @@ use rusqlite::{ Connection, params };
 use wlitem::{Item, Priority};
 use crate::{shared::*, note::Note };
 
-pub fn copy_database_if_not_exists(p: &str) {
+pub fn create_database_if_not_exists(p: &str) {
     let target = real_path(p);
     let destination_path = Path::new(&target);
 

@@ -2,7 +2,7 @@ use clap::Parser;
 use wlitem::Item;
 use crate::note::Note;
 
-use crate::{database::{copy_database_if_not_exists, load_items_from_db, load_notes_from_db, item_with_id}, content::Content};
+use crate::{database::{create_database_if_not_exists, load_items_from_db, load_notes_from_db, item_with_id}, content::Content};
 
 #[derive(Parser)]
 #[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "display wishlist content.")]
@@ -19,7 +19,7 @@ pub struct Show {
 
 impl Show {
     pub fn run(&self) {
-        copy_database_if_not_exists(&self.file_path);
+        create_database_if_not_exists(&self.file_path);
 
         match self.content {
             Content::Items => {

@@ -1,7 +1,7 @@
 use clap::Parser;
 use wlitem::{Priority, Item};
 
-use crate::database::{copy_database_if_not_exists, add_item};
+use crate::database::{create_database_if_not_exists, add_item};
 
 #[derive(Parser)]
 #[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "add new item to wishlist.")]
@@ -27,7 +27,7 @@ pub struct Add {
 
 impl Add {
     pub fn run(&self) {
-        copy_database_if_not_exists(&self.file_path);
+        create_database_if_not_exists(&self.file_path);
 
         self.add_item_to_db(&self.file_path);
     }

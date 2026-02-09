@@ -43,7 +43,7 @@ pub struct Update {
 
 impl Update {
     pub fn run(&self) {
-        copy_database_if_not_exists(&self.file_path);
+        create_database_if_not_exists(&self.file_path);
 
         if self.item_id.is_some() && 
         self.note_id.is_some() && 
