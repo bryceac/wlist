@@ -4,7 +4,7 @@ use std::{ path::{ Path, PathBuf }, collections::HashMap };
 use std::env;
 
 use rusqlite::{ Connection, params };
-use wlitem::{Item, Priority};
+use wlitem::Item;
 use crate::{shared::*, note::Note };
 
 pub fn create_database_if_not_exists(p: &str) {
