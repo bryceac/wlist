@@ -1,4 +1,4 @@
-use std::{ path::{ Path, PathBuf }, collections::HashMap };
+use std::{ fs, path::{ Path, PathBuf }, collections::HashMap };
 
 #[cfg(windows)]
 use std::env;
@@ -27,6 +27,8 @@ pub fn create_database_if_not_exists(p: &str) {
     let schema_path: PathBuf = Path::new("gift_registry.sql").to_path_buf();
 
     if !destination_path.exists() {
+        let _ = fs::create_dir_all(destination_path.parent().unwrap());
+        
         if let Ok(db) = Connection::open(&destination_path) {
             if let Some(schema_path_string) = schema_path.as_path().as_os_str().to_str() {
                 match file_content(schema_path_string) {
