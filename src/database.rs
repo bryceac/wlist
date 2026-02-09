@@ -1,4 +1,4 @@
-use std::{ fs, path::{ Path, PathBuf }, collections::HashMap };
+use std::{ path::{ Path, PathBuf }, collections::HashMap };
 
 #[cfg(windows)]
 use std::env;
@@ -25,12 +25,6 @@ pub fn create_database_if_not_exists(p: &str) {
     #[cfg(unix)]
     // let original_path: PathBuf = Path::new(&real_path("/var/db/wlist/gift_registry.db")).to_path_buf();
     let schema_path: PathBuf = Path::new("gift_registry.sql").to_path_buf();
-    
-
-    /* if !destination_path.exists() {
-        let _ = fs::create_dir_all(destination_path.parent().unwrap());
-        let _ = fs::copy(original_path, destination_path);
-    } */
 
     if !destination_path.exists() {
         if let Ok(db) = Connection::open(&destination_path) {
