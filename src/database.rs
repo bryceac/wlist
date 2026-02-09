@@ -297,24 +297,6 @@ pub fn item_note_associations(p: &str) -> HashMap<String, Vec<u32>> {
     associations
 }
 
-fn id_for_priority(p: &str, priority: &Priority) -> u32 {
-    let mut id: u32 = 0;
-
-    if let Ok(db) = Connection::open(&real_path(p)) {
-        let priority_statement = format!("SELECT id FROM priorities WHERE priority = '{}'", priority.to_str());
-
-        if let Ok(mut statement) = db.prepare(&priority_statement) {
-            if let Ok(priority_id) = statement.query_one([], |row| {
-                row.get(0)
-            }) {
-                id = priority_id;
-            }
-        }
-    }
-
-    id
-}
-
 pub fn add_item(p: &str, item: Item) {
     let item_url = if let Some(url) = item.url.clone() {
         url.as_str().to_owned()
@@ -326,7 +308,7 @@ pub fn add_item(p: &str, item: Item) {
         let insert_statement = "INSERT INTO items VALUES (?1, ?2, ?3, ?4, ?5)";
 
         if let Ok(mut statement) = db.prepare(insert_statement) {
-            if let Err(error) = statement.execute(params![item.id, item.name, item.quantity, id_for_priority(p, &item.priority), item_url]) {
+            if let Err(error) = statement.execute(params![item.id, item.name, item.quantity, item.priority.to_str(), item_url]) {
                 println!("{}", error);
             } else {
                 for note in item.notes.clone() {
@@ -362,7 +344,7 @@ pub fn update_item(p: &str, item: &Item) {
         let update_statement = "UPDATE items SET name = ?1, quantity = ?2, priority = ?3, url = ?4 WHERE id = ?5";
 
         if let Ok(mut statement) = db.prepare(update_statement) {
-            if let Err(error) = statement.execute(params![item.name, item.quantity, id_for_priority(p, &item.priority), item_url, item.id]) {
+            if let Err(error) = statement.execute(params![item.name, item.quantity, item.priority.to_str(), &item.priority, item_url, item.id]) {
                 println!("{}", error);
             }
         }
