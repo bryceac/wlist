@@ -344,7 +344,7 @@ pub fn update_item(p: &str, item: &Item) {
         let update_statement = "UPDATE items SET name = ?1, quantity = ?2, priority = ?3, url = ?4 WHERE id = ?5";
 
         if let Ok(mut statement) = db.prepare(update_statement) {
-            if let Err(error) = statement.execute(params![item.name, item.quantity, item.priority.to_str(), &item.priority, item_url, item.id]) {
+            if let Err(error) = statement.execute(params![item.name, item.quantity, item.priority.to_str(), item_url, item.id]) {
                 println!("{}", error);
             }
         }
