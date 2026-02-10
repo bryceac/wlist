@@ -1,4 +1,4 @@
-use build_html::{ HtmlContainer, HtmlPage, HtmlTag, HtmlElement};
+use build_html::{ HtmlContainer, HtmlPage, HtmlTag, HtmlElement, Html};
 use clap::Parser;
 use wlitem::{ Item, Save };
 
@@ -45,9 +45,13 @@ fn generate_html(items: Vec<Item>, title: &str) -> String {
     for item in items {
         let mut item_details = format!("{}", item.quantity);
 
-        
-        let mut list_item = HtmlElement::new(HtmlTag::ListElement)
-        .with_child()
+
+        let mut list_item = HtmlElement::new(HtmlTag::ListElement);
     }
 
+    html_page
+    .with_header(2, "Notes")
+    .with_html(HtmlElement::new(HtmlTag::HorizontalRule));
+
+    html_page.to_html_string()
 }
