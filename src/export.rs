@@ -70,3 +70,17 @@ fn unique_notes(items: &Vec<Item>) -> HashSet<String> {
 
     notes
 }
+
+fn note_list(items: &Vec<Items>) -> String {
+    let notes = unique_notes(items);
+
+    let mut note_string = "\t\t\t\t<ol>".to_owned();
+
+    for (position, note) in notes.iter().enumerate() {
+
+    }
+
+    note_string.push_str("\t\t\t\t<ol>");
+
+    note_string
+}
