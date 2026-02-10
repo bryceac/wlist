@@ -59,7 +59,7 @@ impl Update {
             self.priority.is_some() &&
             self.url.is_some() &&
             self.notes.is_some() {
-                println!("Cannot update item details and append\r\n or remove existng notes. Please only specify if you want to remove or add note.");
+                println!("Cannot update item details and append\r\n or remove existng notes. Please only specify if you want to remove or add note.\r\n\r\nOtherwise, only specify an item or note id.");
                 return;
             }
 
