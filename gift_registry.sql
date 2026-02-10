@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS "items" (
 	"id"	TEXT,
 	"name"	TEXT NOT NULL DEFAULT "",
 	"quantity"	INTEGER NOT NULL DEFAULT 1,
-	"priority"	TEXT CHECK("priority" IN ("low", "medium", "high", "highest")) NOT NULL DEFAULT "medium",
+	"priority"	TEXT CHECK("priority" IN ("low", "medium", "high", "highest")) NOT NULL DEFAULT "low",
 	"url"	TEXT NULL DEFAULT NULL,
 	PRIMARY KEY("id")
 ) STRICT;
