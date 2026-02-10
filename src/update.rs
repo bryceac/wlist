@@ -66,8 +66,8 @@ impl Update {
             if let Some(id) = self.item_id.clone() {
                 if let Some(item) = item_with_id(&self.file_path, &id) {
                     if let Some(note_id) = self.note_id {
-                        if !self.remove_note && !self.append_note {
-                            println!("Purpose of having a note id is not clear.\r\nPlease use a flag to determine if the note is to be appended or removed.");
+                        if !self.remove_note && !self.append_note || self.remove_note && self.append_note {
+                            println!("Purpose of having a note id is not clear.\r\nPlease use ONE flag to determine if the note is to be appended or removed.");
                             return;
                         }
         
