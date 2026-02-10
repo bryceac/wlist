@@ -95,7 +95,13 @@ fn list_element(item: &Item, items: &Vec<Item>) -> HtmlElement {
         format!("{}", item.name)
     };
 
-    
+    if !item_note_elements.is_empty() {
+        details.push_str(" ");
+
+        for note_element in item_note_elements {
+            details.push_str(&note_element.to_html_string());
+        }
+    }
 
     if let Some(url) = item.url {
         if url.to_string().is_empty() {
