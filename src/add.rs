@@ -9,19 +9,19 @@ pub struct Add {
     #[clap(default_value = "~/wishlist/gift_registry.db", help = "the path to the wishlist database")]
     pub file_path: String,
 
-    #[clap(long, short)]
+    #[clap(long, short, help = "item name")]
     pub name: String,
 
-    #[clap(long, short, default_value = "1")]
+    #[clap(long, short, default_value = "1", help = "the quantity of the item desired")]
     pub quantity: u32,
 
-    #[clap(long, short, default_value = "low")]
+    #[clap(long, short, default_value = "low", help = "how much the item is desired")]
     pub priority: Priority,
 
-    #[clap(long, short)]
+    #[clap(long, short, help = "where the item can be found online")]
     pub url: Option<String>,
 
-    #[clap(long, num_args = 0..)]
+    #[clap(long, help = "notes regarding the item in question", num_args = 0..)]
     pub notes: Option<Vec<String>>
 }
 
