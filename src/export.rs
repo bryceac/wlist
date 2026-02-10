@@ -1,7 +1,7 @@
 use clap::Parser;
 use wlitem::Save;
 
-use crate::{shared::real_path, database::load_items_from_db};
+use crate::{shared::real_path, database::{load_items_from_db, create_database_if_not_exists}};
 
 #[derive(Parser)]
 #[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "export wishlist.")]
@@ -18,6 +18,7 @@ pub struct Export {
 
 impl Export {
     pub fn run(&self) {
+        create_database_if_not_exists(&self.file_path);
         let destination_path = real_path(&self.output_file);
         let items = load_items_from_db(&self.file_path);
 
@@ -30,4 +31,9 @@ impl Export {
             }
         }
     }
+}
+
+fn generate_html() -> String {
+    let html_string = build_html::HtmlPage::new()
+
 }
