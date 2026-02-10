@@ -45,11 +45,7 @@ fn generate_html(items: Vec<Item>, title: &str) -> String {
     let mut item_list = HtmlElement::new(HtmlTag::OrderedList);
 
     for item in items {
-        let mut item_details = format!("{}", item.quantity);
-
-
-        let mut list_item = HtmlElement::new(HtmlTag::ListElement);
-        item_list.with_child(HtmlChild::Element(list_item));
+        todo!();
     }
 
     html_page
@@ -77,11 +73,33 @@ fn notes_for_item(item: &Item, items: &Vec<Item>) -> Vec<HtmlElement> {
 
     for (position, note) in notes.iter().enumerate() {
         if item.notes.contains(note) {
-            let link_destination = format!("#note{}", position+1);
+            let id_number = position+1;
+            let link_destination = format!("#note{}", id_number);
             let note_element = HtmlElement::new(HtmlTag::Superscript)
-            .with_link("", text)
+            .with_link(link_destination, id_number.to_string().as_str());
+
+            note_elements.push(note_element);
         }
     }
 
     note_elements
+}
+
+fn list_element(item: &Item, items: &Vec<Item>) -> HtmlElement {
+    let mut list_item = HtmlElement::new(HtmlTag::ListElement);
+    let item_note_elements = notes_for_item(item, items);
+
+    let mut details = if item.quantity > 1 {
+        format!("{} {}", item.quantity, item.name)
+    } else {
+        format!("{}", item.name)
+    };
+
+    
+
+    if let Some(url) = item.url {
+        if url.to_string().is_empty() {
+            let mut details = format!("{} {}", item.quantity)
+        }
+    }
 }
