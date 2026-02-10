@@ -48,6 +48,7 @@ fn generate_html(items: Vec<Item>, title: &str) -> String {
     html.push_str(&format!("\t\t\t\t<h1>{}</h1>", title));
     html.push_str("\t\t\t</header>");
     html.push_str("\t\t\t<hr>");
+    registry(&items);
     html.push_str("\t\t\t<footer>");
     html.push_str(&format!("\t\t\t\t<h2>Notes</h2>"));
     html.push_str("\t\t\t\t<hr>");
