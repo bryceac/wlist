@@ -106,7 +106,7 @@ fn registry_item(item: &Item, items: &Vec<Item>) -> String {
         if url.to_string().is_empty() {
             details.push_str(&item.name);
         } else {
-            details.push_str(&format!("<a href=\"{}\">{}</a>", item.url.to_string(), item.name));
+            details.push_str(&format!("<a href=\"{}\">{}</a>", url.to_string(), item.name));
         }
     } else {
         details.push_str(&item.name);
