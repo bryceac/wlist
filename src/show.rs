@@ -76,6 +76,6 @@ fn display_items(store: &Vec<Item>) {
 
 fn display_notes(store: &Vec<Note>) {
     for note in store {
-        println!("{}\r\n-----\r\n\r\n{}\r\n\r\n", note.id, note.note);
+        println!("id: {}\r\n-----\r\n\r\n{}\r\n\r\n", note.id, note.note);
     }
 }
