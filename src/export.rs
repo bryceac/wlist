@@ -71,7 +71,7 @@ fn unique_notes(items: &Vec<Item>) -> HashSet<String> {
     notes
 }
 
-fn note_list(items: &Vec<Items>) -> String {
+fn note_list(items: &Vec<Item>) -> String {
     let notes = unique_notes(items);
 
     let mut note_string = "\t\t\t\t<ol>".to_owned();
