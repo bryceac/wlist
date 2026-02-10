@@ -84,15 +84,19 @@ fn note_list(items: &Vec<Item>) -> String {
 
     }
 
-    note_string.push_str("\t\t\t\t<ol>\r\n");
+    note_string.push_str("\t\t\t\t</ol>\r\n");
 
     note_string
 }
 
-fn registry(items: Vec<Item>) -> String {
-    let mut item_string = "\t\t\t\t<ol>\r\n".to_owned();
+fn registry(items: &Vec<Item>) -> String {
+    let mut item_string = "\t\t\t<ol>\r\n".to_owned();
 
-    item_string.push_str("\t\t\t\t<ol>\r\n");
+    for item in items {
+        item_string.push_str(&format!("\t\t\t\t<li>{}</li>\r\n", &registry_item(item, items)));
+    }
+
+    item_string.push_str("\t\t\t</ol>\r\n");
 
     item_string
 }
