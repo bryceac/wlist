@@ -4,9 +4,9 @@ use wlitem::{Priority, Item};
 use crate::database::{create_database_if_not_exists, add_item};
 
 #[derive(Parser)]
-#[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "add new item to wishlist.")]
+#[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "add new item to wishlist.", long_about = " add new item to wishlist. Items are added by simply passing the necessary data.\r\n\r\nOf that data, only the a name is required by doing something like this:\r\n\r\nwlist -n Computer\r\n\r\nIf there are spaces in the name, the name should be enclosed in quotes.\r\n\r\nOther parameters can be specified include the following:\r\n\r\n* Quantity\r\n* Priority (specifies the degree to which you the item)\r\n* URL (place to buy the item)\r\n* Notes\r\n\r\nAll of these are optional and have default values specified if none are provided.\r\n\r\nLike the name, if notes contain spaces, they should be enclosed in quotes. Otherwise, they will be considered separate notes.")]
 pub struct Add {
-    #[clap(default_value = "~/wishlist/gift_registry.db")]
+    #[clap(default_value = "~/wishlist/gift_registry.db", help = "the path to the wishlist database")]
     pub file_path: String,
 
     #[clap(long, short)]
@@ -15,7 +15,7 @@ pub struct Add {
     #[clap(long, short, default_value = "1")]
     pub quantity: u32,
 
-    #[clap(long, short, default_value = "medium")]
+    #[clap(long, short, default_value = "low")]
     pub priority: Priority,
 
     #[clap(long, short)]
