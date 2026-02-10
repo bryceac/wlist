@@ -1,4 +1,4 @@
-use build_html::{ HtmlContainer, HtmlPage, HtmlTag, HtmlElement, Html};
+use build_html::{ HtmlContainer, HtmlPage, HtmlTag, HtmlChild, HtmlElement, Html};
 use clap::Parser;
 use wlitem::{ Item, Save };
 
@@ -47,6 +47,7 @@ fn generate_html(items: Vec<Item>, title: &str) -> String {
 
 
         let mut list_item = HtmlElement::new(HtmlTag::ListElement);
+        item_list.with_child(HtmlChild::Element(list_item));
     }
 
     html_page
