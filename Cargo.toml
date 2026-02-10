@@ -25,12 +25,12 @@ keep track of finances."""
 section = "unknown"
 priority = "optional"
 assets = [
-    ["target/release/rcheckbook", "usr/local/bin/", "755"],
-    ["register.db", "var/db/rcheckbook/", "644"],
+    ["target/release/wlist", "usr/local/bin/", "755"],
+    ["gift_registry.sql", "usr/local/share/wlist/", "644"],
 ]
 
 [package.metadata.generate-rpm]
 assets = [
-    { source = "target/release/rcheckbook", dest = "/usr/local/bin/", mode = "755" },
-    { source = "register.db", dest = "/var/db/rcheckbook/", mode = "644" }
+    { source = "target/release/wlist", dest = "/usr/local/bin/", mode = "755" },
+    { source = "gift_registry.sql", dest = "/usr/local/share/wlist/", mode = "644" }
 ]
