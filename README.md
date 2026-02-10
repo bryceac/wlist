@@ -140,6 +140,8 @@ wlist show path/to/database notes -i 9F432FA2-12D2-4B61-AA55-319D23601C4E
 
 The output will be similiar to the example output above, but will not show you the note id.
 
+In either case, the database path must be explicitly given when looking through notes, although it is usually optional.
+
 ### Contributing
 
 Currently, I have been able to implement everything that I desire as of now.
