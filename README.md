@@ -64,6 +64,44 @@ I have no idea how long it will take me to get things working, but it should be 
   </dd>
 </dl>
 
+### Usage
+
+After installing the program, all you need to do is something like this:
+
+<pre>
+wlist import -i ~/Desktop/items.json
+</pre>
+
+This will create a database at the following location:
+
+<pre>
+~/wishlist/gift_registry.db
+</pre>
+
+This location corresponds to your user folder.
+
+It then imports the data from the given file. Imports are done based on file extension.
+
+Right now, only TSV and JSON files are supported and notes are only supported in JSON files.
+
+if you specify a different path before **-i**, the database will be created in or read from that location instead.
+
+### Displaying Items
+
+By running, the following:
+
+<pre>
+wlist show
+</pre>
+
+You will see something like this:
+
+<pre>
+9F432FA2-12D2-4B61-AA55-319D23601C4E	Nintendo Switch 2	1	highest	https://example.com/nintendo-switch-2
+15278603-03F1-41E0-81ED-6E94883F9AC7	Mario Kart World	1	high	https://example.com/mario-kart-world
+C58232DE-AD35-4188-9736-66BC7CA52E09	Trails in the Sky the 1st	1	medium	https://example.com/trails-in-the-sky
+</pre>
+
 ### Contributing
 
 Currently, I have been able to implement everything that I desire as of now.
