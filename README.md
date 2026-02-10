@@ -86,9 +86,9 @@ Right now, only TSV and JSON files are supported and notes are only supported in
 
 if you specify a different path before **-i**, the database will be created in or read from that location instead.
 
-### Displaying Info
+#### Displaying Info
 
-#### Items
+##### Items
 By running, the following:
 
 <pre>
@@ -113,7 +113,7 @@ The data is interpetted like this:
 4. priority level
 5. URL
 
-#### Notes
+##### Notes
 
 If you instead want to look through notes, you would run something like the following:
 
