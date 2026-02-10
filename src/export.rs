@@ -59,11 +59,11 @@ fn generate_html(items: Vec<Item>, title: &str) -> String {
     html_page.to_html_string()
 }
 
-fn unique_notes(items: Vec<Item>) -> HashSet<String> {
+fn unique_notes(items: &Vec<Item>) -> HashSet<String> {
     let mut notes = HashSet::new();
 
-    for item in items {
-        for note in item.notes {
+    for item in items.clone() {
+        for note in item.notes.clone() {
             notes.insert(note);
         }
     }
