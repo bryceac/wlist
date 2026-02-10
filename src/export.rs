@@ -7,7 +7,7 @@ use crate::{shared::real_path, database::{load_items_from_db, create_database_if
 #[derive(Parser)]
 #[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "export wishlist.")]
 pub struct Export {
-    #[clap(default_value = "~/wishlist/gift_registry.db")]
+    #[clap(default_value = "~/wishlist/gift_registry.db", help = "the path to the wishlist database")]
     pub file_path: String,
 
     #[clap(long, short, help = "set title of HTML output", default_value = "Wishlist")]
