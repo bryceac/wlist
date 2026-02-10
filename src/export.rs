@@ -102,7 +102,7 @@ fn registry_item(item: &Item, items: &Vec<Item>) -> String {
 
     let notes = unique_notes(items);
 
-    if let Some(url) = item.url {
+    if let Some(url) = item.url.clone() {
         if url.to_string().is_empty() {
             details.push_str(&item.name);
         } else {
