@@ -74,13 +74,16 @@ fn unique_notes(items: &Vec<Item>) -> HashSet<String> {
 fn note_list(items: &Vec<Item>) -> String {
     let notes = unique_notes(items);
 
-    let mut note_string = "\t\t\t\t<ol>".to_owned();
+    let mut note_string = "\t\t\t\t<ol>\r\n".to_owned();
 
     for (position, note) in notes.iter().enumerate() {
+        let id_number = position+1;
+
+        note_string.push_str(&format!("\t\t\t\t\t<li id=\"note{}\">{}</li>\r\n", id_number, note));
 
     }
 
-    note_string.push_str("\t\t\t\t<ol>");
+    note_string.push_str("\t\t\t\t<ol>\r\n");
 
     note_string
 }
