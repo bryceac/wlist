@@ -5,7 +5,7 @@ use url::Url;
 use crate::database::*;
 
 #[derive(Parser)]
-#[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "update items and notes.", long_about = "update items or notes.\r\n\r\nBy supplying the right data, you can do either of the following:\r\n\r\n* update notes\r\n* update item details\r\n* append notes to items\r\n* remove notes from items\r\n\r\nPlease note that the latter two options cannot be performed in conjunction with the former two.\r\n\r\nModifying items is a lot like adding them, especially because notes can only be added through items, so things work in the same capacity here.\r\n\r\nNote modification can be done by supplying the identifier for the note, which can be found by running the show command.\r\nThis is the only way notes can be updated.\r\n\r\nIf you want to add or remove existing notes from item, provide the ids for both the iitem and the note like this:\r\n\r\nwlist update -i 15278603-03F1-41E0-81ED-6E94883F9AC7 -n 1\r\n\r\nAfter that, you need to pass either the -r flag to break the connection between them or the -a flag to link them together.\r\n\r\nItem identifiers, like the identifiers for notes, can be be found with the show command.")]
+#[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "update items and notes.", long_about = "update items or notes.\r\n\r\nBy supplying the right data, you can do either of the following:\r\n\r\n* update notes\r\n* update item details\r\n* append notes to items\r\n* remove notes from items\r\n\r\nPlease note that the latter two options cannot be performed in conjunction with the former two.\r\n\r\nModifying items is a lot like adding them, especially because notes can only be added through items, so things work in the same capacity here.\r\n\r\nNote modification can be done by supplying the identifier for the note, which \r\ncan be found by running the show command.\r\nThis is the only way notes can be updated.\r\n\r\nIf you want to add or remove existing notes from item, provide the ids for both the iitem and the note like this:\r\n\r\nwlist update -i 15278603-03F1-41E0-81ED-6E94883F9AC7 -n 1\r\n\r\nAfter that, you need to pass either the -r flag to break the connection between them or the -a flag to link them together.\r\n\r\nItem identifiers, like the identifiers for notes, can be be found with the show command.")]
 pub struct Update {
     #[clap(default_value = "~/wishlist/gift_registry.db", help = "the path to the wishlist database")]
     pub file_path: String,
@@ -16,28 +16,28 @@ pub struct Update {
     #[clap(long, short, help = "note identifier")]
     pub note_id: Option<u32>,
 
-    #[clap(long)]
+    #[clap(long, help = "item name")]
     pub name: Option<String>,
 
-    #[clap(long, short)]
+    #[clap(long, short, help = "number of item desired")]
     pub quantity: Option<u32>,
 
-    #[clap(long, short)]
+    #[clap(long, short, help = "how much you desire the ite")]
     pub priority: Option<Priority>,
 
-    #[clap(long, short)]
+    #[clap(long, short, help = "The URL where the item can be bought online")]
     pub url: Option<String>,
 
-    #[clap(long, num_args = 0..)]
+    #[clap(long, help = "notes regarding the item in question", num_args = 0..)]
     pub notes: Option<Vec<String>>,
 
-    #[clap(long)]
+    #[clap(long, help = "note contents")]
     pub note: Option<String>,
 
-    #[clap(long, short)]
+    #[clap(long, short, help = "denotes that the note should be removed from item")]
     pub remove_note: bool,
 
-    #[clap(long, short)]
+    #[clap(long, short, help = "denotes that the note should be appended to item")]
     pub append_note: bool
 }
 
