@@ -5,12 +5,12 @@ use crate::shared::real_path;
 use crate::database::{ create_database_if_not_exists, update_or_add_item };
 
 #[derive(Parser)]
-#[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "import wishlist.", long_about = "import items to the wishlist.\r\n\r\nUnlike the export command, only two formats are supported, which are as follows:\r\n\r\n* JSON (imports item details and notes)\r\n*TSV (only imports item details).\r\n\r\nIf the imported data contains items that already exist, they will be updated.\r\n\r\nHowever, notes in a JSON file will not be updated and will be added as new notes.")]
+#[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "import wishlist.", long_about = "import items to the wishlist.\r\n\r\nUnlike the export command, only two formats are supported, which are as follows:\r\n\r\n* JSON (imports item details and notes)\r\n*TSV (only imports item details).\r\n\r\nIf the imported data contains items that already exist, they will be updated.\r\n\r\nHowever, notes in a JSON file will not be updated and will be added as new notes.\r\n\r\nImports are done based on file extension, with TSV being the default.")]
 pub struct Import {
-    #[clap(default_value = "~/wishlist/gift_registry.db")]
+    #[clap(default_value = "~/wishlist/gift_registry.db", help = "the path to the wishlist database")]
     pub file_path: String,
 
-    #[clap(long, short)]
+    #[clap(long, short, help = "the file to import data from.")]
     pub input_file: String
 }
 
