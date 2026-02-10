@@ -3,7 +3,7 @@ use clap::Parser;
 use crate::database::{delete_item, item_with_id, delete_note_with_id};
 
 #[derive(Parser)]
-#[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "delete items or notes.", long_about = "Delete items or notes from the wishlist.\r\n\r\nNotes and items can be deleted by passing the respective id, which can be discoered through the show command.\r\n\r\nHowever, you can only delete one or the other at a time.")]
+#[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "delete items or notes.", long_about = "Delete items or notes from the wishlist.\r\n\r\nNotes and items can be deleted by passing the respective id, which can be \r\ndiscoered through the show command.\r\n\r\nHowever, you can only delete one or the other at a time.")]
 pub struct Delete {
     #[clap(default_value = "~/wishlist/gift_registry.db", help = "the path to the wishlist database")]
     pub file_path: String,
