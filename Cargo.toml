@@ -2,6 +2,12 @@
 name = "wlist"
 version = "0.1.0"
 edition = "2024"
+license = "MIT"
+description = "CLI wishlist registry that can be used to produce shareable wishlists with others."
+homepage = "https://github.com/bryceac/wlist"
+readme = "README.md"
+repository = "https://github.com/bryceac/wlist"
+keywords = ["wlist", "wishlist", "wish", "list", "commandline", "cli"]
 
 [dependencies]
 clap = { version = "4.5.57", features = ["derive"] }
@@ -10,3 +16,21 @@ shellexpand = "3.1.1"
 url = "2.5.8"
 url_path = "0.1.3"
 wlitem = "0.1.2"
+
+[package.metadata.deb]
+license-file = ["LICENSE", "4"]
+extended-description = """\
+A simple CLI based checkbook ledger to help \
+keep track of finances."""
+section = "unknown"
+priority = "optional"
+assets = [
+    ["target/release/rcheckbook", "usr/local/bin/", "755"],
+    ["register.db", "var/db/rcheckbook/", "644"],
+]
+
+[package.metadata.generate-rpm]
+assets = [
+    { source = "target/release/rcheckbook", dest = "/usr/local/bin/", mode = "755" },
+    { source = "register.db", dest = "/var/db/rcheckbook/", mode = "644" }
+]
