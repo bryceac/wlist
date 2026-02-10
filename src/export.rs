@@ -1,6 +1,4 @@
 use std::collections::HashSet;
-
-use build_html::{ HtmlContainer, HtmlPage, HtmlTag, HtmlChild, HtmlElement, Html};
 use clap::Parser;
 use wlitem::{ Item, Save };
 
@@ -37,22 +35,7 @@ impl Export {
 }
 
 fn generate_html(items: Vec<Item>, title: &str) -> String {
-    let mut html_page = HtmlPage::new()
-    .with_title(title)
-    .with_header(1, title)
-    .with_html(HtmlElement::new(HtmlTag::HorizontalRule));
-
-    let mut item_list = HtmlElement::new(HtmlTag::OrderedList);
-
-    for item in items {
-        todo!();
-    }
-
-    html_page
-    .with_header(2, "Notes")
-    .with_html(HtmlElement::new(HtmlTag::HorizontalRule));
-
-    html_page.to_html_string()
+    todo!();
 }
 
 fn unique_notes(items: &Vec<Item>) -> HashSet<String> {
@@ -65,67 +48,4 @@ fn unique_notes(items: &Vec<Item>) -> HashSet<String> {
     }
 
     notes
-}
-
-fn notes_for_item(item: &Item, items: &Vec<Item>) -> Vec<HtmlElement> {
-    let mut note_elements: Vec<HtmlElement> = vec![];
-    let notes = unique_notes(items);
-
-    for (position, note) in notes.iter().enumerate() {
-        if item.notes.contains(note) {
-            let id_number = position+1;
-            let link_destination = format!("#note{}", id_number);
-            let note_element = HtmlElement::new(HtmlTag::Superscript)
-            .with_link(link_destination, id_number.to_string().as_str());
-
-            note_elements.push(note_element);
-        }
-    }
-
-    note_elements
-}
-
-fn list_element(item: &Item, items: &Vec<Item>) -> HtmlElement {
-    let mut list_item = HtmlElement::new(HtmlTag::ListElement);
-    let item_note_elements = notes_for_item(item, items);
-
-    /* let mut item_without_url_details = if item.quantity > 1 {
-        format!("{} {}", item.quantity, item.name)
-    } else {
-        format!("{}", item.name)
-    };
-
-    if !item_note_elements.is_empty() {
-        item_without_details.push_str(" ");
-
-        for note_element in item_note_elements {
-            unlinked_item_details.push_str(&note_element.to_html_string());
-        }
-    } */
-
-    if item.quantity > 1 {
-        list_item
-        .with_child(item.quantity.to_string().as_str().into())
-        .with_child(" ".into());
-    }
-
-    
-
-    if let Some(url) = item.url.clone() {
-        if !url.to_string().is_empty() {
-            list_item
-            .with_link(url, item.name.clone());
-        } else {
-            list_item
-            .with_child(item.name.clone().into());
-        }
-    } else {
-        list_item
-        .with_child(item.name.clone().into());
-    }
-
-    list_item
-    .with_child(" ".into());
-
-    list_item
 }
