@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::{ collections::HashSet, io };
 use clap::Parser;
 use wlitem::{ Item, Save };
 
@@ -27,6 +27,8 @@ impl Export {
             ref p if p.ends_with(".json") => if let Err(error) = items.save(p) {
                 println!("{}", error);
             },
+            ref p if p.ends_with(".html") => {
+            },
             _ => if let Err(error) = items.save_tsv(&destination_path) {
                 println!("{}", error)
             }
@@ -34,7 +36,7 @@ impl Export {
     }
 }
 
-fn generate_html(items: Vec<Item>, title: &str) -> String {
+fn generate_html(items: &Vec<Item>, title: &str) -> String {
     let mut html = "<!DOCTYPE html>\r\n".to_owned();
 
     html.push_str("<html>\r\n");
@@ -48,11 +50,11 @@ fn generate_html(items: Vec<Item>, title: &str) -> String {
     html.push_str(&format!("\t\t\t\t<h1>{}</h1>", title));
     html.push_str("\t\t\t</header>");
     html.push_str("\t\t\t<hr>");
-    registry(&items);
+    registry(items);
     html.push_str("\t\t\t<footer>");
     html.push_str(&format!("\t\t\t\t<h2>Notes</h2>"));
     html.push_str("\t\t\t\t<hr>");
-    note_list(&items);
+    note_list(items);
     html.push_str("\t\t\t</footer>");
     html.push_str("\t\t</article>");
     html.push_str("\t</body>\r\n");
@@ -134,4 +136,10 @@ fn registry_item(item: &Item, items: &Vec<Item>) -> String {
     }
 
     details
+}
+
+fn save_html(items: Vec<Item>, title: &str, p: &str) -> Result<(), io::Error> {
+    let html = generate_html(&items, title);
+
+    let output
 }
