@@ -111,12 +111,21 @@ fn list_element(item: &Item, items: &Vec<Item>) -> HtmlElement {
 
     
 
-    if let Some(url) = item.url {
+    if let Some(url) = item.url.clone() {
         if !url.to_string().is_empty() {
             list_item
-            .with_link(href, text)
+            .with_link(url, item.name.clone());
+        } else {
+            list_item
+            .with_child(item.name.clone().into());
         }
+    } else {
+        list_item
+        .with_child(item.name.clone().into());
     }
+
+    list_item
+    .with_child(" ".into());
 
     list_item
 }
