@@ -61,8 +61,14 @@ I have no idea how long it will take me to get things working, but it should be 
 
 ### Contributing
 
-Considering that this project is in its beginning phase at the moment, there is plenty to do at the moment, such as:
+Currently, I have been able to implement everything that I desire as of now.
 
-* implement subcommand generate the HTML with list ordered from highest priority to low priority
+However, if you think you can help make this program even better, feel free to fork this project and make a pull request.
 
-I am sure that I will eventually be able to tick these off at some point, but if you want to help out, feel free to fork this project and issue a pull request.
+### Support
+
+While I have done a lot more programming in Rust these days, I still don't consider my abilities to be that great, so expect to be on your own.
+
+However, I will try my best to help you as much as I can if you email me at the address below:
+
+tonyhawk2100@gmail.com
