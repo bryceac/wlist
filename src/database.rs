@@ -23,8 +23,7 @@ pub fn create_database_if_not_exists(p: &str) {
     };
 
     #[cfg(unix)]
-    // let original_path: PathBuf = Path::new(&real_path("/var/db/wlist/gift_registry.db")).to_path_buf();
-    let schema_path: PathBuf = Path::new("gift_registry.sql").to_path_buf();
+    let schema_path: PathBuf = Path::new("/usr/local/share/wlist/gift_registry.sql").to_path_buf();
 
     if !destination_path.exists() {
         let _ = fs::create_dir_all(destination_path.parent().unwrap());
