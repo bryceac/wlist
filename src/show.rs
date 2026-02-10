@@ -5,15 +5,15 @@ use crate::note::Note;
 use crate::{database::{create_database_if_not_exists, load_items_from_db, load_notes_from_db, item_with_id}, content::Content};
 
 #[derive(Parser)]
-#[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "display wishlist content.")]
+#[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "display wishlist content.", long_about = "Display the contents of the wishlist, whether that be:\r\n\r\n* the notes\r\n* the items\r\n* notes attached to items.\r\n\r\nThe default is the list of items.\r\n\r\nTo view the notes, you would do something like this:\r\n\r\nwlist show path/to/database notes\r\n\r\nThis will display all the notes in the wish list, and if you provide an item id, it will show you the notes belonging to that item.")]
 pub struct Show {
-    #[clap(default_value = "~/wishlist/gift_registry.db")]
+    #[clap(default_value = "~/wishlist/gift_registry.db", help = "the path to the wishlist database")]
     pub file_path: String,
 
-    #[clap(value_enum, default_value_t=Content::Items)]
+    #[clap(value_enum, help = "the content to display", default_value_t=Content::Items)]
     pub content: Content,
 
-    #[clap(long, short)]
+    #[clap(long, short, help = "the id of the item to look at.")]
     pub item_id: Option<String>
 }
 
