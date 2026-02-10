@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 use build_html::{ HtmlContainer, HtmlPage, HtmlTag, HtmlChild, HtmlElement, Html};
 use clap::Parser;
 use wlitem::{ Item, Save };
@@ -55,4 +57,16 @@ fn generate_html(items: Vec<Item>, title: &str) -> String {
     .with_html(HtmlElement::new(HtmlTag::HorizontalRule));
 
     html_page.to_html_string()
+}
+
+fn unique_notes(items: Vec<Item>) -> HashSet<String> {
+    let mut notes = HashSet::new();
+
+    for item in items {
+        for note in item.notes {
+            notes.insert(note);
+        }
+    }
+
+    notes
 }
