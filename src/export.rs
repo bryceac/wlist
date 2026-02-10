@@ -89,23 +89,25 @@ fn list_element(item: &Item, items: &Vec<Item>) -> HtmlElement {
     let mut list_item = HtmlElement::new(HtmlTag::ListElement);
     let item_note_elements = notes_for_item(item, items);
 
-    let mut details = if item.quantity > 1 {
+    /* let mut item_without_url_details = if item.quantity > 1 {
         format!("{} {}", item.quantity, item.name)
     } else {
         format!("{}", item.name)
     };
 
     if !item_note_elements.is_empty() {
-        details.push_str(" ");
+        item_without_details.push_str(" ");
 
         for note_element in item_note_elements {
-            details.push_str(&note_element.to_html_string());
+            unlinked_item_details.push_str(&note_element.to_html_string());
         }
-    }
+    } */
 
     if let Some(url) = item.url {
         if url.to_string().is_empty() {
             let mut details = format!("{} {}", item.quantity)
         }
     }
+
+    list_item
 }
