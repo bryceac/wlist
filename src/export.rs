@@ -88,3 +88,41 @@ fn note_list(items: &Vec<Item>) -> String {
 
     note_string
 }
+
+fn registry(items: Vec<Item>) -> String {
+    todo!()
+}
+
+fn registry_item(item: &Item, items: &Vec<Item>) -> String {
+    let mut details = if item.quantity > 1 {
+        format!("{} ", item.quantity)
+    } else {
+        "".to_owned()
+    };
+
+    let notes = unique_notes(items);
+
+    if let Some(url) = item.url {
+        if url.to_string().is_empty() {
+            details.push_str(&item.name);
+        } else {
+            details.push_str(&format!("<a href=\"{}\">{}</a>", item.url.to_string(), item.name));
+        }
+    } else {
+        details.push_str(&item.name);
+    }
+
+    if !item.notes.is_empty() {
+        details.push_str(" ");
+
+        for (position, note) in notes.iter().enumerate() {
+            if item.notes.contains(note) {
+                let id_number = position+1;
+                let destination = format!("#note{}", id_number);
+                details.push_str(&format!("<sup>[<a href=\"{}\">{}</a>]</sup>", destination, id_number));
+            }
+        }
+    }
+
+    details
+}
