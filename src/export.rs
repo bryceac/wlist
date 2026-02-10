@@ -103,9 +103,18 @@ fn list_element(item: &Item, items: &Vec<Item>) -> HtmlElement {
         }
     } */
 
+    if item.quantity > 1 {
+        list_item
+        .with_child(item.quantity.to_string().as_str().into())
+        .with_child(" ".into());
+    }
+
+    
+
     if let Some(url) = item.url {
-        if url.to_string().is_empty() {
-            let mut details = format!("{} {}", item.quantity)
+        if !url.to_string().is_empty() {
+            list_item
+            .with_link(href, text)
         }
     }
 
