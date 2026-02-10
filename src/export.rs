@@ -1,7 +1,8 @@
+use build_html::{ HtmlContainer, HtmlPage};
 use clap::Parser;
-use wlitem::Save;
+use wlitem::{ Item, Save };
 
-use crate::{shared::real_path, database::{load_items_from_db, create_database_if_not_exists}};
+use crate::{shared::real_path, database::{load_items_from_db, create_database_if_not_exists} };
 
 #[derive(Parser)]
 #[clap(version = "0.1.0", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "export wishlist.")]
@@ -33,7 +34,9 @@ impl Export {
     }
 }
 
-fn generate_html() -> String {
-    let html_string = build_html::HtmlPage::new()
+fn generate_html(items: Vec<Item>, title: &str) -> String {
+    let html_string = HtmlPage::new()
+    .with_title(title)
+    .with_header(1, title);
 
 }
