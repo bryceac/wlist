@@ -86,8 +86,9 @@ Right now, only TSV and JSON files are supported and notes are only supported in
 
 if you specify a different path before **-i**, the database will be created in or read from that location instead.
 
-### Displaying Items
+### Displaying Info
 
+#### Items
 By running, the following:
 
 <pre>
@@ -101,6 +102,43 @@ You will see something like this:
 15278603-03F1-41E0-81ED-6E94883F9AC7	Mario Kart World	1	high	https://example.com/mario-kart-world
 C58232DE-AD35-4188-9736-66BC7CA52E09	Trails in the Sky the 1st	1	medium	https://example.com/trails-in-the-sky
 </pre>
+
+This is the same as what would be present if you were to export the data as TSV.
+
+The data is interpetted like this:
+
+1. id
+2. name
+3. quantity
+4. priority level
+5. URL
+
+#### Notes
+
+If you instead want to look through notes, you would run something like the following:
+
+<pre>
+wlist show path/to/database notes
+</pre>
+
+You will them see something like this:
+
+<pre>
+id: 1
+-----
+
+Hello, World!
+</pre>
+
+Notes will be sparated between each other with double spacing.
+
+If you want to see the notes associated with a particular item, you would do something like this:
+
+<pre>
+wlist show path/to/database notes -i 9F432FA2-12D2-4B61-AA55-319D23601C4E
+</pre>
+
+The output will be similiar to the example output above, but will not show you the note id.
 
 ### Contributing
 
