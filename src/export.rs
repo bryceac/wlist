@@ -49,7 +49,7 @@ fn generate_html(items: Vec<Item>, title: &str) -> String {
     html.push_str("\t\t\t</header>");
     html.push_str("\t\t\t<hr>");
     html.push_str("\t\t\t<footer>");
-    html.push_str("\t\t\t<hr>");
+    html.push_str("\t\t\t\t<hr>");
     html.push_str("\t\t\t</footer>");
     html.push_str("\t\t</article>");
     html.push_str("\t</body>\r\n");
