@@ -70,3 +70,18 @@ fn unique_notes(items: &Vec<Item>) -> HashSet<String> {
 
     notes
 }
+
+fn notes_for_item(item: &Item, items: &Vec<Item>) -> Vec<HtmlElement> {
+    let mut note_elements: Vec<HtmlElement> = vec![];
+    let notes = unique_notes(items);
+
+    for (position, note) in notes.iter().enumerate() {
+        if item.notes.contains(note) {
+            let link_destination = format!("#note{}", position+1);
+            let note_element = HtmlElement::new(HtmlTag::Superscript)
+            .with_link("", text)
+        }
+    }
+
+    note_elements
+}
