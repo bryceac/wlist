@@ -90,7 +90,11 @@ fn note_list(items: &Vec<Item>) -> String {
 }
 
 fn registry(items: Vec<Item>) -> String {
-    todo!()
+    let mut item_string = "\t\t\t\t<ol>\r\n".to_owned();
+
+    item_string.push_str("\t\t\t\t<ol>\r\n");
+
+    item_string
 }
 
 fn registry_item(item: &Item, items: &Vec<Item>) -> String {
