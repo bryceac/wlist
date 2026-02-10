@@ -27,10 +27,11 @@ impl Export {
             ref p if p.ends_with(".json") => if let Err(error) = items.save(p) {
                 println!("{}", error);
             },
-            ref p if p.ends_with(".html") => {
+            ref p if p.ends_with(".html") => if let Err(error) = save_html(items, &self.title, &real_path(p)) {
+                println!("{}", error);
             },
             _ => if let Err(error) = items.save_tsv(&destination_path) {
-                println!("{}", error)
+                println!("{}", error);
             }
         }
     }
