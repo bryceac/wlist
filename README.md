@@ -31,9 +31,7 @@ I have no idea how long it will take me to get things working, but it should be 
   <li>add notes if necessary and link them to items.</li>
   </ul>
 
-  <p>While I do not intend to have this program do all of those things, I do intend to have it generate the HTML with items linked up to their respective notes, 
-    so that I can focus on implementing the style rules necessary myself, such as making sure the link addresses are displayed on the prnted page 
-    and making sure items have enough space for navigation on a touch screen phone.</p>
+  <p>While I do not intend to have this program do all of those things, I do intend to have it generate the HTML with items linked up to their respective notes, so that I can focus on implementing the style rules necessary myself, such as making sure the link addresses are displayed on the prnted page and making sure items have enough space for navigation on a touch screen phone.</p>
   </dd>
   </dl>
 
