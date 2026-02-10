@@ -9,7 +9,7 @@ pub struct Export {
     #[clap(default_value = "~/wishlist/gift_registry.db")]
     pub file_path: String,
 
-    #[clap(long, short, about = "set title of HTML output", default_value = "Wishlist")]
+    #[clap(long, short, help = "set title of HTML output", default_value = "Wishlist")]
     pub title: String,
 
     #[clap(long, short)]
