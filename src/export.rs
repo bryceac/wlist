@@ -21,9 +21,11 @@ impl Export {
     pub fn run(&self) {
         create_database_if_not_exists(&self.file_path);
         let destination_path = real_path(&self.output_file);
-        let items = load_items_from_db(&self.file_path)
-        .sort_by_key(|item| item.priority)
-        .reverse();
+        let mut items: Vec<Item> = load_items_from_db(&self.file_path);
+        
+        items.sort_by_key(|item| item.priority.clone());
+
+        items.reverse();
 
         match destination_path {
             ref p if p.ends_with(".json") => if let Err(error) = items.save(p) {
