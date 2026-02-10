@@ -28,7 +28,11 @@ impl Show {
                     return;
                 }
 
-                let item_store = load_items_from_db(&self.file_path);
+                let mut item_store = load_items_from_db(&self.file_path);
+        
+                item_store.sort_by_key(|item| item.priority.clone());
+
+                item_store.reverse();
 
                 display_items(&item_store);
             },
