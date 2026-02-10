@@ -14,6 +14,13 @@ This project is a <abbr tite="work in progress">WIP</abbr>. It currently only ha
 
 I have no idea how long it will take me to get things working, but it should be simple enough at this stage.
 
+### Version History
+
+<dl>
+<dt style="font-weight:bold">0.1.0</dt>
+<dd>Initial release</dd>
+</dl>
+
 ### Questions
 
 1. <dl><dt style="font-weight:bold">There are already so many different options for wishlists. Why create this program?</dt>
