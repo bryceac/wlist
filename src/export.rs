@@ -35,7 +35,17 @@ impl Export {
 }
 
 fn generate_html(items: Vec<Item>, title: &str) -> String {
-    todo!();
+    let mut html = "<!DOCTYPE html>\r\n".to_owned();
+
+    html.push_str("<html>\r\n");
+
+    html.push_str("\t<head>\r\n");
+    html.push_str("\t</head>\r\n");
+    html.push_str("\t<body>\r\n");
+    html.push_str("\t</body>\r\n");
+    html.push_str("</html>");
+
+    html
 }
 
 fn unique_notes(items: &Vec<Item>) -> HashSet<String> {
