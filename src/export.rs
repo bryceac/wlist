@@ -141,5 +141,10 @@ fn registry_item(item: &Item, items: &Vec<Item>) -> String {
 fn save_html(items: Vec<Item>, title: &str, p: &str) -> Result<(), io::Error> {
     let html = generate_html(&items, title);
 
-    let output
+    let mut output = File::create(p)?;
+
+    match write!(output, "{}", html) {
+        Ok(()) => Ok(()),
+        Err(error) => Err(error)
+    }
 }
