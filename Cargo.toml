@@ -12,6 +12,7 @@ keywords = ["wlist", "wishlist", "wish", "list", "commandline", "cli"]
 
 [dependencies]
 clap = { version = "4.5.57", features = ["derive"] }
+indexmap = "2.13.0"
 rusqlite = { version = "0.38.0", features = ["bundled"] }
 shellexpand = "3.1.1"
 url = "2.5.8"
