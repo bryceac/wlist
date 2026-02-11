@@ -226,6 +226,43 @@ wlist delete -n 1
 
 The moment an item or note is removed in this manner, any notes appended to the specified item or any items that had the specified note would have their associations broken.
 
+#### Exporting Data
+
+If you want to export your wishlist, 
+in order to either back things up or give your list to others, 
+you would run something like the following:
+
+<pre>
+wlist export -o ~/Desktop/wishlist.tsv
+</pre>
+
+There are only three supported formats for exporting, 
+which are as follows:
+
+* JSON (useful for backing up item and note data)
+* TSV (only useful if you do not care about your notes)
+* HTML (for use when you are ready to share your wishlist)
+
+The format is determined by file extension, 
+with TSV being asumed by default.
+
+For example, replacing the file extension seen in the above example with **.json** will perform a JSON export.
+
+If exporting to the latter two, the output will order your items from highest priority to lowest, just like with the show command.
+
+When exporting to HTML, you can specify a title by using **-t** like this:
+
+<pre>
+wlist export -t "Birthday List" -o ~/Desktop/test.html
+</pre>
+
+Please note that the HTML exported is rather basic and this program does not include any ability to customize the styling.
+
+This is intended because I made this program mostly for myself as a way to quickly generate the kind of HTML wish lists I typically make by hand,
+so that I can focus out implementing the CSS as myself.
+
+As such, you are responsible for styling things in the way you see fit, but if you are happy with the default look of the HTML, then I am glad.
+
 ### Contributing
 
 Currently, I have been able to implement everything that I desire as of now.
