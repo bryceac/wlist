@@ -18,7 +18,7 @@ I have no idea how long it will take me to get things working, but it should be 
 
 <dl>
 <dt style="font-weight:bold">0.1.0</dt>
-<dd>Initial release</dd>
+<dd>Initial release. Released Feb. 10, 2026</dd>
 </dl>
 
 ### Questions
