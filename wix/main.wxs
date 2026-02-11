@@ -126,7 +126,7 @@
             
             <ComponentRef Id='binary0'/>
 
-            <Component Id='db_schema' />
+            <ComponentRef Id='db_schema' />
 
             <Feature
                 Id='Environment'
