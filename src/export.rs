@@ -1,6 +1,7 @@
 use std::{ collections::HashSet, fs::File, io::{ self, Write } };
 use clap::Parser;
 use wlitem::{ Item, Save };
+use indexmap::IndexSet;
 
 use crate::{shared::real_path, database::{load_items_from_db, create_database_if_not_exists} };
 
@@ -68,8 +69,8 @@ fn generate_html(items: &Vec<Item>, title: &str) -> String {
     html
 }
 
-fn unique_notes(items: &Vec<Item>) -> HashSet<String> {
-    let mut notes = HashSet::new();
+fn unique_notes(items: &Vec<Item>) -> IndexSet<String> {
+    let mut notes = IndexSet::new();
 
     for item in items.clone() {
         for note in item.notes.clone() {
