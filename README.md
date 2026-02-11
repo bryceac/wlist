@@ -208,6 +208,24 @@ wlist -n 1 --note Hello
 
 This will take the specified note and update its content to the given content.
 
+#### Deleting Data
+
+Deleting stuff is rather simple.
+
+If you want to remove a particular item, you would run something like the following:
+
+<pre>
+wlist delete -i 15278603-03F1-41E0-81ED-6E94883F9AC7 
+</pre>
+
+If you want to delete a note, you would instead run something like this:
+
+<pre>
+wlist delete -n 1
+</pre>
+
+The moment an item or note is removed in this manner, any notes appended to the specified item or any items that had the specified note would have their associations broken.
+
 ### Contributing
 
 Currently, I have been able to implement everything that I desire as of now.
