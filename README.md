@@ -142,6 +142,72 @@ The output will be similiar to the example output above, but will not show you t
 
 In either case, the database path must be explicitly given when looking through notes, although it is usually optional.
 
+#### Adding Items
+
+To add items to your wishlist. All you need to do is use something like the following:
+
+<pre>
+wlist add -n "Nintendo Switch 2" -p highest -u https://example.com/nintendo-switch-2
+</pre>
+
+This will add the item specified to your wishlist.
+
+If you want to add notes for the item you would add this to the end of the above:
+
+<pre>
+--note hello world
+</pre>
+
+This will add two notes to the item, and if the notes already exist in the database, the notes will be linked to the item instead.
+
+If your notes include spacing, remember to place quotes around them, so that it will be all one note.
+
+Notes **cannot** be added outside of including them with items upon creation or updating.
+
+Also, when adding items, you can do so with as little as just the name.
+Everything else is optional.
+
+#### Updating Stuff
+
+If you want to make updates to your wshlist, that is done in different ways,
+depending on what you want to do.
+
+##### Items
+
+If you want to update an item, you would something like this:
+
+<pre>
+wlist update -i 15278603-03F1-41E0-81ED-6E94883F9AC7 -p high
+</pre>
+
+This will change the priority of the specified item to high.
+
+All the options present when adding an item manually, which can be seen
+under [Adding Items](#adding-items) are also available when updating.
+
+If you want to remove notes from an item, you would do something like this:
+
+<pre>
+wlist update -i 15278603-03F1-41E0-81ED-6E94883F9AC7 -n 1 -r
+</pre>
+
+If you want to instead append an existing note, use **-a** instead of **-r**.
+
+When you run something like this, you cannot update anything about an item
+without running a separate command.
+
+The same is true for notes.
+
+##### Notes
+
+If you want to update a note, you would run something like this:
+
+<pre>
+wlist -n 1 --note Hello
+</pre>
+
+This will take the specified note and update its content to the given content.
+
 ### Contributing
 
 Currently, I have been able to implement everything that I desire as of now.
