@@ -16,10 +16,10 @@ pub fn create_database_if_not_exists(p: &str) {
         if let Some(db_directory) = path.parent() {
             db_directory.join("gift_registry.sql")
         } else {
-            Path::new("gift_registry.db").to_path_buf()  
+            Path::new("gift_registry.sql").to_path_buf()  
         }
     } else {
-        Path::new("gift_registry.db").to_path_buf()
+        Path::new("gift_registry.sql").to_path_buf()
     };
 
     #[cfg(unix)]
