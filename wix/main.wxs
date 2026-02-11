@@ -95,6 +95,15 @@
                                 Source='target\$(var.Profile)\wlist.exe'
                                 KeyPath='yes'/>
                         </Component>
+
+                        <Component Id='db_schema' Guid='*' Win64='$(var.Win64)'>
+                            <File
+                                Id='gift_registry.sql'
+                                Name='gift_registry.sql'
+                                DiskId='1'
+                                Source='gift_registry.sql'
+                                KeyPath='yes'/>
+                        </Component>
                     </Directory>
                 </Directory>
             </Directory>
