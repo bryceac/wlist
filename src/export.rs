@@ -1,4 +1,4 @@
-use std::{ collections::HashSet, fs::File, io::{ self, Write } };
+use std::{ fs::File, io::{ self, Write } };
 use clap::Parser;
 use wlitem::{ Item, Save };
 use indexmap::IndexSet;
