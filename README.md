@@ -6,7 +6,7 @@
 
 **Description:** CLI program written in Rust that can be used to create wishlist in HTML.
 
-**Version:** 0.1.1
+**Version:** 0.1.2
 
 ## Notes
 
@@ -20,7 +20,11 @@ I have no idea how long it will take me to get things working, but it should be 
 <dt style="font-weight:bold">0.1.0</dt>
 <dd>Initial release. Released Feb. 10, 2026</dd>
 <dt style="font-weight:bold">0.1.1</dt>
-<dd>Switch HashSet out for IndexSet, to preserve order. Released Feb. 11, 2026</dd>
+<dd>Switch HashSet out for IndexSet, to preserve order. Released Feb. 11, 2026 Afternoon</dd>
+<dt style="font-weight:bold">0.1.2</dt>
+<dd>Minor update that updates important crate, 
+to allow for greater flexibility with the JSON, 
+by making quantity optional. Released Feb. 11, 2026 Evening</dd>
 </dl>
 
 ### Questions
