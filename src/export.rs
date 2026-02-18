@@ -57,7 +57,7 @@ fn generate_html(items: &Vec<Item>, title: &str) -> String {
     html.push_str("\t\t\t\t<hr>");
     html.push_str("\t\t\t</header>");
     html.push_str(&registry(items));
-    if unique_notes(&items).is_empty() {
+    if !unique_notes(&items).is_empty() {
         html.push_str("\t\t\t<footer>");
         html.push_str(&format!("\t\t\t\t<h2>Notes</h2>"));
         html.push_str("\t\t\t\t<hr>");
