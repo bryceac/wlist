@@ -26,7 +26,7 @@ I have no idea how long it will take me to get things working, but it should be 
 to allow for greater flexibility with the JSON, 
 by making quantity optional. Released Feb. 11, 2026 Evening</dd>
 dt style="font-weight:bold">0.1.2</dt>
-<dd>Minor update that makes it so that HTML only includes the note list when needed.</dd>
+<dd>Minor update that makes it so that HTML only includes the note list when needed and TSV importing.</dd>
 </dl>
 
 ### Questions
