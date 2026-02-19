@@ -6,7 +6,7 @@ use indexmap::IndexSet;
 use crate::{shared::real_path, database::{load_items_from_db, create_database_if_not_exists} };
 
 #[derive(Parser)]
-#[clap(version = "0.1.1", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "export wishlist.", long_about = "export wishlist to file. Supported formats are as follows:\r\n\r\n* JSON (exports items and notes)\r\n* TSV (exports only items and basic details)\r\n* HTML (file that can be distributed to others with stored information)\r\n\r\nPlease be aware that the HTML output is very basic and is only meant to be a\r\nstarting point, if you find that it does not look that great.\r\n\r\nThe data exported is determined by the extension and exports to TSV by default.")]
+#[clap(version = "0.1.2", author = "Bryce Campbell <tonyhawk2100@gmail.com>", about = "export wishlist.", long_about = "export wishlist to file. Supported formats are as follows:\r\n\r\n* JSON (exports items and notes)\r\n* TSV (exports only items and basic details)\r\n* HTML (file that can be distributed to others with stored information)\r\n\r\nPlease be aware that the HTML output is very basic and is only meant to be a\r\nstarting point, if you find that it does not look that great.\r\n\r\nThe data exported is determined by the extension and exports to TSV by default.")]
 pub struct Export {
     #[clap(default_value = "~/wishlist/gift_registry.db", help = "the path to the wishlist database")]
     pub file_path: String,
