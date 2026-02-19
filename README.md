@@ -6,7 +6,7 @@
 
 **Description:** CLI program written in Rust that can be used to create wishlist in HTML.
 
-**Version:** 0.1.2
+**Version:** 0.1.3
 
 ## Notes
 
@@ -25,6 +25,8 @@ I have no idea how long it will take me to get things working, but it should be 
 <dd>Minor update that updates important crate, 
 to allow for greater flexibility with the JSON, 
 by making quantity optional. Released Feb. 11, 2026 Evening</dd>
+dt style="font-weight:bold">0.1.2</dt>
+<dd>Minor update that makes it so that HTML only includes the note list when needed.</dd>
 </dl>
 
 ### Questions
