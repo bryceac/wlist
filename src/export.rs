@@ -51,20 +51,20 @@ fn generate_html(items: &Vec<Item>, title: &str) -> String {
     html.push_str(&format!("\t\t<title>{}</title>", title));
     html.push_str("\t</head>\r\n");
     html.push_str("\t<body>\r\n");
-    html.push_str("\t\t<article>");
-    html.push_str("\t\t\t<header>");
-    html.push_str(&format!("\t\t\t\t<h1>{}</h1>", title));
-    html.push_str("\t\t\t\t<hr>");
-    html.push_str("\t\t\t</header>");
+    html.push_str("\t\t<article>\r\n");
+    html.push_str("\t\t\t<header>\r\n");
+    html.push_str(&format!("\t\t\t\t<h1>{}</h1>\r\n", title));
+    html.push_str("\t\t\t\t<hr>\r\n");
+    html.push_str("\t\t\t</header>\r\n");
     html.push_str(&registry(items));
     if !unique_notes(&items).is_empty() {
-        html.push_str("\t\t\t<footer>");
-        html.push_str(&format!("\t\t\t\t<h2>Notes</h2>"));
-        html.push_str("\t\t\t\t<hr>");
+        html.push_str("\t\t\t<footer>\r\n");
+        html.push_str(&format!("\t\t\t\t<h2>Notes</h2>\r\n"));
+        html.push_str("\t\t\t\t<hr>\r\n");
         html.push_str(&note_list(items));
-        html.push_str("\t\t\t</footer>");
+        html.push_str("\t\t\t</footer>\r\n");
     }
-    html.push_str("\t\t</article>");
+    html.push_str("\t\t</article>\r\n");
     html.push_str("\t</body>\r\n");
     html.push_str("</html>");
 
