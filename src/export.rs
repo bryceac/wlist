@@ -86,7 +86,7 @@ fn unique_notes(items: &Vec<Item>) -> IndexSet<String> {
 fn note_list(items: &Vec<Item>) -> String {
     let notes = unique_notes(items);
 
-    let mut note_string = "\t\t\t\t<ol>\r\n".to_owned();
+    let mut note_string = "\t\t\t\t<ol id=\"notes\">\r\n".to_owned();
 
     for (position, note) in notes.iter().enumerate() {
         let id_number = position+1;
@@ -101,7 +101,7 @@ fn note_list(items: &Vec<Item>) -> String {
 }
 
 fn registry(items: &Vec<Item>) -> String {
-    let mut item_string = "\t\t\t<ol>\r\n".to_owned();
+    let mut item_string = "\t\t\t<ol id=\"registry\">\r\n".to_owned();
 
     for item in items {
         item_string.push_str(&format!("\t\t\t\t<li>{}</li>\r\n", &registry_item(item, items)));
