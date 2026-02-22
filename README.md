@@ -10,9 +10,9 @@
 
 ## Notes
 
-This project is a <abbr tite="work in progress">WIP</abbr>. It currently only has a database that will act as the backend and some functions that are necessary to communicate with it propery.
+This project has been tested on macOS 26, but should work on other platforms. 
 
-I have no idea how long it will take me to get things working, but it should be simple enough at this stage.
+It compiles fine on Rust 1.93, but it is unknown if it will compile any earlier, as dependencies might require at least 1.88.
 
 ### Version History
 
