@@ -10,7 +10,7 @@ pub struct Show {
     #[clap(default_value = "~/wishlist/gift_registry.db", help = "the path to the wishlist database")]
     pub file_path: String,
 
-    #[clap(value_enum, help = "the content to display", default_value_t=Content::Items)]
+    #[clap(long, short, value_enum, help = "the content to display", default_value_t=Content::Items)]
     pub content: Content,
 
     #[clap(long, short, help = "the id of the item to look at.")]
