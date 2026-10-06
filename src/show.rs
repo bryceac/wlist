@@ -65,7 +65,7 @@ fn display_items(store: &Vec<Item>) {
             "N/A".to_owned()
         };
 
-        println!("{}\t{},\t{}\t{}\t{}", 
+        println!("{}\t{}\t{}\t{}\t{}", 
         item.id, 
         item.name, 
         item.quantity, 
