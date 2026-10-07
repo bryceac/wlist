@@ -6,7 +6,7 @@
 
 **Description:** CLI program written in Rust that can be used to create wishlist in HTML.
 
-**Version:** 0.1.4
+**Version:** 0.1.5
 
 ## Notes
 
@@ -28,7 +28,9 @@ by making quantity optional. Released Feb. 11, 2026 Evening</dd>
 <dt style="font-weight:bold">0.1.3</dt>
 <dd>Minor update that makes it so that HTML only includes the note list when needed and fix TSV importing. Released Feb. 18, 2026</dd>
 <dt style="font-weight:bold">0.1.4</dt>
-<dd>Minor update that adds ids to HTML output, to make it easier to target styling. Released Feb. 22, 2026/dd>
+<dd>Minor update that adds ids to HTML output, to make it easier to target styling. Released Feb. 22, 2026</dd>
+<dt style="font-weight:bold">0.1.5</dt>
+<dd>Minor update. Fix update command and remove commas from displa. Released Oct. 6, 2026</dd>
 </dl>
 
 ### Questions
@@ -128,7 +130,7 @@ The data is interpetted like this:
 If you instead want to look through notes, you would run something like the following:
 
 <pre>
-wlist show path/to/database notes
+wlist show -c notes
 </pre>
 
 You will them see something like this:
@@ -179,7 +181,7 @@ Everything else is optional.
 
 #### Updating Stuff
 
-If you want to make updates to your wshlist, that is done in different ways,
+If you want to make updates to your wishlist, that is done in different ways,
 depending on what you want to do.
 
 ##### Items
@@ -269,7 +271,7 @@ wlist export -t "Birthday List" -o ~/Desktop/test.html
 Please note that the HTML exported is rather basic and this program does not include any ability to customize the styling.
 
 This is intended because I made this program mostly for myself as a way to quickly generate the kind of HTML wish lists I typically make by hand,
-so that I can focus out implementing the CSS as myself.
+so that I can focus on implementing the CSS as myself.
 
 As such, you are responsible for styling things in the way you see fit, but if you are happy with the default look of the HTML, then I am glad.
 
