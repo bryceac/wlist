@@ -22,7 +22,7 @@ pub struct Update {
     #[clap(long, short, help = "number of item desired")]
     pub quantity: Option<u32>,
 
-    #[clap(long, short, help = "how much you desire the ite")]
+    #[clap(long, short, help = "how much you desire the item")]
     pub priority: Option<Priority>,
 
     #[clap(long, short, help = "The URL where the item can be bought online")]
