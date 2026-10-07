@@ -30,7 +30,7 @@ by making quantity optional. Released Feb. 11, 2026 Evening</dd>
 <dt style="font-weight:bold">0.1.4</dt>
 <dd>Minor update that adds ids to HTML output, to make it easier to target styling. Released Feb. 22, 2026</dd>
 <dt style="font-weight:bold">0.1.5</dt>
-<dd>Minor update. Fix update command and remove commas from displa. Released Oct. 6, 2026</dd>
+<dd>Minor update. Fix update command and remove commas from display. Released Oct. 6, 2026</dd>
 </dl>
 
 ### Questions
