@@ -208,12 +208,21 @@ fn items_to_notes_link(item: &Vec<Item>, notes: &Vec<String>, sheet: &mut spread
     let mut note_offset: Option<u32> = None;
 
     for (index, item) in items.iter().enumerate() {
-        let row_index = if let Some(note_offset) = note_offset {
+        let start_index = if let Some(note_offset) = note_offset {
             index + note_offset
         } else {
             index+1
         };
 
-        sheet.set_value(row_index, )
+        for (note_index, note) in notes.iter().enumerate() {
+            let row_index = start_index + note_index;
+
+            if item.notes.contains(note) {
+                sheet.set_value(row_index, 0, item.id);
+                sheet.set_value(row_index, 1, note_index+1);
+            }
+        }
+
+        note_offset = Some(item.notes.len());
     }
 }
