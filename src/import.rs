@@ -59,7 +59,7 @@ fn items_from_ods(p: &str) -> Vec<Item> {
         let associations = ods_note_associations(&workbook);
 
         for row in note_sheet.rows() {
-            if let Some(data) = row.first {
+            if let Some(data) = row.first() {
                 if let Data::String(note) = data {
                     notes.push(note);
                 }
@@ -92,7 +92,7 @@ fn item_from_ods_row(row: &[Data]) -> Item {
                 builder.set_name(&name);
             },
             2 => if let Data::Int(quantity) = data {
-                builder.set_quantity(quantity);
+                builder.set_quantity(quantity as u32);
             },
             3 => if let Data::String(priority) = data {
                 builder.set_priority(&priority);
@@ -119,10 +119,10 @@ fn ods_note_associations(workbook: &Ods<_>) -> HashMap<String, Vec<Int>> {
 
             for (column_index, data) in row.iter().enumate() {
                 match column_index {
-                    0 => if Data::String(id) = data {
+                    0 => if let Data::String(id) = data {
                         item_id = data;
                     },
-                    1 => if Data::Int(note_id) = data {
+                    1 => if let Data::Int(note_id) = data {
                         if let Some(mut ids) = links.get_mut(item_id) {
                             ids.push(note_id);
                         } else {
