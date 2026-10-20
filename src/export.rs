@@ -169,7 +169,11 @@ fn create_ods_book(items: Vec<Item>, p: &str) -> spreadsheet_ods::WorkBook {
 
     for (index, item) in items.iter().enumerate() {
         let row_index = index+1;
+
+        add_item_to_ods_sheet(item, row_index, &mut sheet);
     }
+
+    book
 }
 
 fn add_item_to_ods_sheet(item: &Item, row_index: u32, sheet: &mut spreadsheet_ods::Sheet) {
