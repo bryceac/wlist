@@ -241,6 +241,7 @@ fn ods_items_to_notes_link(items: &Vec<Item>, notes: &IndexSet<String>, sheet: &
 
 fn create_xlsx_book(p: &str, items: Vec<Item>) -> Result<(), XlsxError> {
     let mut book = Workbook::new(p)?;
+    let notes = unique_notes(&items);
 
     let mut registry_sheet = book.add_worksheet(Some("Wishlist"))?;
     let mut note_sheet = book.add_worksheet(Some("Notes"))?;
@@ -259,6 +260,10 @@ fn create_xlsx_book(p: &str, items: Vec<Item>) -> Result<(), XlsxError> {
         let row_index = index+1;
 
         let _ = add_item_to_xlsx_sheet(&item, row_index.try_into().unwrap(), &mut registry_sheet);
+    }
+
+    for (index, note) in notes.iter().enumerate() {
+        note_sheet.write_string(index.try_into().unwrap(), 0, note.clone())?;
     }
 
     book.close()?;
