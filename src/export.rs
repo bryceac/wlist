@@ -3,6 +3,7 @@ use clap::Parser;
 use wlitem::{ Item, Save };
 use indexmap::IndexSet;
 use icu::locale::locale;
+use xlsxwriter::prelude::*;
 
 use crate::{shared::real_path, database::{load_items_from_db, create_database_if_not_exists} };
 
@@ -197,7 +198,7 @@ fn create_ods_book(items: Vec<Item>) -> spreadsheet_ods::WorkBook {
 
     book.push_sheet(note_sheet);
 
-    items_to_notes_link(&items, &notes, &mut link_sheet);
+    ods_items_to_notes_link(&items, &notes, &mut link_sheet);
 
     book.push_sheet(link_sheet);
 
@@ -215,7 +216,7 @@ fn add_item_to_ods_sheet(item: &Item, row_index: u32, sheet: &mut spreadsheet_od
     }
 }
 
-fn items_to_notes_link(items: &Vec<Item>, notes: &IndexSet<String>, sheet: &mut spreadsheet_ods::Sheet) {
+fn ods_items_to_notes_link(items: &Vec<Item>, notes: &IndexSet<String>, sheet: &mut spreadsheet_ods::Sheet) {
     let mut note_offset: Option<u32> = None;
 
     for (index, item) in items.iter().enumerate() {
