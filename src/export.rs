@@ -255,6 +255,12 @@ fn create_xlsx_book(p: &str, items: Vec<Item>) -> Result<(), XlsxError> {
     link_sheet.write_string(0, 0, "Item ID", None)?;
     link_sheet.write_string(0, 1, "Note ID", None)?;
 
+    for (index, item) in items.iter().enumerate() {
+        let row_index = index+1;
+
+        add_item_to_xlsx_sheet(&item, row_index.try_into().unwrap(), registry_sheet);
+    }
+
     book.close()?;
     Ok(())
 }
