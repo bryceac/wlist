@@ -1,4 +1,4 @@
-use std::{ fs::File, io::{ self, Write }, Path };
+use std::{ fs::File, io::{ self, Write }, path::Path };
 use clap::Parser;
 use wlitem::{ Item, Save };
 use indexmap::IndexSet;
