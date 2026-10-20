@@ -299,8 +299,8 @@ fn xlsx_items_to_notes_link(items: &Vec<Item>, notes: &IndexSet<String>, sheet: 
             let row_index = start_index + (note_index as u32);
 
             if item.notes.contains(note) {
-                sheet.write_string(row_index, 0, item.id.clone(), None)?;
-                sheet.write_string(row_index, 1, ((note_index+1) as i32).to_string(), None)?;
+                sheet.write_string(row_index, 0, &item.id, None)?;
+                sheet.write_string(row_index, 1, &((note_index+1) as i32).to_string(), None)?;
             }
         }
 
