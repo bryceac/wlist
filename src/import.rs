@@ -38,3 +38,19 @@ impl Import {
         }
     }
 }
+
+fn items_from_ods(p: &str) -> Vec<Item> {
+    let mut items: Vec<Item> = vec![];
+    let mut workbook: Ods<_> = open_workbook(p).expect("Could not read workbook");
+    let wishlist = workbook.worksheet_range("Wishlist").expect("Wishlist sheet not found.");
+
+    for (row_index, row) in wishlist.rows().enumerate() {
+        if row_index == 0 {
+            continue;
+        } else {
+            todo!()
+        }
+    }
+
+    items
+}
