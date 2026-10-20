@@ -55,11 +55,22 @@ fn items_from_ods(p: &str) -> Vec<Item> {
     if let Ok(note_sheet) = workbook.worksheet_range("Notes") {
         let links = workbook.worksheet_range("Links").expect("Notes should be linked to items if provided.");
         let mut notes: Vec<String> = vec![];
+        let associations = ods_note_associations(&workbook);
 
         for row in note_sheet.rows() {
             if let Some(data) = row.first {
                 if let Data::String(note) = data {
                     notes.push(note);
+                }
+            }
+        }
+
+        for key in associations.keys() {
+            if let Some(item) = items.iter().find(|i| i.id == key) {
+                if let Some(note_ids) = associations.get(key) {
+                    for note_id in note_ids {
+                        item.notes.push(notes[note_id as usize]);
+                    }
                 }
             }
         }
@@ -95,7 +106,7 @@ fn item_from_ods_row(row: &[Data]) -> Item {
     builder.build()
 }
 
-fn ods_note_associations(workbook: Ods<_>) -> HashMap<String, Vec<Int>> {
+fn ods_note_associations(workbook: &Ods<_>) -> HashMap<String, Vec<Int>> {
     let link_sheet = workbook.worksheet_range("Links").expect("Could not open Links sheet.");
     let links = HashMap::new();
 
