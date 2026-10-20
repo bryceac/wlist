@@ -239,8 +239,8 @@ fn ods_items_to_notes_link(items: &Vec<Item>, notes: &IndexSet<String>, sheet: &
     }
 }
 
-fn create_xlsx_book(p: &str, items: Vec<Item>) -> Result<(), xlsxwriter::XlsxError> {
-    let mut book = xlsxwriter::Workbook::new(p)?;
+fn create_xlsx_book(p: &str, items: Vec<Item>) -> Result<(), XlsxError> {
+    let mut book = Workbook::new(p)?;
 
     let mut registry_sheet = book.add_worksheet(Some("Wishlist"))?;
     let mut note_sheet = book.add_worksheet(Some("Notes"))?;
@@ -259,7 +259,7 @@ fn create_xlsx_book(p: &str, items: Vec<Item>) -> Result<(), xlsxwriter::XlsxErr
     Ok(())
 }
 
-fn add_item_to_xlsx_sheet(item: &Item, row_index: u32, sheet: &mut xlsxwriter::Worksheet) -> Result<(), xlsxwriter::XlsxError> {
+fn add_item_to_xlsx_sheet(item: &Item, row_index: u32, sheet: &mut Worksheet) -> Result<(), XlsxError> {
     sheet.write_string(row_index, 0, item.id.clone());
     sheet.write_string(row_index, 1, item.name.clone());
     sheet.write_number(row_index, 2, item.quantity);
