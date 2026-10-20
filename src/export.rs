@@ -156,3 +156,7 @@ fn save_html(items: Vec<Item>, title: &str, p: &str) -> Result<(), io::Error> {
         Err(error) => Err(error)
     }
 }
+
+fn create_ods_book(items: Vec<Item>, p: &str) -> spreadsheet_ods::WorkBook {
+    
+}
