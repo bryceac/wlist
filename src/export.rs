@@ -162,6 +162,7 @@ fn create_ods_book(items: Vec<Item>, p: &str) -> spreadsheet_ods::WorkBook {
 
     let mut registry_sheet = spreadsheet_ods::Sheet::new("Wishlist");
     let mut note_sheet = spreadsheet_ods_ods::Sheet::new("Notes");
+    let notes = unique_notes(&items);
 
     registry_sheet.set_value(0, 1, "Name");
     registry_sheet.set_value(0, 1, "Quantity");
@@ -176,7 +177,7 @@ fn create_ods_book(items: Vec<Item>, p: &str) -> spreadsheet_ods::WorkBook {
 
     book.push_sheet(registry_sheet);
 
-    for (index, note) in unique_notes(&items).iter().enumerate() {
+    for (index, note) in notes.iter().enumerate() {
         let id = index+1;
 
         note_sheet.set_value(index, 0, id);
