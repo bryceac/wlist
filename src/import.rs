@@ -127,7 +127,7 @@ fn ods_note_association(row: &[Data]) -> HashMap<String, Vec<u32>> {
 
         match column_index {
             0 => if let Data::String(id) = data {
-                item_id = id;
+                item_id = id.to_string();
             },
             1 => if let Data::Int(note_id) = data {
                 links.insert(item_id, vec![*note_id as u32]);
