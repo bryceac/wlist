@@ -177,5 +177,5 @@ fn add_item_to_ods_sheet(item: &Item, row_index: u32, sheet: &mut spreadsheet_od
     sheet.set_value(row_index, 1, item.name);
     sheet.set_value(row_index, 2, item.quantity);
     sheet.set_value(row_index, 3, item.priority.rawValue);
-    sheet.set_value(row_index, 4, item.url);
+    sheet.set_value(row_index, 4, item.url.to_string());
 }
