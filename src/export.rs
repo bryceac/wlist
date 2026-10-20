@@ -187,6 +187,8 @@ fn create_ods_book(items: Vec<Item>, p: &str) -> spreadsheet_ods::WorkBook {
 
     book.push_sheet(note_sheet);
 
+    items_to_notes_link()
+
     book
 }
 
@@ -201,7 +203,7 @@ fn add_item_to_ods_sheet(item: &Item, row_index: u32, sheet: &mut spreadsheet_od
     }
 }
 
-fn items_to_notes_link(item: &Vec<Item>, notes: &Vec<String>, sheet: &mut spreadsheet_ods::sheet) {
+fn items_to_notes_link(items: &Vec<Item>, notes: &Vec<String>, sheet: &mut spreadsheet_ods::sheet) {
     let mut note_offset: Option<u32> = None;
 
     for (index, item) in items.iter().enumerate() {
