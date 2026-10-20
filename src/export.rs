@@ -266,6 +266,8 @@ fn create_xlsx_book(p: &str, items: Vec<Item>) -> Result<(), XlsxError> {
         note_sheet.write_string(index.try_into().unwrap(), 0, &note, None)?;
     }
 
+    xlsx_items_to_notes_link(&items, &notes, &mut link_sheet)?;
+
     book.close()?;
     Ok(())
 }
@@ -297,11 +299,13 @@ fn xlsx_items_to_notes_link(items: &Vec<Item>, notes: &IndexSet<String>, sheet: 
             let row_index = start_index + (note_index as u32);
 
             if item.notes.contains(note) {
-                sheet.set_value(row_index, 0, item.id.clone());
-                sheet.set_value(row_index, 1, (note_index+1) as i32);
+                sheet.write_string(row_index, 0, item.id.clone())?;
+                sheet.write_string(row_index, 1, ((note_index+1) as i32).to_string())?;
             }
         }
 
         note_offset = Some(item.notes.len().try_into().unwrap());
     }
+
+    Ok(())
 }
