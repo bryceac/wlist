@@ -282,3 +282,26 @@ fn add_item_to_xlsx_sheet(item: &Item, row_index: u32, sheet: &mut Worksheet) ->
         sheet.write_blank(row_index, 4, None)
     }
 }
+
+fn xlsx_items_to_notes_link(items: &Vec<Item>, notes: &IndexSet<String>, sheet: &mut Worksheet) -> Result<(), XlsxError> {
+    let mut note_offset: Option<u32> = None;
+
+    for (index, item) in items.iter().enumerate() {
+        let start_index = if let Some(note_offset) = note_offset {
+            (index as u32) + note_offset
+        } else {
+            (index+1) as u32
+        };
+
+        for (note_index, note) in notes.iter().enumerate() {
+            let row_index = start_index + (note_index as u32);
+
+            if item.notes.contains(note) {
+                sheet.set_value(row_index, 0, item.id.clone());
+                sheet.set_value(row_index, 1, (note_index+1) as i32);
+            }
+        }
+
+        note_offset = Some(item.notes.len().try_into().unwrap());
+    }
+}
