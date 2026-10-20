@@ -61,7 +61,7 @@ fn items_from_ods(p: &str) -> Vec<Item> {
         for row in note_sheet.rows() {
             if let Some(data) = row.first() {
                 if let Data::String(note) = data {
-                    notes.push(note);
+                    notes.push(note.to_owned());
                 }
             }
         }
@@ -92,7 +92,7 @@ fn item_from_ods_row(row: &[Data]) -> Item {
                 builder.set_name(&name);
             },
             2 => if let Data::Int(quantity) = data {
-                builder.set_quantity(quantity as u32);
+                builder.set_quantity(*quantity as u32);
             },
             3 => if let Data::String(priority) = data {
                 builder.set_priority(&priority);
@@ -107,9 +107,9 @@ fn item_from_ods_row(row: &[Data]) -> Item {
     builder.build()
 }
 
-fn ods_note_associations(workbook: &Ods<_>) -> HashMap<String, Vec<Int>> {
+fn ods_note_associations(workbook: &Ods<_>) -> HashMap<String, Vec<u32>> {
     let link_sheet = workbook.worksheet_range("Links").expect("Could not open Links sheet.");
-    let links = HashMap::new();
+    let links: HashMap<String, Vec<u32>> = HashMap::new();
 
     for (index, row) in link_sheet.rows().iter().enumerate() {
         if index == 0 {
@@ -120,13 +120,13 @@ fn ods_note_associations(workbook: &Ods<_>) -> HashMap<String, Vec<Int>> {
             for (column_index, data) in row.iter().enumate() {
                 match column_index {
                     0 => if let Data::String(id) = data {
-                        item_id = data;
+                        item_id = id;
                     },
                     1 => if let Data::Int(note_id) = data {
-                        if let Some(mut ids) = links.get_mut(item_id) {
-                            ids.push(note_id);
+                        if let Some(mut ids) = links.get_mut(&item_id) {
+                            ids.push(note_id as u32);
                         } else {
-                            links.insert(item_id, vec![note_id]);
+                            links.insert(item_id, vec![note_id as u32]);
                         }
                     },
                     _ => ()
