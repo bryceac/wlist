@@ -158,5 +158,24 @@ fn save_html(items: Vec<Item>, title: &str, p: &str) -> Result<(), io::Error> {
 }
 
 fn create_ods_book(items: Vec<Item>, p: &str) -> spreadsheet_ods::WorkBook {
-    
+    let mut book = spreadsheet_ods::WorkBook::new(icu_locid::local!("en_US"));
+
+    let mut sheet = spreadsheet_ods::Sheet::new("Wishlist");
+
+    sheet.set_value(0, 1, "Name");
+    sheet.set_value(0, 1, "Quantity");
+    sheet.set_value(0, 1, "Priority");
+    sheet.set_value(0, 1, "URL");
+
+    for (index, item) in items.iter().enumerate() {
+        let row_index = index+1;
+    }
+}
+
+fn add_item_to_ods_sheet(item: &Item, row_index: u32, sheet: &mut spreadsheet_ods::Sheet) {
+    sheet.set_value(row_index, 0, item.id);
+    sheet.set_value(row_index, 1, item.name);
+    sheet.set_value(row_index, 2, item.quantity);
+    sheet.set_value(row_index, 3, item.priority.rawValue);
+    sheet.set_value(row_index, 4, item.url);
 }
