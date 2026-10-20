@@ -36,6 +36,15 @@ impl Export {
             ref p if p.ends_with(".html") => if let Err(error) = save_html(items, &self.title, &real_path(p)) {
                 println!("{}", error);
             },
+            ref p if p.ends_with(".ods") => let Err(error) = spreadsheet_ods::write_ods(&mut create_ods_book(items.clone(), Path::new(&destination_path))) {
+                match error {
+                    spreadsheet_ods::OdsError::Io(error) => println!("{}", error),
+                    spreadsheet_ods::OdsError::Utf8(error) => println!("{}", error),
+                    spreadsheet_ods::OdsError::Xml(error) => println!("{}", error),
+                    spreadsheet_ods::OdsError::Zip(error) => println!("{}", error),
+                    _ => ()
+                }
+            }
             _ => if let Err(error) = items.save_tsv(&destination_path) {
                 println!("{}", error);
             }
