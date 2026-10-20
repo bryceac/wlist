@@ -692,6 +692,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "icu_locid"
+version = "2.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d4b1caaf463dca211ec77afa9210dfa507f99f76168faf15d650ab7ad03416fd"
+
+[[package]]
 name = "icu_normalizer"
 version = "2.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1934,6 +1940,7 @@ version = "0.1.5"
 dependencies = [
  "calamine",
  "clap",
+ "icu_locid",
  "indexmap",
  "rusqlite",
  "shellexpand",
