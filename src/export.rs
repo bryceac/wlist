@@ -170,6 +170,9 @@ fn create_ods_book(items: Vec<Item>, p: &str) -> spreadsheet_ods::WorkBook {
     registry_sheet.set_value(0, 3, "Priority");
     registry_sheet.set_value(0, 4, "URL");
 
+    link_sheet.set_value(0, 0, "Item ID");
+    link_sheet.set_value(0, 1, "Note ID");
+
     for (index, item) in items.iter().enumerate() {
         let row_index = index+1;
 
