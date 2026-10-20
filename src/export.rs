@@ -266,8 +266,8 @@ fn add_item_to_xlsx_sheet(item: &Item, row_index: u32, sheet: &mut Worksheet) ->
     sheet.write_string(row_index, 3, item.priority.to_str(), None)?;
 
     if let Some(url) = item.url.clone() {
-        sheet.write_string(row_index, 4, &url.to_string(), None)?;
+        sheet.write_string(row_index, 4, &url.to_string(), None)
     } else {
-        sheet.write_blank(row_index, 4, None)?;
+        sheet.write_blank(row_index, 4, None)
     }
 }
