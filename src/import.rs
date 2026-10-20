@@ -62,7 +62,7 @@ fn items_from_ods(p: &str) -> Vec<Item> {
                     notes.push(note);
                 }
             }
-        } 
+        }
     }
 
     items
@@ -94,3 +94,35 @@ fn item_from_ods_row(row: &[Data]) -> Item {
 
     builder.build()
 }
+
+fn ods_note_associations(workbook: Ods<_>) -> HashMap<String, Vec<Int>> {
+    let link_sheet = workbook.worksheet_range("Links").expect("Could not open Links sheet.");
+    let links = HashMap::new();
+
+    for (index, row) in link_sheet.rows().iter().enumerate() {
+        if index == 0 {
+            continue;
+        } else {
+            let mut item_id = String::default();
+
+            for (column_index, data) in row.iter().enumate() {
+                match column_index {
+                    0 => if Data::String(id) = data {
+                        item_id = data;
+                    },
+                    1 => if Data::Int(note_id) = data {
+                        if let Some(mut ids) = links.get_mut(item_id) {
+                            ids.push(note_id);
+                        } else {
+                            links.insert(item_id, vec![note_id]);
+                        }
+                    },
+                    _ => ()
+                }
+            }
+        }
+        
+    }
+
+    links
+} 
