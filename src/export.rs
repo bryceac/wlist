@@ -187,7 +187,9 @@ fn create_ods_book(items: Vec<Item>, p: &str) -> spreadsheet_ods::WorkBook {
 
     book.push_sheet(note_sheet);
 
-    items_to_notes_link()
+    items_to_notes_link(&items, &notes, &mut link_sheet);
+
+    book.push_sheet(link_sheet);
 
     book
 }
@@ -217,7 +219,7 @@ fn items_to_notes_link(items: &Vec<Item>, notes: &Vec<String>, sheet: &mut sprea
             let row_index = start_index + note_index;
 
             if item.notes.contains(note) {
-                sheet.set_value(row_index, 0, item.id);
+                sheet.set_value(row_index, 0, item.id.clone());
                 sheet.set_value(row_index, 1, note_index+1);
             }
         }
