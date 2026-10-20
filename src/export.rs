@@ -2,7 +2,7 @@ use std::{ fs::File, io::{ self, Write } };
 use clap::Parser;
 use wlitem::{ Item, Save };
 use indexmap::IndexSet;
-use icu_locid::locale;
+use icu::locale::locale;
 
 use crate::{shared::real_path, database::{load_items_from_db, create_database_if_not_exists} };
 
