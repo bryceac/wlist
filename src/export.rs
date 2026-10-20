@@ -258,3 +258,14 @@ fn create_xlsx_book(p: &str, items: Vec<Item>) -> Result<(), xlsxwriter::XlsxErr
     book.close()?;
     Ok(())
 }
+
+fn add_item_to_ods_sheet(item: &Item, row_index: u32, sheet: &mut xlsxwriter::Worksheet) {
+    sheet.write_string(row_index, 0, item.id.clone());
+    sheet.write_string(row_index, 1, item.name.clone());
+    sheet.write_number(row_index, 2, item.quantity);
+    sheet.write_string(row_index, 3, item.priority.to_str());
+
+    if let Some(url) = item.url.clone() {
+        sheet.write_string(row_index, 4, url.to_string());
+    }
+}
