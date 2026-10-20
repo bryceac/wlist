@@ -203,3 +203,17 @@ fn add_item_to_ods_sheet(item: &Item, row_index: u32, sheet: &mut spreadsheet_od
         sheet.set_value(row_index, 4, url.to_string());
     }
 }
+
+fn items_to_notes_link(item: &Vec<Item>, notes: &Vec<String>, sheet: &mut spreadsheet_ods::sheet) {
+    let mut note_offset: Option<u32> = None;
+
+    for (index, item) in items.iter().enumerate() {
+        let row_index = if let Some(note_offset) = note_offset {
+            index + note_offset
+        } else {
+            index+1
+        };
+
+        sheet.set_value(row_index, )
+    }
+}
