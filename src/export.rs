@@ -252,8 +252,8 @@ fn create_xlsx_book(p: &str, items: Vec<Item>) -> Result<(), xlsxwriter::XlsxErr
     registry_sheet.write_string(0, 3, "Priority", None)?;
     registry_sheet.write_string(0, 4, "URL", None)?;
 
-    link_sheet.write_string(0, 1, "Item ID", None)?;
-    link_sheet.write_string(0, 2, "Note ID", None)?;
+    link_sheet.write_string(0, 0, "Item ID", None)?;
+    link_sheet.write_string(0, 1, "Note ID", None)?;
 
     book.close()?;
     Ok(())
