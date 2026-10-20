@@ -183,7 +183,7 @@ fn create_ods_book(items: Vec<Item>, p: &str) -> spreadsheet_ods::WorkBook {
     book.push_sheet(registry_sheet);
 
     for (index, note) in notes.iter().enumerate() {
-        note_sheet.set_value(index, 0, note.clone());
+        note_sheet.set_value(index.try_into().unwrap(), 0, note.clone());
     }
 
     book.push_sheet(note_sheet);
@@ -206,7 +206,7 @@ fn add_item_to_ods_sheet(item: &Item, row_index: u32, sheet: &mut spreadsheet_od
     }
 }
 
-fn items_to_notes_link(items: &Vec<Item>, notes: &Vec<String>, sheet: &mut spreadsheet_ods::Sheet) {
+fn items_to_notes_link(items: &Vec<Item>, notes: &IndexSet<String>, sheet: &mut spreadsheet_ods::Sheet) {
     let mut note_offset: Option<u32> = None;
 
     for (index, item) in items.iter().enumerate() {
@@ -221,7 +221,7 @@ fn items_to_notes_link(items: &Vec<Item>, notes: &Vec<String>, sheet: &mut sprea
 
             if item.notes.contains(note) {
                 sheet.set_value(row_index, 0, item.id.clone());
-                sheet.set_value(row_index, 1, note_index+1);
+                sheet.set_value(row_index, 1, ((note_index+1) as i32));
             }
         }
 
