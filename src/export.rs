@@ -240,7 +240,7 @@ fn ods_items_to_notes_link(items: &Vec<Item>, notes: &IndexSet<String>, sheet: &
 }
 
 fn create_xlsx_book(p: &str, items: Vec<Item>) -> Result<(), XlsxError> {
-    let mut book = Workbook::new(p)?;
+    let book = Workbook::new(p)?;
     let notes = unique_notes(&items);
 
     let mut registry_sheet = book.add_worksheet(Some("Wishlist"))?;
