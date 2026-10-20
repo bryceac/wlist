@@ -259,7 +259,7 @@ fn create_xlsx_book(p: &str, items: Vec<Item>) -> Result<(), xlsxwriter::XlsxErr
     Ok(())
 }
 
-fn add_item_to_ods_sheet(item: &Item, row_index: u32, sheet: &mut xlsxwriter::Worksheet) {
+fn add_item_to_xlsx_sheet(item: &Item, row_index: u32, sheet: &mut xlsxwriter::Worksheet) {
     sheet.write_string(row_index, 0, item.id.clone());
     sheet.write_string(row_index, 1, item.name.clone());
     sheet.write_number(row_index, 2, item.quantity);
