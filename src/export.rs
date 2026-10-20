@@ -263,7 +263,7 @@ fn create_xlsx_book(p: &str, items: Vec<Item>) -> Result<(), XlsxError> {
     }
 
     for (index, note) in notes.iter().enumerate() {
-        note_sheet.write_string(index.try_into().unwrap(), 0, note.clone())?;
+        note_sheet.write_string(index.try_into().unwrap(), 0, &note)?;
     }
 
     book.close()?;
