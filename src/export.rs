@@ -173,8 +173,8 @@ fn create_ods_book(items: Vec<Item>, p: &str) -> spreadsheet_ods::WorkBook {
 }
 
 fn add_item_to_ods_sheet(item: &Item, row_index: u32, sheet: &mut spreadsheet_ods::Sheet) {
-    sheet.set_value(row_index, 0, item.id);
-    sheet.set_value(row_index, 1, item.name);
+    sheet.set_value(row_index, 0, item.id.clone());
+    sheet.set_value(row_index, 1, item.name.clone());
     sheet.set_value(row_index, 2, item.quantity);
     sheet.set_value(row_index, 3, item.priority.to_str());
 
