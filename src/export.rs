@@ -177,7 +177,7 @@ fn create_ods_book(items: Vec<Item>, p: &str) -> spreadsheet_ods::WorkBook {
     for (index, item) in items.iter().enumerate() {
         let row_index = index+1;
 
-        add_item_to_ods_sheet(item, row_index, &mut registry_sheet);
+        add_item_to_ods_sheet(item, row_index.try_into().unwrap(), &mut registry_sheet);
     }
 
     book.push_sheet(registry_sheet);
@@ -211,13 +211,13 @@ fn items_to_notes_link(items: &Vec<Item>, notes: &Vec<String>, sheet: &mut sprea
 
     for (index, item) in items.iter().enumerate() {
         let start_index = if let Some(note_offset) = note_offset {
-            index + note_offset
+            index.try_into().unwrap() + note_offset
         } else {
             index+1
         };
 
         for (note_index, note) in notes.iter().enumerate() {
-            let row_index = start_index + note_index;
+            let row_index = start_index + note_index.try_into().unwrap();
 
             if item.notes.contains(note) {
                 sheet.set_value(row_index, 0, item.id.clone());
