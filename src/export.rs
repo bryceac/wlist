@@ -238,3 +238,23 @@ fn ods_items_to_notes_link(items: &Vec<Item>, notes: &IndexSet<String>, sheet: &
         note_offset = Some(item.notes.len().try_into().unwrap());
     }
 }
+
+fn create_xlsx_book(p: &str, items: Vec<Item>) -> Result<(), xlsxwriter::XlsxError> {
+    let mut book = xlsxwriter::Workbook::new(p)?;
+
+    let mut registry_sheet = book.add_worksheet(Some("Wishlist"))?;
+    let mut note_sheet = book.add_worksheet(Some("Notes"))?;
+    let mut link_sheet = book.add_worksheet(Some("Links"))?;
+
+    registry_sheet.write_blank(0, 0, None)?;
+    registry_sheet.write_string(0, 1, "Name", None)?;
+    registry_sheet.write_string(0, 2, "Quantity", None)?;
+    registry_sheet.write_string(0, 3, "Priority", None)?;
+    registry_sheet.write_string(0, 4, "URL", None)?;
+
+    link_sheet.write_string(0, 1, "Item ID", None)?;
+    link_sheet.write_string(0, 2, "Note ID", None)?;
+
+    book.close()?;
+    Ok(())
+}
