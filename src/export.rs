@@ -162,8 +162,8 @@ fn create_ods_book(items: Vec<Item>, p: &str) -> spreadsheet_ods::WorkBook {
     let mut book = spreadsheet_ods::WorkBook::new(locale!("en_US"));
 
     let mut registry_sheet = spreadsheet_ods::Sheet::new("Wishlist");
-    let mut note_sheet = spreadsheet_ods_ods::Sheet::new("Notes");
-    let mut link_sheet = spreadsheet_ods_ods::Sheet::new("Links");
+    let mut note_sheet = spreadsheet_ods::Sheet::new("Notes");
+    let mut link_sheet = spreadsheet_ods::Sheet::new("Links");
     let notes = unique_notes(&items);
 
     registry_sheet.set_value(0, 1, "Name");
