@@ -217,7 +217,7 @@ fn items_to_notes_link(items: &Vec<Item>, notes: &IndexSet<String>, sheet: &mut 
         };
 
         for (note_index, note) in notes.iter().enumerate() {
-            let row_index = start_index + note_index.try_into().unwrap();
+            let row_index = start_index + (note_index as u32);
 
             if item.notes.contains(note) {
                 sheet.set_value(row_index, 0, item.id.clone());
