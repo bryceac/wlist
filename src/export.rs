@@ -2,6 +2,7 @@ use std::{ fs::File, io::{ self, Write } };
 use clap::Parser;
 use wlitem::{ Item, Save };
 use indexmap::IndexSet;
+use icu_locid::locale;
 
 use crate::{shared::real_path, database::{load_items_from_db, create_database_if_not_exists} };
 
@@ -158,7 +159,7 @@ fn save_html(items: Vec<Item>, title: &str, p: &str) -> Result<(), io::Error> {
 }
 
 fn create_ods_book(items: Vec<Item>, p: &str) -> spreadsheet_ods::WorkBook {
-    let mut book = spreadsheet_ods::WorkBook::new(icu_locid::locale!("en_US"));
+    let mut book = spreadsheet_ods::WorkBook::new(locale!("en_US"));
 
     let mut registry_sheet = spreadsheet_ods::Sheet::new("Wishlist");
     let mut note_sheet = spreadsheet_ods_ods::Sheet::new("Notes");
