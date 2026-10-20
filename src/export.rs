@@ -182,7 +182,7 @@ fn create_ods_book(items: Vec<Item>, p: &str) -> spreadsheet_ods::WorkBook {
     book.push_sheet(registry_sheet);
 
     for (index, note) in notes.iter().enumerate() {
-        note_sheet.set_value(index, 0, note);
+        note_sheet.set_value(index, 0, note.clone());
     }
 
     book.push_sheet(note_sheet);
