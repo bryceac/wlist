@@ -48,9 +48,36 @@ fn items_from_ods(p: &str) -> Vec<Item> {
         if row_index == 0 {
             continue;
         } else {
-            todo!()
+            items.push(item_from_ods_row(&row));
         }
     }
 
     items
+}
+
+fn item_from_ods_row(row: &[Data]) -> Item {
+    let mut builder = Item::builder();
+
+    for (column_index, data) in row.iter().enumerate() {
+        match column_index {
+            0 => if let Data::String(item_id) = data {
+                builder.set_id(&item_id);
+            },
+            1 => if let Data::String(name) = data {
+                builder.set_name(&name);
+            },
+            2 => if let Data::Int(quantity) = data {
+                builder.set_quantity(quantity);
+            },
+            3 => if let Data::String(priority) = data {
+                builder.set_priority(&priority);
+            },
+            4 => if let Data::String(url) = data {
+                builder.set_url(&url);
+            },
+            _ => ()
+        }
+    }
+
+    builder.build()
 }
