@@ -260,10 +260,10 @@ fn create_xlsx_book(p: &str, items: Vec<Item>) -> Result<(), XlsxError> {
 }
 
 fn add_item_to_xlsx_sheet(item: &Item, row_index: u32, sheet: &mut Worksheet) -> Result<(), XlsxError> {
-    sheet.write_string(row_index, 0, item.id.clone());
-    sheet.write_string(row_index, 1, item.name.clone());
-    sheet.write_number(row_index, 2, item.quantity);
-    sheet.write_string(row_index, 3, item.priority.to_str());
+    sheet.write_string(row_index, 0, item.id.clone(), None);
+    sheet.write_string(row_index, 1, item.name.clone(), None);
+    sheet.write_number(row_index, 2, item.quantity, None);
+    sheet.write_string(row_index, 3, item.priority.to_str(), None);
 
     if let Some(url) = item.url.clone() {
         sheet.write_string(row_index, 4, url.to_string());
