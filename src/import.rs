@@ -52,6 +52,19 @@ fn items_from_ods(p: &str) -> Vec<Item> {
         }
     }
 
+    if let Ok(note_sheet) = workbook.worksheet_range("Notes") {
+        let links = workbook.worksheet_range("Links").expect("Notes should be linked to items if provided.");
+        let mut notes: Vec<String> = vec![];
+
+        for row in note_sheet.rows() {
+            if let Some(data) = row.first {
+                if let Data::String(note) = data {
+                    notes.push(note);
+                }
+            }
+        } 
+    }
+
     items
 }
 
