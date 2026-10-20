@@ -166,9 +166,9 @@ fn create_ods_book(items: Vec<Item>, p: &str) -> spreadsheet_ods::WorkBook {
     let notes = unique_notes(&items);
 
     registry_sheet.set_value(0, 1, "Name");
-    registry_sheet.set_value(0, 1, "Quantity");
-    registry_sheet.set_value(0, 1, "Priority");
-    registry_sheet.set_value(0, 1, "URL");
+    registry_sheet.set_value(0, 2, "Quantity");
+    registry_sheet.set_value(0, 3, "Priority");
+    registry_sheet.set_value(0, 4, "URL");
 
     for (index, item) in items.iter().enumerate() {
         let row_index = index+1;
