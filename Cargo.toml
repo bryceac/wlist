@@ -11,6 +11,7 @@ repository = "https://github.com/bryceac/wlist"
 keywords = ["wlist", "wishlist", "wish", "list", "commandline", "cli"]
 
 [dependencies]
+calamine = "0.37.0"
 clap = { version = "4.5.57", features = ["derive"] }
 indexmap = "2.13.0"
 rusqlite = { version = "0.38.0", features = ["bundled"] }
