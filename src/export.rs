@@ -258,7 +258,7 @@ fn create_xlsx_book(p: &str, items: Vec<Item>) -> Result<(), XlsxError> {
     for (index, item) in items.iter().enumerate() {
         let row_index = index+1;
 
-        add_item_to_xlsx_sheet(&item, row_index.try_into().unwrap(), &mut registry_sheet);
+        let _ = add_item_to_xlsx_sheet(&item, row_index.try_into().unwrap(), &mut registry_sheet);
     }
 
     book.close()?;
