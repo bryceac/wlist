@@ -1,5 +1,6 @@
 use clap::Parser;
 use wlitem::Item;
+use std::collections::HashMap;
 
 use crate::shared::real_path;
 use crate::database::{ create_database_if_not_exists, update_or_add_item };
