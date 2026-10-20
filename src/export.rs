@@ -224,6 +224,6 @@ fn items_to_notes_link(items: &Vec<Item>, notes: &Vec<String>, sheet: &mut sprea
             }
         }
 
-        note_offset = Some(item.notes.len());
+        note_offset = Some(item.notes.len().try_into().unwrap());
     }
 }
