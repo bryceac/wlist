@@ -120,7 +120,7 @@ fn item_from_ods_row(row: &[Data]) -> Item {
 }
 
 fn ods_note_association(row: &[Data]) -> HashMap<String, Vec<u32>> {
-    let links: HashMap<String, Vec<u32>> = HashMap::new();
+    let mut links: HashMap<String, Vec<u32>> = HashMap::new();
 
     for (column_index, data) in row.iter().enumerate() {
         let mut item_id = String::default();
