@@ -46,6 +46,9 @@ impl Export {
                     _ => ()
                 }
             }
+            ref p if p.ends_with(".xlsx") => if let Err(error) = create_xlsx_book(&destination_path, items) {
+                println!("{}", error);
+            }
             _ => if let Err(error) = items.save_tsv(&destination_path) {
                 println!("{}", error);
             }
