@@ -50,7 +50,7 @@ fn items_from_ods(p: &str) -> Vec<Item> {
         if row_index == 0 {
             continue;
         } else {
-            items.push(item_from_ods_row(&row));
+            items.push(item_from_row(&row));
         }
     }
 
@@ -68,7 +68,7 @@ fn items_from_ods(p: &str) -> Vec<Item> {
         }
 
         for row in link_sheet.rows() {
-            let association = ods_note_association(row);
+            let association = note_association(row);
 
             let key = association.keys().clone().next().unwrap();
 
@@ -93,7 +93,7 @@ fn items_from_ods(p: &str) -> Vec<Item> {
     items
 }
 
-fn item_from_ods_row(row: &[Data]) -> Item {
+fn item_from_row(row: &[Data]) -> Item {
     let mut builder = Item::builder();
 
     for (column_index, data) in row.iter().enumerate() {
@@ -120,7 +120,7 @@ fn item_from_ods_row(row: &[Data]) -> Item {
     builder.build()
 }
 
-fn ods_note_association(row: &[Data]) -> HashMap<String, Vec<u32>> {
+fn note_association(row: &[Data]) -> HashMap<String, Vec<u32>> {
     let mut links: HashMap<String, Vec<u32>> = HashMap::new();
 
     for (column_index, data) in row.iter().enumerate() {
@@ -149,7 +149,7 @@ fn items_from_xlsx(p: &str) -> Vec<Item> {
         if row_index == 0 {
             continue;
         } else {
-            items.push(item_from_ods_row(&row));
+            items.push(item_from_row(&row));
         }
     }
 
@@ -167,7 +167,7 @@ fn items_from_xlsx(p: &str) -> Vec<Item> {
         }
 
         for row in link_sheet.rows() {
-            let association = ods_note_association(row);
+            let association = note_association(row);
 
             let key = association.keys().clone().next().unwrap();
 
