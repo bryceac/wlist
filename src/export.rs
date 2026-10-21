@@ -172,7 +172,7 @@ fn save_html(items: Vec<Item>, title: &str, p: &str) -> Result<(), io::Error> {
 }
 
 fn create_ods_book(items: Vec<Item>) -> spreadsheet_ods::WorkBook {
-    let mut book = spreadsheet_ods::WorkBook::new(locale!("en_US"));
+    let mut book = spreadsheet_ods::WorkBook::new(locale!("en-US"));
 
     let mut registry_sheet = spreadsheet_ods::Sheet::new("Wishlist");
     let mut note_sheet = spreadsheet_ods::Sheet::new("Notes");
