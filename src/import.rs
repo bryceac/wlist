@@ -56,7 +56,7 @@ fn items_from_ods(p: &str) -> Vec<Item> {
     if let Ok(note_sheet) = workbook.worksheet_range("Notes") {
         let link_sheet = workbook.worksheet_range("Links").expect("Notes should be linked to items if provided.");
         let mut notes: Vec<String> = vec![];
-        let associations: HashMap<String, Vec<u32>> = HashMap::new();
+        let mut associations: HashMap<String, Vec<u32>> = HashMap::new();
 
         for row in note_sheet.rows() {
             if let Some(data) = row.first() {
@@ -67,7 +67,7 @@ fn items_from_ods(p: &str) -> Vec<Item> {
         }
 
         for row in link_sheet.rows() {
-            let association = ods_note_association(row);
+            let mut association = ods_note_association(row);
 
             let key = association.keys().clone().next().unwrap();
 
@@ -79,10 +79,10 @@ fn items_from_ods(p: &str) -> Vec<Item> {
         }
 
         for key in associations.keys() {
-            if let Some(item) = items.iter().find(|i| i.id == *key) {
+            if let Some(mut item) = items.iter().find(|i| i.id == *key) {
                 if let Some(note_ids) = associations.get(key) {
                     for note_id in note_ids {
-                        item.notes.push(notes[*note_id as usize]);
+                        item.notes.push(notes[*note_id as usize].clone());
                     }
                 }
             }
