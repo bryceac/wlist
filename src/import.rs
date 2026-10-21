@@ -146,10 +146,10 @@ fn ods_note_association(row: &[Data]) -> HashMap<String, Vec<u32>> {
 
 fn xlsx_note_association(row: &[Data]) -> HashMap<String, Vec<u32>> {
     let mut links: HashMap<String, Vec<u32>> = HashMap::new();
+    let mut item_id = String::default();
 
     for (column_index, data) in row.iter().enumerate() {
-        let mut item_id = String::default();
-
+        
         match column_index {
             0 => if let Data::String(id) = data {
                 item_id = id.to_string();
