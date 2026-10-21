@@ -171,15 +171,19 @@ fn items_from_xlsx(p: &str) -> Vec<Item> {
             }
         }
 
-        for row in link_sheet.rows() {
-            let association = note_association(row);
-
-            let key = association.keys().clone().nth(0).unwrap();
-
-            if let Some(note_ids) = associations.get_mut(key) {
-                note_ids.append(&mut association.get(key).unwrap().clone());
+        for (row_index, row) in link_sheet.rows().iter().enumerate() {
+            if row_ndex == 0 {
+                continue;
             } else {
-                associations.insert(key.to_string(), association.get(key).unwrap().to_vec());
+                let association = note_association(row);
+
+                let key = association.keys().clone().nth(0).unwrap();
+
+                if let Some(note_ids) = associations.get_mut(key) {
+                    note_ids.append(&mut association.get(key).unwrap().clone());
+                } else {
+                    associations.insert(key.to_string(), association.get(key).unwrap().to_vec());
+                }
             }
         }
 
