@@ -72,7 +72,7 @@ fn items_from_ods(p: &str) -> Vec<Item> {
             if row_index == 0 {
                 continue;
             } else {
-                let association = note_association(row);
+                let association = ods_note_association(row);
 
                 let key = association.keys().clone().nth(0).unwrap();
 
@@ -125,7 +125,27 @@ fn item_from_row(row: &[Data]) -> Item {
     builder.build()
 }
 
-fn note_association(row: &[Data]) -> HashMap<String, Vec<u32>> {
+fn ods_note_association(row: &[Data]) -> HashMap<String, Vec<u32>> {
+    let mut links: HashMap<String, Vec<u32>> = HashMap::new();
+
+    for (column_index, data) in row.iter().enumerate() {
+        let mut item_id = String::default();
+
+        match column_index {
+            0 => if let Data::String(id) = data {
+                item_id = id.to_string();
+            },
+            1 => if let Data::Float(note_id) = data {
+                links.insert(item_id, vec![(note_id-1) as u32]);
+            },
+            _ => ()
+        }
+    }
+
+    links
+}
+
+fn xlsx_note_association(row: &[Data]) -> HashMap<String, Vec<u32>> {
     let mut links: HashMap<String, Vec<u32>> = HashMap::new();
 
     for (column_index, data) in row.iter().enumerate() {
@@ -177,7 +197,7 @@ fn items_from_xlsx(p: &str) -> Vec<Item> {
             if row_index == 0 {
                 continue;
             } else {
-                let association = note_association(row);
+                let association = xlsx_note_association(row);
 
                 let key = association.keys().clone().nth(0).unwrap();
 
