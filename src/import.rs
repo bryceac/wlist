@@ -135,7 +135,7 @@ fn ods_note_association(row: &[Data]) -> HashMap<String, Vec<u32>> {
                 item_id = id.to_string();
             },
             1 => if let Data::Float(note_id) = data {
-                links.insert(item_id, vec![(note_id.round() as u32) -1]);
+                links.insert(item_id.clone(), vec![(note_id.round() as u32) -1]);
             },
             _ => ()
         }
@@ -156,7 +156,7 @@ fn xlsx_note_association(row: &[Data]) -> HashMap<String, Vec<u32>> {
             },
             1 => if let Data::String(note_id_string) = data {
                 if let Ok(note_id) = note_id_string.parse::<u32>() {
-                    links.insert(item_id, vec![note_id-1]);
+                    links.insert(item_id.clone(), vec![note_id-1]);
                 }
             },
             _ => ()
