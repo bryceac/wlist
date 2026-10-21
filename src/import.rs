@@ -28,6 +28,7 @@ impl Import {
                 vec![]
             },
             ref p if p.ends_with(".ods") => items_from_ods(&origin_path),
+            ref p if p.ends_with(".xlsx") => items_from_xlsx(&origin_path),
             _ => if let Ok(decoded_items) = Item::from_tsv_file(&origin_path) {
                 decoded_items
             } else {
