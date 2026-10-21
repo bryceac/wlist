@@ -138,4 +138,56 @@ fn ods_note_association(row: &[Data]) -> HashMap<String, Vec<u32>> {
     }
 
     links
-} 
+}
+
+fn items_from_xlsx(p: &str) -> Vec<Item> {
+    let mut items: Vec<Item> = vec![];
+    let mut workbook: Xlsx<_> = open_workbook(p).expect("Could not read workbook");
+    let wishlist = workbook.worksheet_range("Wishlist").expect("Wishlist sheet not found.");
+
+    for (row_index, row) in wishlist.rows().enumerate() {
+        if row_index == 0 {
+            continue;
+        } else {
+            items.push(item_from_ods_row(&row));
+        }
+    }
+
+    if let Ok(note_sheet) = workbook.worksheet_range("Notes") {
+        let link_sheet = workbook.worksheet_range("Links").expect("Notes should be linked to items if provided.");
+        let mut notes: Vec<String> = vec![];
+        let mut associations: HashMap<String, Vec<u32>> = HashMap::new();
+
+        for row in note_sheet.rows() {
+            if let Some(data) = row.first() {
+                if let Data::String(note) = data {
+                    notes.push(note.to_owned());
+                }
+            }
+        }
+
+        for row in link_sheet.rows() {
+            let association = ods_note_association(row);
+
+            let key = association.keys().clone().next().unwrap();
+
+            if let Some(note_ids) = associations.get_mut(key) {
+                note_ids.append(&mut association.get(key).unwrap().clone());
+            } else {
+                associations.insert(key.to_string(), association.get(key).unwrap().to_vec());
+            }
+        }
+
+        for key in associations.keys() {
+            if let Some(item) = items.iter_mut().find(|i| i.id == *key) {
+                if let Some(note_ids) = associations.get(key) {
+                    for note_id in note_ids {
+                        item.notes.push(notes[*note_id as usize].clone());
+                    }
+                }
+            }
+        }
+    }
+
+    items
+}
