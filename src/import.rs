@@ -79,7 +79,7 @@ fn items_from_ods(p: &str) -> Vec<Item> {
         }
 
         for key in associations.keys() {
-            if let Some(mut item) = items.iter().find(|i| i.id == *key) {
+            if let Some(mut item) = items.iter_mut().find(|i| i.id == *key) {
                 if let Some(note_ids) = associations.get(key) {
                     for note_id in note_ids {
                         item.notes.push(notes[*note_id as usize].clone());
