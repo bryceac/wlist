@@ -171,8 +171,8 @@ fn items_from_xlsx(p: &str) -> Vec<Item> {
             }
         }
 
-        for (row_index, row) in link_sheet.rows().iter().enumerate() {
-            if row_ndex == 0 {
+        for (row_index, row) in link_sheet.rows().enumerate() {
+            if row_index == 0 {
                 continue;
             } else {
                 let association = note_association(row);
