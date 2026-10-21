@@ -71,7 +71,7 @@ fn items_from_ods(p: &str) -> Vec<Item> {
         for row in link_sheet.rows() {
             let association = note_association(row);
 
-            let key = association.keys().clone().next().unwrap();
+            let key = association.keys().clone().nth(0).unwrap();
 
             if let Some(note_ids) = associations.get_mut(key) {
                 note_ids.append(&mut association.get(key).unwrap().clone());
@@ -170,7 +170,7 @@ fn items_from_xlsx(p: &str) -> Vec<Item> {
         for row in link_sheet.rows() {
             let association = note_association(row);
 
-            let key = association.keys().clone().next().unwrap();
+            let key = association.keys().clone().nth(0).unwrap();
 
             if let Some(note_ids) = associations.get_mut(key) {
                 note_ids.append(&mut association.get(key).unwrap().clone());
