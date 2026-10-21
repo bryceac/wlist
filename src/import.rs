@@ -72,7 +72,7 @@ fn items_from_ods(p: &str) -> Vec<Item> {
             let key = association.keys().clone().next().unwrap();
 
             if let Some(mut note_ids) = associations.get_mut(key) {
-                note_ids.append(association.get_mut(key).unwrap());
+                note_ids.append(association.get(key).unwrap());
             } else {
                 associations.insert(key.to_string(), association.get(key).unwrap().to_vec());
             }
