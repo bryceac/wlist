@@ -68,7 +68,7 @@ fn items_from_ods(p: &str) -> Vec<Item> {
             }
         }
 
-        for (row_index, row) in link_sheet.rows().iter().enumerate() {
+        for (row_index, row) in link_sheet.rows().enumerate() {
             if row_index == 0 {
                 continue;
             } else {
