@@ -69,7 +69,7 @@ fn items_from_ods(p: &str) -> Vec<Item> {
         for row in link_sheet.rows() {
             let association = ods_note_association(row);
 
-            let key = association.into_keys().first().unwrap();
+            let key = association.keys().copied().first().unwrap();
 
             if let Some(mut note_ids) = associations.get_mut(&key) {
                 note_ids.append(association.get_mut(key).unwrap());
