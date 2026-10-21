@@ -96,7 +96,7 @@ This location corresponds to your user folder.
 
 It then imports the data from the given file. Imports are done based on file extension.
 
-Right now, only TSV and JSON files are supported and notes are only supported in JSON files.
+Right now, only TSV, ODS, XLSX (Excel), and JSON files are supported and notes are only supported in JSON, ODS, and XLSX files.
 
 if you specify a different path before **-i**, the database will be created in or read from that location instead.
 
@@ -149,7 +149,7 @@ Notes will be sparated between each other with double spacing.
 If you want to see the notes associated with a particular item, you would do something like this:
 
 <pre>
-wlist show path/to/database notes -i 9F432FA2-12D2-4B61-AA55-319D23601C4E
+wlist show -c notes -i 9F432FA2-12D2-4B61-AA55-319D23601C4E
 </pre>
 
 The output will be similiar to the example output above, but will not show you the note id.
@@ -217,7 +217,7 @@ The same is true for notes.
 If you want to update a note, you would run something like this:
 
 <pre>
-wlist -n 1 --note Hello
+wlist update -n 1 --note Hello
 </pre>
 
 This will take the specified note and update its content to the given content.
@@ -250,11 +250,13 @@ you would run something like the following:
 wlist export -o ~/Desktop/wishlist.tsv
 </pre>
 
-There are only three supported formats for exporting, 
+There are only five supported formats for exporting, 
 which are as follows:
 
 * JSON (useful for backing up item and note data)
 * TSV (only useful if you do not care about your notes)
+* ODS (useful if you want to use LibreOffice or other program with ODF support)
+* XLSX (useful to edit your wishlist in Excel)
 * HTML (for use when you are ready to share your wishlist)
 
 The format is determined by file extension, 
@@ -262,7 +264,7 @@ with TSV being asumed by default.
 
 For example, replacing the file extension seen in the above example with **.json** will perform a JSON export.
 
-If exporting to the latter two, the output will order your items from highest priority to lowest, just like with the show command.
+If exporting to TSV or HTML, the output will order your items from highest priority to lowest, just like with the show command.
 
 When exporting to HTML, you can specify a title by using **-t** like this:
 
