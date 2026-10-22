@@ -318,15 +318,15 @@ pub fn add_item(p: &str, item: Item) {
 }
 
 pub fn delete_item(p: &str, item: &Item) {
-    if let Ok(db) = Connection::open(&real_path(p)) {
-        let delete_statement = "DELETE FROM items WHERE id = ?1";
+    let db = Connect::open(&real_path(p)).unwrap();
 
-        if let Ok(mut statement) = db.prepare(delete_statement) {
-            if let Err(error) = statement.execute([item.id.clone()]) {
-                println!("{}", error);
-            } else {
-                delete_item_note_associations(p, Some(&item.id), None);
-            }
+    let delete_statement = "DELETE FROM items WHERE id = ?1";
+
+    if let Ok(mut statement) = db.prepare(delete_statement) {
+        if let Err(error) = statement.execute([item.id.clone()]) {
+            println!("{}", error);
+        } else {
+            delete_item_note_associations(p, Some(&item.id), None);
         }
     }
 }
