@@ -94,15 +94,15 @@ fn id_for_note(p: &str, note: &str) -> Option<u32> {
 }
 
 fn add_note(p: &str, note: &str) {
-    if let Ok(db) = Connection::open(&real_path(p)) {
-        let insert_note_statement = "Insert INTO notes(note) VALUES (?1)";
+    let db = Connection::open(&real_path(p)).unwrap();
 
-        if let Ok(mut statement) = db.prepare(insert_note_statement) {
-            if let Err(error) = statement.execute([note]) {
-                println!("{}", error);
-            }
+    let insert_note_statement = "Insert INTO notes(note) VALUES (?1)";
+
+    if let Ok(mut statement) = db.prepare(insert_note_statement) {
+        if let Err(error) = statement.execute([note]) {
+            println!("{}", error);
         }
-    } else {}
+    }
 }
 
 pub fn link_note_to_item(p: &str, item: &Item, note: &str) {
