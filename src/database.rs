@@ -177,16 +177,16 @@ fn delete_item_note_associations(p: &str, item_id: Option<&str>, note_id: Option
         "DELETE FROM item_notes WHERE note_id = ?1"
     };
 
-    if let Ok(db) = Connection::open(&real_path(p)) {
-        if let Ok(mut statement) = db.prepare(delete_statement) {
-            if let Some(item_id) = item_id {
-                if let Err(error) = statement.execute(params![item_id]) {
-                    println!("{}", error)
-                }
-            } else {
-                if let Err(error) = statement.execute(params![note_id.unwrap()]) {
-                    println!("{}", error)
-                }
+    let db = Connection::open(&real_path(p)).unwrap();
+
+    if let Ok(mut statement) = db.prepare(delete_statement) {
+        if let Some(item_id) = item_id {
+            if let Err(error) = statement.execute(params![item_id]) {
+                println!("{}", error)
+            }
+        } else {
+            if let Err(error) = statement.execute(params![note_id.unwrap()]) {
+                println!("{}", error)
             }
         }
     }
