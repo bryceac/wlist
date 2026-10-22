@@ -211,44 +211,41 @@ pub fn retrieve_notes_for_item_with_id(p: &str, item_id: &str) -> Vec<String> {
 pub fn load_items_from_db(p: &str) -> Vec<Item> {
     let mut items: Vec<Item> = vec![];
 
-    match Connection::open(&real_path(p)) {
-        Ok(db) => {
-            if let Ok(mut statement) = db.prepare("SELECT * FROM items") {
-                let item_query = statement.query_map([], |row| {
-                    let id: String = row.get_unwrap(0);
-                    let name: String = row.get_unwrap(1);
-                    let quantity: u32 = if let Ok(num) = row.get(2) {
-                        num
-                    } else {
-                        1
-                    };
+    let db = Connection::open(&real_path(p)).unwrap();
 
-                    let priority: String = row.get_unwrap(3);
-                    let url: String = row.get_unwrap(4);
+    if let Ok(mut statement) = db.prepare("SELECT * FROM items") {
+        let item_query = statement.query_map([], |row| {
+            let id: String = row.get_unwrap(0);
+            let name: String = row.get_unwrap(1);
+            let quantity: u32 = if let Ok(num) = row.get(2) {
+                num
+            } else {
+                1
+            };
 
-                    let mut item = Item::builder();
+            let priority: String = row.get_unwrap(3);
+            let url: String = row.get_unwrap(4);
 
-                    item.set_id(&id)
-                    .set_name(&name)
-                    .set_quantity(quantity)
-                    .set_priority(&priority)
-                    .set_url(&url);
+            let mut item = Item::builder();
 
-                    for note in retrieve_notes_for_item_with_id(p, &id) {
-                        item.add_note(&note);
-                    }
+            item.set_id(&id)
+                .set_name(&name)
+                .set_quantity(quantity)
+                .set_priority(&priority)
+                .set_url(&url);
 
-                    Ok(item.build())
-                }).unwrap();
-
-                for item in item_query {
-                    if let Ok(item) = item {
-                        items.push(item.clone());
-                    }
-                }
+            for note in retrieve_notes_for_item_with_id(p, &id) {
+                item.add_note(&note);
             }
-        },
-        _ => {}
+
+            Ok(item.build())
+        }).unwrap();
+
+        for item in item_query {
+            if let Ok(item) = item {
+                items.push(item.clone());
+            }
+        }
     }
 
     items
