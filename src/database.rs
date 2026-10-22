@@ -29,14 +29,14 @@ pub fn create_database_if_not_exists(p: &str) {
         let _ = fs::create_dir_all(destination_path.parent().unwrap());
         
         if let Ok(db) = Connection::open(&destination_path) {
-            if let Some(schema_path_string) = schema_path.as_path().as_os_str().to_str() {
+            /* if let Some(schema_path_string) = schema_path.as_path().as_os_str().to_str() {
                 match file_content(schema_path_string) {
                     Ok(sql) => if let Err(error) = db.execute_batch(&sql) {
                         println!("{}", error)
                     },
                     Err(error) => println!("{}", error)
                 }
-            }
+            } */
         }
     }
 }
