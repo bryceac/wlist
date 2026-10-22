@@ -113,13 +113,13 @@ pub fn link_note_to_item(p: &str, item: &Item, note: &str) {
         id_for_note(p, note).unwrap()
     };
 
-    if let Ok(db) = Connection::open(&real_path(p)) {
-        let insert_link_statement = "INSERT INTO item_notes VALUES (?1, ?2)";
+    let db = Connection::open(&real_path(p)).unwrap();
 
-        if let Ok(mut statement) = db.prepare(insert_link_statement) {
-            if let Err(error) = statement.execute(params![item.id, note_id]) {
-                println!("{}", error);
-            }
+    let insert_link_statement = "INSERT INTO item_notes VALUES (?1, ?2)";
+
+    if let Ok(mut statement) = db.prepare(insert_link_statement) {
+        if let Err(error) = statement.execute(params![item.id, note_id]) {
+            println!("{}", error);
         }
     }
 }
