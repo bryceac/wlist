@@ -291,7 +291,7 @@ pub fn item_note_associations(p: &str) -> HashMap<String, Vec<u32>> {
             }
         }
     }
-    
+
     associations
 }
 
@@ -302,16 +302,16 @@ pub fn add_item(p: &str, item: Item) {
         "".to_owned()
     };
 
-    if let Ok(db) = Connection::open(&real_path(p)) {
-        let insert_statement = "INSERT INTO items VALUES (?1, ?2, ?3, ?4, ?5)";
+    let db = Connection::open(&real_path(p)).unwrap();
 
-        if let Ok(mut statement) = db.prepare(insert_statement) {
-            if let Err(error) = statement.execute(params![item.id, item.name, item.quantity, item.priority.to_str(), item_url]) {
-                println!("{}", error);
-            } else {
-                for note in item.notes.clone() {
-                    link_note_to_item(p, &item, &note);
-                }
+    let insert_statement = "INSERT INTO items VALUES (?1, ?2, ?3, ?4, ?5)";
+
+    if let Ok(mut statement) = db.prepare(insert_statement) {
+        if let Err(error) = statement.execute(params![item.id, item.name, item.quantity, item.priority.to_str(), item_url]) {
+            println!("{}", error);
+        } else {
+            for note in item.notes.clone() {
+                link_note_to_item(p, &item, &note);
             }
         }
     }
