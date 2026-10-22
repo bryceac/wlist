@@ -139,7 +139,7 @@ pub fn delete_note_with_id(p: &str, note_id: u32) {
 }
 
 pub fn update_note_with_id(p: &str, note_id: u32, note: &str) {
-    let db = Connection(&real_path(p)).unwrap();
+    let db = Connection::open(&real_path(p)).unwrap();
 
     let update_statement = "UPDATE notes SET note = ?1 WHERE id = ?2";
 
@@ -318,7 +318,7 @@ pub fn add_item(p: &str, item: Item) {
 }
 
 pub fn delete_item(p: &str, item: &Item) {
-    let db = Connect::open(&real_path(p)).unwrap();
+    let db = Connection::open(&real_path(p)).unwrap();
 
     let delete_statement = "DELETE FROM items WHERE id = ?1";
 
