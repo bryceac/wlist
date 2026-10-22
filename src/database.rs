@@ -11,33 +11,10 @@ pub fn create_database_if_not_exists(p: &str) {
     let target = real_path(p);
     let destination_path = Path::new(&target);
 
-   /* #[cfg(windows)]
-    let schema_path: PathBuf = if let Ok(path) = env::current_exe() {
-        if let Some(db_directory) = path.parent() {
-            db_directory.join("gift_registry.sql")
-        } else {
-            Path::new("gift_registry.sql").to_path_buf()  
-        }
-    } else {
-        Path::new("gift_registry.sql").to_path_buf()
-    };
-
-    #[cfg(unix)]
-    let schema_path: PathBuf = Path::new("/usr/local/share/wlist/gift_registry.sql").to_path_buf(); */
-
     if !destination_path.exists() {
         let _ = fs::create_dir_all(destination_path.parent().unwrap());
         
         if let Ok(db) = Connection::open(&destination_path) {
-            /* if let Some(schema_path_string) = schema_path.as_path().as_os_str().to_str() {
-                match file_content(schema_path_string) {
-                    Ok(sql) => if let Err(error) = db.execute_batch(&sql) {
-                        println!("{}", error)
-                    },
-                    Err(error) => println!("{}", error)
-                }
-            } */
-            
             if let Err(error) = db.execute_batch("BEGIN TRANSACTION;
                 DROP TABLE IF EXISTS \"items\";
                 CREATE TABLE IF NOT EXISTS \"items\" (
