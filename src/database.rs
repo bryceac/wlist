@@ -338,21 +338,21 @@ pub fn update_item(p: &str, item: &Item) {
         "".to_owned()
     };
 
-    if let Ok(db) = Connection::open(&real_path(p)) {
-        let update_statement = "UPDATE items SET name = ?1, quantity = ?2, priority = ?3, url = ?4 WHERE id = ?5";
+    let db = Connection::open(&real_path(p)).unwrap();
 
-        if let Ok(mut statement) = db.prepare(update_statement) {
-            if let Err(error) = statement.execute(params![item.name, item.quantity, item.priority.to_str(), item_url, item.id]) {
-                println!("{}", error);
-            }
+    let update_statement = "UPDATE items SET name = ?1, quantity = ?2, priority = ?3, url = ?4 WHERE id = ?5";
+
+    if let Ok(mut statement) = db.prepare(update_statement) {
+        if let Err(error) = statement.execute(params![item.name, item.quantity, item.priority.to_str(), item_url, item.id]) {
+            println!("{}", error);
         }
+    }
 
-        let current_notes = retrieve_notes_for_item_with_id(p, &item.id);
+    let current_notes = retrieve_notes_for_item_with_id(p, &item.id);
 
-        for note in item.notes.clone() {
-            if !current_notes.contains(&note) {
-                link_note_to_item(p, &item, &note);
-            }
+    for note in item.notes.clone() {
+        if !current_notes.contains(&note) {
+            link_note_to_item(p, &item, &note);
         }
     }
 }
