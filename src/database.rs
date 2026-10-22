@@ -125,15 +125,15 @@ pub fn link_note_to_item(p: &str, item: &Item, note: &str) {
 }
 
 pub fn delete_note_with_id(p: &str, note_id: u32) {
-    if let Ok(db) = Connection::open(&real_path(p)) {
-        let delete_statement = "DELETE FROM notes WHERE id = ?1";
+    let db = Connection::open(&real_path(p)).unwrap();
 
-        if let Ok(mut statement) = db.prepare(delete_statement) {
-            if let Err(error) = statement.execute(params![note_id]) {
-                println!("{}", error)
-            } else {
-                delete_item_note_associations(p, None, Some(note_id));
-            }
+    let delete_statement = "DELETE FROM notes WHERE id = ?1";
+
+    if let Ok(mut statement) = db.prepare(delete_statement) {
+        if let Err(error) = statement.execute(params![note_id]) {
+            println!("{}", error)
+        } else {
+            delete_item_note_associations(p, None, Some(note_id));
         }
     }
 }
