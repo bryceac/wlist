@@ -11,7 +11,7 @@ pub fn create_database_if_not_exists(p: &str) {
     let target = real_path(p);
     let destination_path = Path::new(&target);
 
-    #[cfg(windows)]
+   /* #[cfg(windows)]
     let schema_path: PathBuf = if let Ok(path) = env::current_exe() {
         if let Some(db_directory) = path.parent() {
             db_directory.join("gift_registry.sql")
@@ -23,7 +23,7 @@ pub fn create_database_if_not_exists(p: &str) {
     };
 
     #[cfg(unix)]
-    let schema_path: PathBuf = Path::new("/usr/local/share/wlist/gift_registry.sql").to_path_buf();
+    let schema_path: PathBuf = Path::new("/usr/local/share/wlist/gift_registry.sql").to_path_buf(); */
 
     if !destination_path.exists() {
         let _ = fs::create_dir_all(destination_path.parent().unwrap());
