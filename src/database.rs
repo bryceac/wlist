@@ -139,13 +139,13 @@ pub fn delete_note_with_id(p: &str, note_id: u32) {
 }
 
 pub fn update_note_with_id(p: &str, note_id: u32, note: &str) {
-    if let Ok(db) = Connection::open(&real_path(p)) {
-        let update_statement = "UPDATE notes SET note = ?1 WHERE id = ?2";
+    let db = Connection(&real_path(p)).unwrap();
 
-        if let Ok(mut statement) = db.prepare(update_statement) {
-            if let Err(error) = statement.execute(params![note, note_id]) {
-                println!("{}", error);
-            }
+    let update_statement = "UPDATE notes SET note = ?1 WHERE id = ?2";
+
+    if let Ok(mut statement) = db.prepare(update_statement) {
+        if let Err(error) = statement.execute(params![note, note_id]) {
+            println!("{}", error);
         }
     }
 }
