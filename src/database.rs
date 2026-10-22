@@ -263,36 +263,35 @@ pub fn item_with_id(p: &str, id: &str) -> Option<Item> {
 
 pub fn item_note_associations(p: &str) -> HashMap<String, Vec<u32>> {
     let mut associations: HashMap<String, Vec<u32>> = HashMap::new();
+    let db = Connection::open(&real_path(p)).unwrap();
 
-    if let Ok(db) = Connection::open(&real_path(p)) {
-        if let Ok(mut statement) = db.prepare("SELECT * FROM item_notes") {
-            let item_note_query = statement.query_map([], |row| {
-                let item_id: String = row.get_unwrap(0);
-                let note_id: u32 = if let Ok(num) = row.get(1) {
-                    num
-                } else {
-                    0
-                };
+    if let Ok(mut statement) = db.prepare("SELECT * FROM item_notes") {
+        let item_note_query = statement.query_map([], |row| {
+            let item_id: String = row.get_unwrap(0);
+            let note_id: u32 = if let Ok(num) = row.get(1) {
+                num
+            } else {
+                0
+            };
 
-                Ok((item_id,note_id))
-            }).unwrap();
+            Ok((item_id,note_id))
+        }).unwrap();
 
-            for item_pair in item_note_query {
-                let keys: Vec<String> = associations.keys().map(|key| key.to_owned()).collect();
+        for item_pair in item_note_query {
+            let keys: Vec<String> = associations.keys().map(|key| key.to_owned()).collect();
 
-                if let Ok(item_pair) = item_pair {
-                    if keys.contains(&item_pair.0) {
-                        if let Some(note_ids) = associations.get_mut(&item_pair.0) {
-                            note_ids.push(item_pair.1);
-                        }
-                    } else {
-                        associations.insert(item_pair.0, vec![item_pair.1]);
+            if let Ok(item_pair) = item_pair {
+                if keys.contains(&item_pair.0) {
+                    if let Some(note_ids) = associations.get_mut(&item_pair.0) {
+                        note_ids.push(item_pair.1);
                     }
+                } else {
+                    associations.insert(item_pair.0, vec![item_pair.1]);
                 }
             }
         }
     }
-
+    
     associations
 }
 
