@@ -6,7 +6,7 @@
 
 **Description:** CLI program written in Rust that can be used to create wishlist in HTML.
 
-**Version:** 0.1.6
+**Version:** 0.2
 
 ## Notes
 
@@ -33,6 +33,8 @@ by making quantity optional. Released Feb. 11, 2026 Evening</dd>
 <dd>Minor update. Fix update and show commands and remove commas from display. Released Oct. 6, 2026</dd>
 <dt style="font-weight:bold">0.1.6</dt>
 <dd>Minor update. Add in ability to import and export wishlists in ODS and Excel formats. Released Oct. 21, 2026</dd>
+<dt style="font-weight:bold">0.2</dt>
+<dd>Major update. Move Database schema out of its own file, making it easier to test and port, and clean up code. Released Oct. 22, 2026</dd>
 </dl>
 
 ### Questions
