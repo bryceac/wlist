@@ -1,17 +1,11 @@
-prefix ?= /usr/local
-bindir = $(prefix)/bin
-SYS := $(shell $(CC) -dumpmachine)
+PREFIX := "/usr/local"
+BINDIR := PREFIX+"/bin"
 
 build:
 	cargo build --release
-install: build
-ifneq (, $(findstring darwin, $(SYS)))
-	install "target/release/wlist" "$(bindir)/wlist"
-else
-	install -D "target/release/wlist" "$(bindir)/wlist"
-endif
+install:
+    install "target/release/wlist" "{{BINDIR}}/wlist"
 uninstall:
-	rm -rf "$(bindir)/wlist"
+	rm "$(bindir)/wlist"
 clean:
 	rm -rf target
-.PHONY: build install uninstall clean
