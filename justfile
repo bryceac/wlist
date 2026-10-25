@@ -6,6 +6,6 @@ build:
 install:
     install "target/release/wlist" "{{BINDIR}}/wlist"
 uninstall:
-	rm "$(bindir)/wlist"
+	rm "{{BINDIR}}}}/wlist"
 clean:
 	rm -rf target
