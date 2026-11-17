@@ -1,4 +1,4 @@
-.TH WLIST-DELETE 1 "17 November 2026" "version 0.3.0"
+.TH WLIST-DELETE 1 "17 November 2026" "version 0.1.0"
 .SH NAME
 wlist-delete \- remove item from registry.
 .SH SYNOPSIS
@@ -21,10 +21,15 @@ The id of the item to delete.
 The id of the note to delete.
 .SH AUTHOR
 Bryce Campbell (tonyhawk2100@gmail.com)
-.SH SEE ALSO
-wlist-add(1),
-wlist-export(1),
-wlist-import(1),
-wlist-show(1),
-wlist-delete(1),
-wlist-update(1)
+.SH EXAMPLES
+Remove item from Registry:
+.RS
+.IP
+wlist delete --item-id FF04C3DC-F0FE-472E-8737-0F4034C049F0
+.RE
+.PP
+Remove note from Registry:
+.RS
+.IP
+wlist --note-id 1
+.RE
