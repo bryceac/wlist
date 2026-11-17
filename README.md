@@ -293,7 +293,7 @@ If you want to feed the CSS rules directly into the progra, the program now incl
 To provide the rules upfront, you would do something like this:
 
 <pre>
-"body { color: #ff00ff; }" | wlist export -c - -o ~/Desktop/test.html
+echo "body { color: #ff00ff; }" | wlist export -c - -o ~/Desktop/test.html
 </pre>
 
 That dash after **-c** is required. While I would have liked for it to be omitted, it caused issues exporting to other formats, so I had to give up on that idea.
