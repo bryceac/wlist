@@ -1,40 +1,24 @@
-.TH WLIST 1 "17 November 2026" "version 0.3.0"
+.TH WLIST-DELETE 1 "17 November 2026" "version 0.3.0"
 .SH NAME
-wlist \- simple CLI wishlist creator.
+wlist-delete \- remove item from registry.
 .SH SYNOPSIS
-wlist <Command>...
+wlist delete  [--item-id <item id>]
+[--note-id <note id>]
 .SH DESCRIPTION
-wlist is a program that can be used 
-to generate a wishlist that can be given to anyone.
+Remove an item 
+.B OR 
+note from register.
 .PP
-Each operation is performed by a subcommand, as such:
-.RS
-.IP
-adding an item.
-.IP
-updating an item.
-.IP
-removing an item.
-.IP
-importing items.
-.IP
-exporting the registry.
-.IP
-displaying the registry 
-and item details.
-.RE
+By removing either, 
+links established 
+between the notes and items will be removed.
 .SH OPTIONS
-
-As this program relies on using subcommands, there are no real options.
-
-However, for basic things, like information, the following are available:
-
 .TP
-.B -h, --help
-Displays help.
+.B --item-id <item id>
+The id of the item to delete.
 .TP
-.B -V, --version
-Display version number.
+.B --note-id
+The id of the note to delete.
 .SH AUTHOR
 Bryce Campbell (tonyhawk2100@gmail.com)
 .SH SEE ALSO
