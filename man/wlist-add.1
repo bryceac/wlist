@@ -8,19 +8,18 @@ rcheckbook add [path/to/database]
 [--url <url> | -u <url>]
 [--notes <Notes>...]
 .SH DESCRIPTION
-Add an entry to the registry.
+Add an item to the registry.
 .PP
-The add subcommand can be used to add an entry 
+The add subcommand can be used to add an item 
 to the registry with all the data that you know.
 .PP
-The only required information are the vendor and
-the amount exchanged.
+The only required information is the name of the item.
 .PP
 If no path to database is given,
 the program will try to open a database located in
-.B .checkbook
-user your home directory named
-.B register.db.
+.B wishlist
+in your home directory named
+.B gift_registry.db.
 .SH OPTIONS
 .TP
 .B -a <amount>, --amount <amount>
