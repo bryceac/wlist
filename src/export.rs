@@ -88,7 +88,7 @@ fn generate_html(items: &Vec<Item>, title: &str, css: &str) -> String {
 
     if !css.is_empty() {
         html.push_str("\t\t<style>\r\n");
-        html.push_str(css);
+        html.push_str(format!("{}\r\n", css));
         html.push_str("\t\t</style>\r\n");
     }
     
