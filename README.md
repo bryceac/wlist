@@ -280,12 +280,23 @@ When exporting to HTML, you can specify a title by using **-t** like this:
 wlist export -t "Birthday List" -o ~/Desktop/test.html
 </pre>
 
-Please note that the HTML exported is rather basic and this program does not include any ability to customize the styling.
+If you would like to stylize the HTML output, you would use **-c** like this:
 
-This is intended because I made this program mostly for myself as a way to quickly generate the kind of HTML wish lists I typically make by hand,
-so that I can focus on implementing the CSS as myself.
+<pre>
+wlist export -c style.css -o ~/Desktop/test.html
+</pre>
 
-As such, you are responsible for styling things in the way you see fit, but if you are happy with the default look of the HTML, then I am glad.
+This will include the contents of style.css as part of the HTML.
+
+If you want to feed the CSS rules directly into the progra, the program now includes the ability to read stdin, but only for exports.
+
+To provide the rules upfront, you would do something like this:
+
+<pre>
+"body { color: #ff00ff; }" | wlist export -c - -o ~/Desktop/test.html
+</pre>
+
+That dash after **-c** is required. While I would have liked for it to be omitted, it caused issues exporting to other formats, so I had to give up on that idea.
 
 ### Contributing
 
