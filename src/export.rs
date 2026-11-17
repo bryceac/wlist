@@ -38,7 +38,7 @@ impl Export {
             ref p if p.ends_with(".json") => if let Err(error) = items.save(p) {
                 println!("{}", error);
             },
-            ref p if p.ends_with(".html") => if let Err(error) = save_html(items, &self.title, &real_path(p)) {
+            ref p if p.ends_with(".html") => if let Err(error) = save_html(items, &self.title, &self.css.clone().contents().unwrap_or("".to_owned()), &real_path(p)) {
                 println!("{}", error);
             },
             ref p if p.ends_with(".ods") => if let Err(error) = spreadsheet_ods::write_ods(&mut create_ods_book(items.clone()), Path::new(&destination_path)) {
@@ -60,13 +60,20 @@ impl Export {
     }
 }
 
-fn generate_html(items: &Vec<Item>, title: &str) -> String {
+fn generate_html(items: &Vec<Item>, title: &str, css: &str) -> String {
     let mut html = "<!DOCTYPE html>\r\n".to_owned();
 
     html.push_str("<html>\r\n");
 
     html.push_str("\t<head>\r\n");
     html.push_str(&format!("\t\t<title>{}</title>\r\n", title));
+
+    if !css.is_empty() || css != "-" {
+        html.push_str("\t\t<style>\r\n");
+        html.push_str(css);
+        html.push_str("\t\t</style>\r\n");
+    }
+    
     html.push_str("\t</head>\r\n");
     html.push_str("\t<body>\r\n");
     html.push_str("\t\t<article>\r\n");
@@ -160,8 +167,8 @@ fn registry_item(item: &Item, items: &Vec<Item>) -> String {
     details
 }
 
-fn save_html(items: Vec<Item>, title: &str, p: &str) -> Result<(), io::Error> {
-    let html = generate_html(&items, title);
+fn save_html(items: Vec<Item>, title: &str, css: &str, p: &str) -> Result<(), io::Error> {
+    let html = generate_html(&items, title, css);
 
     let mut output = File::create(p)?;
 
