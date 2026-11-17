@@ -177,7 +177,7 @@ This will add the item specified to your wishlist.
 If you want to add notes for the item you would add this to the end of the above:
 
 <pre>
---note hello world
+--notes hello world
 </pre>
 
 This will add two notes to the item, and if the notes already exist in the database, the notes will be linked to the item instead.
