@@ -1,6 +1,6 @@
 .TH WLIST 1 "17 November 2026" "version 0.3.0"
 .SH NAME
-wlist \- simple CLI checkbook ledger.
+wlist \- simple CLI wishlist creator.
 .SH SYNOPSIS
 wlist <Command>...
 .SH DESCRIPTION
@@ -10,25 +10,24 @@ to generate a wishlist that can be given to anyone.
 Each operation is performed by a subcommand, as such:
 .RS
 .IP
-adding an entry.
+adding an item.
 .IP
-updating an entry.
+updating an item.
 .IP
-removing an entries.
+removing an item.
 .IP
-importing entries.
+importing items.
 .IP
 exporting the registry.
 .IP
-displaying the registry.
-.IP
-displaying a summary of the registry.
+displaying the registry 
+and item details.
 .RE
 .SH OPTIONS
 
 As this program relies on using subcommands, there are no real options.
 
-However, for basic things information, the following are available:
+However, for basic things, like information, the following are available:
 
 .TP
 .B -h, --help
@@ -39,10 +38,9 @@ Display version number.
 .SH AUTHOR
 Bryce Campbell (tonyhawk2100@gmail.com)
 .SH SEE ALSO
-rcheckbook-add(1),
-rcheckbook-export(1),
-rcheckbook-import(1),
-rcheckbook-list(1),
-rcheckbook-remove(1),
-rcheckbook-summary(1),
-rcheckbook-update(1)
+wlist-add(1),
+wlist-export(1),
+wlist-import(1),
+wlist-show(1),
+wlist-delete(1),
+wlist-update(1)
