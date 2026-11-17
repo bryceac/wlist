@@ -4,7 +4,7 @@ wlist-add \- Add item to registry.
 .SH SYNOPSIS
 rcheckbook add [path/to/database] 
 --name <item> | -n <item> [--quantity <amount> | -a <amount>]
-[--priority <priority level> | -p <priority level>]--vendor <vendor>
+[--priority <priority level> | -p <priority level>]
 [--url <url> | -u <url>]
 [--notes <Notes>...]
 .SH DESCRIPTION
@@ -22,109 +22,80 @@ in your home directory named
 .B gift_registry.db.
 .SH OPTIONS
 .TP
-.B -a <amount>, --amount <amount>
-The amount exchanged.
-.PP
-A positive value denotes a deposit, 
-while a negative or zero value denotes a withdrawal.
-.PP
-If a value is not given, it will be put down as zero.
-.PP
-Because negative values are allowed, 
-it is best to provide this date last.
+.B -n <item>, --name <item>
+The item desired.
 .TP
-.B --category <category>
-The category to assign to the entry.
+.B -q <amount>, --quantity <amount>
+The quantity of the specified item.
 .PP
-If your category has any spaces, make sure to wrap it up in quotes.
+If no quantity is specified, 
+it will be assumed to be 1.
+.TP
+.B -p <priority level>, --priority <priority level>
+How much you want the item.
 .PP
-If no category is named, it will be considered Uncategorized.
-.PP
-If a specified category is not found, 
-it will be added to the registry along with the transaction.
-.PP
-The default categories are as follows:
+The value can be one of the following:
 .RS
 .IP
-Dining
+low
 .IP
-Gifts
+medium
 .IP
-Groceries
+high
 .IP
-Opening Balance
-.IP
-Recreation
-.IP
-Subscriptions
-.IP
-Utilities
+highest
 .RE
 .PP
-Categories are case insensitive.
-.PP
-However, 
-the case used when specifying a new category 
-will be the case stored in the database.
-.PP
-To keep things consistent,
-it is best to capitialize things as if they were
-a title.
+If no value is given, low is assumed.
 .TP
-.B --check-number <check number>
-The check number associated with the exchange.
+.B -u <url>, --url <url>
+The URL for the item.
 .PP
-If not provided, it will just remain empty.
+If this is not specified, the URL will be **/**.
 .TP
-.B -d <date>, --date <date>
-The date the exchange took place.
+.B --notes <Notes>...
+A list of notes regarding the item.
 .PP
-When specifying the date, the expected format is
-YYYY-MM-DD.
+When providing a note, 
+make sure to put the note in quotes,
+unless the note is only one word.
 .PP
-If this is not provided when adding an entry, 
-the current date will be used.
-.TP
-.B -m <memo>, --memo <memo>
-A brief description of the exchange.
+If quotes are not used, 
+each item is considered its own note.
 .PP
 If not provided, this will simply be left empty.
-.PP
-However, it is best to prvide a memo, 
-so that you know what it was for.
-.TP
-.B -r, --reconciled
-Mark the transaction as reconciled.
-.PP
-If left off, the transaction will be considered unreconciled.
-.TP
-.B --vendor <vendor>
-The vendor/payee in the exchange.
 .SH EXAMPLES
-Add entry to registry:
+Add item to registry:
 .RS
 .IP
-recheckbook add --vendor Bill 
--m "reimburse for food" -a -20
+wlist add -n "Mario Kart" 
 .RE
 .PP
-Add reconciled transaction from Jan. 01, 1970:
+Add item with a note:
 .RS
 .IP
-recheckbook add -d 1970-01-01 --vendor "Sam Hill Credit Union" 
--m "Interest Earned" -r -a 0.02
+wlist add -name "Mario Kart" --notes "Only if I get Switch 2."
 .RE
 .PP
-Add transaction paid via check:
+Add item with two notes:
 .RS
 .IP
-recheckbook add --check-number 1260 --vendor "Velociraptor Entertainment" 
--m "Pay Day" -r -a 50000
+wlist -name "Mario Kart --notes "Only if I get Switch 2." "Physical only."
 .RE
 .PP
-Add transaction with Category:
+Add item with priority level:
 .RS
 .IP
-recheckbook add --vendor "Fake Street Electronics" -m "Head set"
---category Gifts -a -200
+wlist -n "Mario Kart" -p high
+.RE
+.PP
+Add item with URL:
+.RS
+.IP
+wlist add -name "Mario Kart" -u https://example.com/mario-kart
+.RE
+.PP
+Add item a quantity of more than 1:
+.RS
+wlist add -n "Mario Kart" -q 2
 .RE
