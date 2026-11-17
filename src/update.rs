@@ -1,6 +1,6 @@
 use clap::Parser;
 use wlitem::Priority;
-use url::Url;
+use http::Uri;
 
 use crate::database::*;
 
