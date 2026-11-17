@@ -1,5 +1,6 @@
 use std::{ fs::File, io::{ self, Write }, path::Path };
 use clap::Parser;
+use clap_stdin::FileOrStdin;
 use wlitem::{ Item, Save };
 use indexmap::IndexSet;
 use icu::locale::locale;
@@ -15,6 +16,9 @@ pub struct Export {
 
     #[clap(long, short, help = "set title of HTML output", default_value = "Wishlist")]
     pub title: String,
+
+    #[clap(long, short, help = "set style rules of HTML output", default_value = "-")]
+    pub css: FileOrStdin,
 
     #[clap(long, short, help = "the file that the content is supposed to be saved to.")]
     pub output_file: String
