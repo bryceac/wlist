@@ -327,18 +327,13 @@ pub fn delete_item(p: &str, item: &Item) {
 }
 
 pub fn update_item(p: &str, item: &Item) {
-    let item_url = if let Some(url) = item.url.clone() {
-        url.as_str().to_owned()
-    } else {
-        "".to_owned()
-    };
 
     let db = Connection::open(&real_path(p)).unwrap();
 
     let update_statement = "UPDATE items SET name = ?1, quantity = ?2, priority = ?3, url = ?4 WHERE id = ?5";
 
     if let Ok(mut statement) = db.prepare(update_statement) {
-        if let Err(error) = statement.execute(params![item.name, item.quantity, item.priority.to_str(), item_url, item.id]) {
+        if let Err(error) = statement.execute(params![item.name, item.quantity, item.priority.to_str(), item.url.to_string(), item.id]) {
             println!("{}", error);
         }
     }
