@@ -29,21 +29,28 @@ impl Export {
         create_database_if_not_exists(&self.file_path);
         let destination_path = real_path(&self.output_file);
         let mut items: Vec<Item> = load_items_from_db(&self.file_path);
+        let css = if let Some(css) = self.css.clone() {
+            css.contents().unwrap_or("".to_string())
+        } else {
+            String::default()
+        };
         
         items.sort_by_key(|item| item.priority.clone());
 
         items.reverse();
 
-        if !destination_path.ends_with(".html") && !self.css.clone().contents().unwrap_or("".to_owned()).is_empty() {
-            println!("Styling can only be added to HTML exports.");
-            return;
+        if !destination_path.ends_with(".html") {
+            if !css.is_empty() {
+                    println!("Styling can only be added to HTML exports.");
+                    return;
+            }
         }
 
         match destination_path {
             ref p if p.ends_with(".json") => if let Err(error) = items.save(p) {
                 println!("{}", error);
             },
-            ref p if p.ends_with(".html") => if let Err(error) = save_html(items, &self.title, &self.css.clone().contents().unwrap_or("".to_owned()), &real_path(p)) {
+            ref p if p.ends_with(".html") => if let Err(error) = save_html(items, &self.title, &css, &real_path(p)) {
                 println!("{}", error);
             },
             ref p if p.ends_with(".ods") => if let Err(error) = spreadsheet_ods::write_ods(&mut create_ods_book(items.clone()), Path::new(&destination_path)) {
