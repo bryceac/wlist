@@ -296,18 +296,13 @@ pub fn item_note_associations(p: &str) -> HashMap<String, Vec<u32>> {
 }
 
 pub fn add_item(p: &str, item: Item) {
-    let item_url = if let Some(url) = item.url.clone() {
-        url.as_str().to_owned()
-    } else {
-        "".to_owned()
-    };
 
     let db = Connection::open(&real_path(p)).unwrap();
 
     let insert_statement = "INSERT INTO items VALUES (?1, ?2, ?3, ?4, ?5)";
 
     if let Ok(mut statement) = db.prepare(insert_statement) {
-        if let Err(error) = statement.execute(params![item.id, item.name, item.quantity, item.priority.to_str(), item_url]) {
+        if let Err(error) = statement.execute(params![item.id, item.name, item.quantity, item.priority.to_str(), item.url.to_string()]) {
             println!("{}", error);
         } else {
             for note in item.notes.clone() {
