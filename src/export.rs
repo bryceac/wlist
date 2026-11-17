@@ -34,22 +34,9 @@ impl Export {
 
         items.reverse();
 
-        if !destination_path.ends_with(".html") {
-            match (self.title.clone(), self.css.clone().contents().unwrap_or("".to_owned())) {
-                (title, css) if title.is_empty() && !css.is_empty() => {
-                    println!("styling rules can only be provided with HTML exports");
-                    return;
-                },
-                (title, css) if !title.is_empty() && css.is_empty() => {
-                    println!("title may only be provided with HTML export, as it is not needed otherwise.");
-                    return;
-                },
-                (title, css) if !title.is_empty() && !css.is_empty() => {
-                    println!("title and styling rules may only be applied to HTML exports");
-                    return;
-                },
-                _ => {} 
-            }
+        if !destination_path.ends_with(".html") && !self.css.clone().contents().unwrap_or("".to_owned()).is_empty() {
+            println!("Styling can only be added to HTML exports.");
+            return;
         }
 
         match destination_path {
