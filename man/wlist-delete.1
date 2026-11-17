@@ -1,0 +1,46 @@
+.TH WLIST 1 "17 November 2026" "version 0.3.0"
+.SH NAME
+wlist \- simple CLI wishlist creator.
+.SH SYNOPSIS
+wlist <Command>...
+.SH DESCRIPTION
+wlist is a program that can be used 
+to generate a wishlist that can be given to anyone.
+.PP
+Each operation is performed by a subcommand, as such:
+.RS
+.IP
+adding an item.
+.IP
+updating an item.
+.IP
+removing an item.
+.IP
+importing items.
+.IP
+exporting the registry.
+.IP
+displaying the registry 
+and item details.
+.RE
+.SH OPTIONS
+
+As this program relies on using subcommands, there are no real options.
+
+However, for basic things, like information, the following are available:
+
+.TP
+.B -h, --help
+Displays help.
+.TP
+.B -V, --version
+Display version number.
+.SH AUTHOR
+Bryce Campbell (tonyhawk2100@gmail.com)
+.SH SEE ALSO
+wlist-add(1),
+wlist-export(1),
+wlist-import(1),
+wlist-show(1),
+wlist-delete(1),
+wlist-update(1)
