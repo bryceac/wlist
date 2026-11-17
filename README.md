@@ -59,7 +59,8 @@ by making quantity optional. Released Feb. 11, 2026 Evening</dd>
   <li>add notes if necessary and link them to items.</li>
   </ul>
 
-  <p>While I do not intend to have this program do all of those things, I do intend to have it generate the HTML with items linked up to their respective notes, so that I can focus on implementing the style rules necessary myself, such as making sure the link addresses are displayed on the prnted page and making sure items have enough space for navigation on a touch screen phone.</p>
+  <p>While I originally did not intend to have this program do all of those things, I did originally intend to have it generate the HTML with items linked up to their respective notes, so that I can focus on implementing the style rules necessary myself, such as making sure the link addresses are displayed on the prnted page and making sure items have enough space for navigation on a touch screen phone.</p>
+  <p>However, recently, I decided that I should allow HTML output to include CSS rules, so I recently added in that capability as of version 0.3</p>
   </dd>
   </dl>
 
