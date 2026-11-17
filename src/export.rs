@@ -135,14 +135,10 @@ fn registry_item(item: &Item, items: &Vec<Item>) -> String {
 
     let notes = unique_notes(items);
 
-    if let Some(url) = item.url.clone() {
-        if url.to_string().is_empty() {
-            details.push_str(&item.name);
-        } else {
-            details.push_str(&format!("<a href=\"{}\">{}</a>", url.to_string(), item.name));
-        }
-    } else {
+    if !item.url.to_string().is_empty() {
         details.push_str(&item.name);
+    } else {
+        details.push_str(&format!("<a href=\"{}\">{}</a>", item.url.to_string(), item.name));
     }
 
     if !item.notes.is_empty() {
@@ -214,8 +210,8 @@ fn add_item_to_ods_sheet(item: &Item, row_index: u32, sheet: &mut spreadsheet_od
     sheet.set_value(row_index, 2, item.quantity);
     sheet.set_value(row_index, 3, item.priority.to_str());
 
-    if let Some(url) = item.url.clone() {
-        sheet.set_value(row_index, 4, url.to_string());
+    if !item.url.to_string().is_empty() {
+        sheet.set_value(row_index, 4, item.url.to_string());
     }
 }
 
@@ -281,8 +277,8 @@ fn add_item_to_xlsx_sheet(item: &Item, row_index: u32, sheet: &mut Worksheet) ->
     sheet.write_string(row_index, 2, &item.quantity.to_string(), None)?;
     sheet.write_string(row_index, 3, item.priority.to_str(), None)?;
 
-    if let Some(url) = item.url.clone() {
-        sheet.write_string(row_index, 4, &url.to_string(), None)
+    if !item.url.to_string().is_empty() {
+        sheet.write_string(row_index, 4, &item.url.to_string(), None)
     } else {
         sheet.write_blank(row_index, 4, None)
     }
