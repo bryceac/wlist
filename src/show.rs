@@ -59,8 +59,8 @@ impl Show {
 
 fn display_items(store: &Vec<Item>) {
     for item in store {
-        let item_url = if let Some(url) = item.url.clone() {
-            url.as_str().to_owned()
+        let item_url = if item.url.to_string().is_empty() {
+            item.url.to_string()
         } else {
             "N/A".to_owned()
         };
