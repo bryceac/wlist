@@ -17,8 +17,8 @@ pub struct Export {
     #[clap(long, short, help = "set title of HTML output", default_value = "Wishlist")]
     pub title: String,
 
-    #[clap(long, short, help = "set style rules of HTML output", default_value = "-")]
-    pub css: FileOrStdin,
+    #[clap(long, short, help = "set style rules of HTML output")]
+    pub css: Option<FileOrStdin>,
 
     #[clap(long, short, help = "the file that the content is supposed to be saved to.")]
     pub output_file: String
