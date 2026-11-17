@@ -100,8 +100,8 @@ impl Update {
                 }
 
                 if let Some(url_string) = self.url.clone() {
-                    if let Ok(url) = Url::parse(&url_string) {
-                        item.url = Some(url);
+                    if let Ok(url) = url_string.parse::<Uri>() {
+                        item.url = url;
                     }
                 }
 
