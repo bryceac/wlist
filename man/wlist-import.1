@@ -1,13 +1,11 @@
-.TH WLIST-IMPORT 1 "17 November 2026" "version 0.3.0"
+.TH WLIST-IMPORT 1 "17 November 2026" "version 0.2.0"
 .SH NAME
 wlist-import \- import items into registry.
 .SH SYNOPSIS
-wlist export [path/to/database]
-[--title <title> | -t <title>]
-[--css <CSS input> | -c <CSS input>]
-[--output-file <file path> | -o <file path>]
+wlist import [path/to/database]
+[--input-file <file path> | -i <file path>]
 .SH DESCRIPTION
-Export Wishlist to file.
+Import items to registry
 .PP
 Supported formats include:
 .RS
@@ -16,45 +14,23 @@ JSON
 .IP
 TSV
 .IP
-HTML
-.IP
 ODS
 .IP
 Excel
 .RE
 .PP
-Exports are done based on file extension.
-.SH OPTIONS
-.TP
-.B -t <title>, --title <title>
-The title of the HTML output
-.TP
-.B -c <CSS input>, --css <CSS input>
-The CSS styling for the HTML output.
-.TP
-.B -o <file path>, --output-file <file path>
-The file to write to.
+Imports are done based on file extension.
 .PP
-This determines the kind of output too.
+However, only JSON, Excel, and ODS support notes.
+.SH OPTIONS
+.B -i <file path>, --input-file <file path>
+The file to load from.
+.PP
+This determines how the files are parsed.
 .SH AUTHOR
 Bryce Campbell (tonyhawk2100@gmail.com)
 .SH EXAMPLES
-Export list to TSV:
+import from TSV:
 .RS
-wlist export -o items.tsv
-.RE
-.PP
-Export list to HTML with title:
-.RS
-wlist export -t "Birthday List" -o wishlist.html
-.RE
-.PP
-Export list with CSS from file:
-.RS
-wlist export -c style.css -o wishlist.html
-.RE
-.PP
-Export list to HTML with provided CSS:
-.RS
-echo "body { color: #ff00ff; }" | wlist export -c - -o wishlist.html
+wlist import -i items.tsv
 .RE
