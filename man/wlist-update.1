@@ -74,13 +74,13 @@ with the specified id to the specified item.
 .SH AUTHOR
 Bryce Campbell (tonyhawk2100@gmail.com)
 .SH EXAMPLES
-Add notes to item:
+Add new notes to item:
 .RS
 .IP
 wlist update -i FF04C3DC-F0FE-472E-8737-0F4034C049F0 --notes hello world 
 .RE
 .PP
-Add exist note to item:
+Add existing note to item:
 .RS
 .IP
 wlist update -i FF04C3DC-F0FE-472E-8737-0F4034C049F0 -n 1 -a
@@ -92,19 +92,8 @@ Update note:
 wlist update -n 1 --note "Hello, World!"
 .RE
 .PP
-Add item with priority level:
+update item with priority level:
 .RS
 .IP
-wlist -n "Mario Kart" -p high
-.RE
-.PP
-Add item with URL:
-.RS
-.IP
-wlist add -name "Mario Kart" -u https://example.com/mario-kart
-.RE
-.PP
-Add item a quantity of more than 1:
-.RS
-wlist add -n "Mario Kart" -q 2
+wlist update -i FF04C3DC-F0FE-472E-8737-0F4034C049F0 -p high
 .RE
