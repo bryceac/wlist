@@ -1,4 +1,4 @@
-.TH WLIST-UPDATE 1 "17 November 2026" "version 0.1.0"
+.TH WLIST-UPDATE 1 "17 November 2026" "version 0.1.1"
 .SH NAME
 wlist-update \- update item and note details.
 .SH SYNOPSIS
@@ -11,22 +11,11 @@ wlist update [path/to/database]
 [--notes <Notes>...][--note <note>]
 [--remove-note | -r][--append-note | -a]
 .SH DESCRIPTION
-Add an item to the registry.
-.PP
-The add subcommand can be used to add an item 
-to the registry with all the data that you know.
-.PP
-The only required information is the name of the item.
-.PP
-If no path to database is given,
-the program will try to open a database located in
-.B wishlist
-in your home directory named
-.B gift_registry.db.
+Update items and notes.
 .SH OPTIONS
 .TP
-.B -n <item>, --name <item>
-The item desired.
+.B -i <item id>, --item <item id>
+The item to update.
 .TP
 .B -q <amount>, --quantity <amount>
 The quantity of the specified item.
