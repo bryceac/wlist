@@ -6,43 +6,50 @@ wlist show [path/to/database]
 [--content <content type> | -c <content type>]
 [--item-id <id> | -i <id> ]
 .SH DESCRIPTION
-wlist is a program that can be used 
-to generate a wishlist that can be given to anyone.
+show list and other details.
 .PP
-Each operation is performed by a subcommand, as such:
+Those details can either be:
 .RS
+.IP 
+details about items
 .IP
-adding an item.
+the items in the list.
 .IP
-updating an item.
-.IP
-removing an item.
-.IP
-importing items.
-.IP
-exporting the registry.
-.IP
-displaying the registry 
-and item details.
+notes
 .RE
+.PP
+When view the item list, which is the default, 
+you cannot specify a particular item, 
+unlike if you were to view the notes.
 .SH OPTIONS
-
-As this program relies on using subcommands, there are no real options.
-
-However, for basic things, like information, the following are available:
-
 .TP
-.B -h, --help
-Displays help.
+.B -c <content type>, --content <content type>
+Determines what to show.
+.PP
+The value can be either **items** or **notes**
+.PP
+Items is default and will show the registry,
+while notes will show the notes and, 
+if an item id is supplied, show notes attached to an item.
 .TP
-.B -V, --version
-Display version number.
+.B -i <id>, --item-id <id>
+The item to be looked up.
+.PP
+This can only be used when viewing notes.
 .SH AUTHOR
 Bryce Campbell (tonyhawk2100@gmail.com)
-.SH SEE ALSO
-wlist-add(1),
-wlist-export(1),
-wlist-import(1),
-wlist-show(1),
-wlist-delete(1),
-wlist-update(1)
+.SH EXAMPLES
+View list:
+.RS
+wlist show
+.RE
+.PP
+View notes:
+.RS
+wlist show -c notes
+.RE
+.PP
+View notes connected to item:
+.RS
+wlist show -c -i FF04C3DC-F0FE-472E-8737-0F4034C049F0
+.RE
