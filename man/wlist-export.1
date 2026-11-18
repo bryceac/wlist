@@ -1,46 +1,60 @@
-.TH WLIST 1 "17 November 2026" "version 0.3.0"
+.TH WLIST-EXPORT 1 "17 November 2026" "version 0.3.0"
 .SH NAME
-wlist \- simple CLI wishlist creator.
+wlist-export \- export wishlist data.
 .SH SYNOPSIS
-wlist <Command>...
+wlist export [path/to/database]
+[--title <title> | -t <title>]
+[--css <CSS input> | -c <CSS input>]
+[--output-file <file path> | -o <file path>]
 .SH DESCRIPTION
-wlist is a program that can be used 
-to generate a wishlist that can be given to anyone.
+Export Wishlist to file.
 .PP
-Each operation is performed by a subcommand, as such:
+Supported formats include:
 .RS
 .IP
-adding an item.
+JSON
 .IP
-updating an item.
+TSV
 .IP
-removing an item.
+HTML
 .IP
-importing items.
+ODS
 .IP
-exporting the registry.
-.IP
-displaying the registry 
-and item details.
+Excel
 .RE
+.PP
+Exports are done based on file extension.
 .SH OPTIONS
-
-As this program relies on using subcommands, there are no real options.
-
-However, for basic things, like information, the following are available:
-
 .TP
-.B -h, --help
-Displays help.
+.B -t <title>, --title <title>
+The title of the HTML output
 .TP
-.B -V, --version
-Display version number.
+.B -c <CSS input>, --css <CSS input>
+The CSS styling for the HTML output.
+.TP
+.B -o <file path>, --output-file <file path>
+The file to write to.
+.PP
+This determines the kind of output too.
 .SH AUTHOR
 Bryce Campbell (tonyhawk2100@gmail.com)
-.SH SEE ALSO
-wlist-add(1),
-wlist-export(1),
-wlist-import(1),
-wlist-show(1),
-wlist-delete(1),
-wlist-update(1)
+.SH EXAMPLES
+Export list to TSV:
+.RS
+wlist export -o items.tsv
+.RE
+.PP
+Export list to HTML with title:
+.RS
+wlist export -t "Birthday List" -o wishlist.html
+.RE
+.PP
+Export list with CSS from file:
+.RS
+wlist export -c style.css -o wishlist.html
+.RE
+.PP
+Export list to HTML with provided CSS:
+.RS
+echo "body { color: #ff00ff; }" | wlist export -c - -o wishlist.html
+.RE
