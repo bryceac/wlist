@@ -5,7 +5,7 @@ MANDIR := PREFIX/share/man
 build:
 	cargo build --release
 install:
-    install "target/release/wlist" "{{BINDIR}}/wlist"
+	install "target/release/wlist" "{{BINDIR}}/wlist"
 	install "man/wlist.1" "{{MANDIR}}/man1"
 	install "man/wlist-add.1" "{{MANDIR}}/man1"
 	install "man/wlist-delete.1" "{{MANDIR}}/man1"
