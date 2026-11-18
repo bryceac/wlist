@@ -158,7 +158,7 @@ fn registry_item(item: &Item, items: &Vec<Item>) -> String {
 
     let notes = unique_notes(items);
 
-    if !item.url.to_string().is_empty() || item.url.to_string() != "/" {
+    if !item.url.to_string().is_empty() && item.url.to_string() != "/" {
         details.push_str(&item.name);
     } else {
         details.push_str(&format!("<a href=\"{}\">{}</a>", item.url.to_string(), item.name));
@@ -233,7 +233,7 @@ fn add_item_to_ods_sheet(item: &Item, row_index: u32, sheet: &mut spreadsheet_od
     sheet.set_value(row_index, 2, item.quantity);
     sheet.set_value(row_index, 3, item.priority.to_str());
 
-    if !item.url.to_string().is_empty() || item.url.to_string() != "/" {
+    if !item.url.to_string().is_empty() && item.url.to_string() != "/" {
         sheet.set_value(row_index, 4, item.url.to_string());
     }
 }
@@ -300,7 +300,7 @@ fn add_item_to_xlsx_sheet(item: &Item, row_index: u32, sheet: &mut Worksheet) ->
     sheet.write_string(row_index, 2, &item.quantity.to_string(), None)?;
     sheet.write_string(row_index, 3, item.priority.to_str(), None)?;
 
-    if !item.url.to_string().is_empty() || item.url.to_string() != "/" {
+    if !item.url.to_string().is_empty() && item.url.to_string() != "/" {
         sheet.write_string(row_index, 4, &item.url.to_string(), None)
     } else {
         sheet.write_blank(row_index, 4, None)

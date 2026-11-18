@@ -59,7 +59,7 @@ impl Show {
 
 fn display_items(store: &Vec<Item>) {
     for item in store {
-        let item_url = if !item.url.to_string().is_empty() || item.url.to_string() != "/" {
+        let item_url = if !item.url.to_string().is_empty() && item.url.to_string() != "/" {
             item.url.to_string()
         } else {
             "N/A".to_owned()
