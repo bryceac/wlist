@@ -40,13 +40,9 @@ high
 .IP
 highest
 .RE
-.PP
-If no value is given, low is assumed.
 .TP
 .B -u <url>, --url <url>
 The URL for the item.
-.PP
-If this is not specified, the URL will be **/**.
 .TP
 .B --notes <Notes>...
 A list of notes regarding the item.
@@ -57,27 +53,43 @@ unless the note is only one word.
 .PP
 If quotes are not used, 
 each item is considered its own note.
+.TP
+.B --note <note content>
+specify note content.
 .PP
-If not provided, this will simply be left empty.
+Because things can get confusing otherwise,
+This can only be used when updating notes themselves.
+.PP
+If you want to add notes that don't exist to items,
+use
+.B --notes
+.TP
+.B -r, --remove-note
+Tell program to remove a note 
+with the specified id from the specified item.
+.TP
+.B -a, --append-note
+Tell the program to append a note 
+with the specified id to the specified item.
 .SH AUTHOR
 Bryce Campbell (tonyhawk2100@gmail.com)
 .SH EXAMPLES
-Add item to registry:
+Add notes to item:
 .RS
 .IP
-wlist add -n "Mario Kart" 
+wlist update -i FF04C3DC-F0FE-472E-8737-0F4034C049F0 --notes hello world 
 .RE
 .PP
-Add item with a note:
+Add exist note to item:
 .RS
 .IP
-wlist add -name "Mario Kart" --notes "Only if I get Switch 2."
+wlist update -i FF04C3DC-F0FE-472E-8737-0F4034C049F0 -n 1 -a
 .RE
 .PP
-Add item with two notes:
+Update note:
 .RS
 .IP
-wlist -name "Mario Kart --notes "Only if I get Switch 2." "Physical only."
+wlist update -n 1 --note "Hello, World!"
 .RE
 .PP
 Add item with priority level:
