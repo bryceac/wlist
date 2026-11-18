@@ -15,12 +15,12 @@ install:
 	install "man/wlist-update.1" "{{MANDIR}}/man1"
 uninstall:
 	rm "{{BINDIR}}/wlist"
-	rm "{{MANDIR}}/wlist.1"
-	rm "{{MANDIR}}/wlist-add.1"
-	rm "{{MANDIR}}/wlist-delete.1"
-	rm "{{MANDIR}}/wlist-export.1"
-	rm "{{MANDIR}}/wlist-import.1"
-	rm "{{MANDIR}}/wlist-show.1"
-	rm "{{MANDIR}}/wlist-update.1"
+	rm "{{MANDIR}}/man1/wlist.1"
+	rm "{{MANDIR}}/man1/wlist-add.1"
+	rm "{{MANDIR}}/man1/wlist-delete.1"
+	rm "{{MANDIR}}/man1/wlist-export.1"
+	rm "{{MANDIR}}/man1/wlist-import.1"
+	rm "{{MANDIR}}/man1/wlist-show.1"
+	rm "{{MANDIR}}/man1/wlist-update.1"
 clean:
 	rm -rf target

@@ -33,23 +33,23 @@ section = "unknown"
 priority = "optional"
 assets = [
     ["target/release/wlist", "usr/local/bin/", "755"],
-    ["man/wlist.1", "usr/local/share/man1/", "644"],
-    ["man/wlist-add.1", "usr/local/share/man1/", "644"],
-    ["man/wlist-delete.1", "usr/local/share/man1/", "644"],
-    ["man/wlist-export.1", "usr/local/share/man1/", "644"],
-    ["man/wlist-import.1", "usr/local/share/man1/", "644"],
-    ["man/wlist-show.1", "usr/local/share/man1/", "644"],
-    ["man/wlist-update.1", "usr/local/share/man1/", "644"]
+    ["man/wlist.1", "usr/local/share/man/man1/", "644"],
+    ["man/wlist-add.1", "usr/local/share/man/man1/", "644"],
+    ["man/wlist-delete.1", "usr/local/share/man/man1/", "644"],
+    ["man/wlist-export.1", "usr/local/share/man/man1/", "644"],
+    ["man/wlist-import.1", "usr/local/share/man/man1/", "644"],
+    ["man/wlist-show.1", "usr/local/share/man/man1/", "644"],
+    ["man/wlist-update.1", "usr/local/share/man/man1/", "644"]
 ]
 
 [package.metadata.generate-rpm]
 assets = [
     { source = "target/release/wlist", dest = "/usr/local/bin/", mode = "755" },
-    { source = "man/wlist.1", dest = "/usr/local/share/man1/", mode = "644"},
-    { source = "man/wlist-add.1", dest = "/usr/local/share/man1/", mode = "644"},
-    { source = "man/wlist-delete.1", dest = "/usr/local/share/man1/", mode = "644"},
-    { source = "man/wlist-export.1", dest = "/usr/local/share/man1/", mode = "644"},
-    { source = "man/wlist-import.1", dest = "/usr/local/share/man1/", mode = "644"},
-    { source = "man/wlist-show.1", dest = "/usr/local/share/man1/", mode = "644"},
-    { source = "man/wlist-update.1", dest = "/usr/local/share/man1/", mode = "644"}
+    { source = "man/wlist.1", dest = "/usr/local/share/man/man1/", mode = "644"},
+    { source = "man/wlist-add.1", dest = "/usr/local/share/man/man1/", mode = "644"},
+    { source = "man/wlist-delete.1", dest = "/usr/local/share/man/man1/", mode = "644"},
+    { source = "man/wlist-export.1", dest = "/usr/local/share/man/man1/", mode = "644"},
+    { source = "man/wlist-import.1", dest = "/usr/local/share/man/man1/", mode = "644"},
+    { source = "man/wlist-show.1", dest = "/usr/local/share/man/man1/", mode = "644"},
+    { source = "man/wlist-update.1", dest = "/usr/local/share/man/man1/", mode = "644"}
 ]
