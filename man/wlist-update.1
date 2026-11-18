@@ -1,46 +1,103 @@
-.TH WLIST 1 "17 November 2026" "version 0.3.0"
+.TH WLIST-ADD 1 "17 November 2026" "version 0.1.0"
 .SH NAME
-wlist \- simple CLI wishlist creator.
+wlist-add \- Add item to registry.
 .SH SYNOPSIS
-wlist <Command>...
+wlist add [path/to/database] 
+--name <item> | -n <item> [--quantity <amount> | -a <amount>]
+[--priority <priority level> | -p <priority level>]
+[--url <url> | -u <url>]
+[--notes <Notes>...]
 .SH DESCRIPTION
-wlist is a program that can be used 
-to generate a wishlist that can be given to anyone.
+Add an item to the registry.
 .PP
-Each operation is performed by a subcommand, as such:
+The add subcommand can be used to add an item 
+to the registry with all the data that you know.
+.PP
+The only required information is the name of the item.
+.PP
+If no path to database is given,
+the program will try to open a database located in
+.B wishlist
+in your home directory named
+.B gift_registry.db.
+.SH OPTIONS
+.TP
+.B -n <item>, --name <item>
+The item desired.
+.TP
+.B -q <amount>, --quantity <amount>
+The quantity of the specified item.
+.PP
+If no quantity is specified, 
+it will be assumed to be 1.
+.TP
+.B -p <priority level>, --priority <priority level>
+How much you want the item.
+.PP
+The value can be one of the following:
 .RS
 .IP
-adding an item.
+low
 .IP
-updating an item.
+medium
 .IP
-removing an item.
+high
 .IP
-importing items.
-.IP
-exporting the registry.
-.IP
-displaying the registry 
-and item details.
+highest
 .RE
-.SH OPTIONS
-
-As this program relies on using subcommands, there are no real options.
-
-However, for basic things, like information, the following are available:
-
+.PP
+If no value is given, low is assumed.
 .TP
-.B -h, --help
-Displays help.
+.B -u <url>, --url <url>
+The URL for the item.
+.PP
+If this is not specified, the URL will be **/**.
 .TP
-.B -V, --version
-Display version number.
+.B --notes <Notes>...
+A list of notes regarding the item.
+.PP
+When providing a note, 
+make sure to put the note in quotes,
+unless the note is only one word.
+.PP
+If quotes are not used, 
+each item is considered its own note.
+.PP
+If not provided, this will simply be left empty.
 .SH AUTHOR
 Bryce Campbell (tonyhawk2100@gmail.com)
-.SH SEE ALSO
-wlist-add(1),
-wlist-export(1),
-wlist-import(1),
-wlist-show(1),
-wlist-delete(1),
-wlist-update(1)
+.SH EXAMPLES
+Add item to registry:
+.RS
+.IP
+wlist add -n "Mario Kart" 
+.RE
+.PP
+Add item with a note:
+.RS
+.IP
+wlist add -name "Mario Kart" --notes "Only if I get Switch 2."
+.RE
+.PP
+Add item with two notes:
+.RS
+.IP
+wlist -name "Mario Kart --notes "Only if I get Switch 2." "Physical only."
+.RE
+.PP
+Add item with priority level:
+.RS
+.IP
+wlist -n "Mario Kart" -p high
+.RE
+.PP
+Add item with URL:
+.RS
+.IP
+wlist add -name "Mario Kart" -u https://example.com/mario-kart
+.RE
+.PP
+Add item a quantity of more than 1:
+.RS
+wlist add -n "Mario Kart" -q 2
+.RE
