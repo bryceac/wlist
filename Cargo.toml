@@ -45,7 +45,7 @@ assets = [
 [package.metadata.generate-rpm]
 assets = [
     { source = "target/release/wlist", dest = "/usr/local/bin/", mode = "755" },
-    { source = "man/wlist.1", dest = "/usr/local/share/man1/", "644"},
+    { source = "man/wlist.1", dest = "/usr/local/share/man1/", mode = "644"},
     { source = "man/wlist-add.1", dest = "/usr/local/share/man1/", "644"},
     { source = "man/wlist-delete.1", dest = "/usr/local/share/man1/", mode = "644"},
     { source = "man/wlist-export.1", dest = "/usr/local/share/man1/", mode = "644"},
