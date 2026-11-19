@@ -47,7 +47,7 @@ by making quantity optional. Released Feb. 11, 2026 Evening</dd>
 </dd>
 <dt style="font-weight:bold">0.3.2</dt>
 <dd>
-<p>Minor update that makes sure logic flows as it should for given subcommand.</p>
+<p>Minor update that makes sure logic flows as it should for given subcommand and update main dependency.</p>
 <p>Released Nov. 19, 2026</p>
 </dd>
 </dl>
