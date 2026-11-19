@@ -2438,9 +2438,9 @@ dependencies = [
 
 [[package]]
 name = "wlitem"
-version = "0.1.4"
+version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "69ca624988afaf08739e815fd6c8244aef54a81b7cde113877e400ae259d84bf"
+checksum = "59a4635eedc602738a9221def74b24013eec810c469e22ca2c487b57cb90d519"
 dependencies = [
  "http",
  "http-serde-ext",
